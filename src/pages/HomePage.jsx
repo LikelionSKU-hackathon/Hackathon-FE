@@ -1,7 +1,5 @@
-import { Link } from "react-router-dom";
-import { useEffect, useState } from 'react';
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-import { ScrollMenu } from 'react-horizontal-scrolling-menu';
 
 const Box = styled.div`
     width: 280px;
@@ -30,20 +28,21 @@ const ButtonBox = styled.button`
     margin: 20px;
     padding: 10px;
     justify-content: center;
-    border-radius : 0px;
+    border-radius: 0px;
 `;
-const MusicBox = styled.div`
-    width : 280px;
-    height : 50px;
-    margin : 20px;
-    padding : 10px;
-    background : rgb(17,17,17);
-    border-radius : 100px;
-    align-items: center;
-    padding : 10px;
-    display : flex;
 
+const MusicBox = styled.div`
+    width: 280px;
+    height: 50px;
+    margin: 20px;
+    padding: 10px;
+    background: rgb(17,17,17);
+    border-radius: 100px;
+    align-items: center;
+    padding: 10px;
+    display: flex;
 `;
+
 const ScrollBox = styled.div`
     width: 100%; /* 부모 요소의 너비에 맞춤 */
     height: 140px;
@@ -75,69 +74,75 @@ const DiaryButton = styled.button`
     white-space: normal; /* 텍스트 자동 줄바꿈 */
     word-break: break-word; /* 단어 줄바꿈 */
     display: block;
-    // overflow-x: scroll;
-    border-radius : 10px;
+    border-radius: 10px;
 `;
 
 const Circle = styled.div`
-    background : rgb(217,217,217);
-    width : 50px;
-    height : 50px;
-    border-radius : 50%;
-    margin : 5px;
+    background: rgb(217,217,217);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin: 5px;
 `;
 
-export default function HomePage() {
+function HomePage() {
     let diaryNum = 14;
     let topic = 'ENFJ로 살면서 느끼는 장점과 단점은?';
     let music = '저번주 듣던 명상곡';
+
     return (
         <Container>
             <h4>홈페이지</h4>
             <MusicBox>
                 <Circle></Circle>
-                <div style={{flexDirection : 'column'}}>
-                    <text style={{fontSize : '15px', color : "white", fontWeight : '400'}}>{ music }</text><br/>
-                    <text style={{fontSize : '12px', color : 'rgb(153,153,153)', fontWeight : '400'}}>{ music }</text>
+                <div style={{flexDirection: 'column'}}>
+                    <span style={{fontSize: '15px', color: "white", fontWeight: '400'}}>{music}</span><br/>
+                    <span style={{fontSize: '12px', color: 'rgb(153,153,153)', fontWeight: '400'}}>{music}</span>
                 </div>
             </MusicBox>
             <Box>
-                <text>
+                <span>
                     오늘의 일기 주제 #{diaryNum}<br />
                     {topic}
-                </text>
+                </span>
             </Box>
             <ButtonBox>
-                <text>나의 일기 기록 보러 가기</text>
+                <span>나의 일기 기록 보러 가기</span>
             </ButtonBox>
             <Box style={{ height: '105px', fontSize: '14px', fontWeight: '800', justifyContent: 'center', flexDirection: 'column' }}>
-                <text>오늘 일기 작성하기</text>
+                <span>오늘 일기 작성하기</span>
                 <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
-                    <DiaryButton>
-                        <text>지정주제로<br></br> 일기쓰기</text>
-                    </DiaryButton>
-                    <DiaryButton>
-                        <text>자유주제로<br></br> 일기쓰기</text>
-                    </DiaryButton>
+                    <NavLink to="/writeDiary" style={{ textDecoration: 'none' }}>
+                        <DiaryButton>
+                            <span>지정주제로<br/> 일기쓰기</span>
+                        </DiaryButton>
+                    </NavLink>
+                    <NavLink to="/writeDiary" style={{ textDecoration: 'none' }}>
+                        <DiaryButton>
+                            <span>자유주제로<br/> 일기쓰기</span>
+                        </DiaryButton>
+                    </NavLink>
                 </div>
             </Box>
-            <Box style={{ height : '400px', fontWeight : '800', fontSize : '16px', flexDirection: 'column' }}>
-                <text>오늘 키다의 인기 이야기꾼 </text>
-                <div style = {{ display : 'flex', flexDirection : 'row', whiteSpace : 'nowrap', margin: '20px'}}>{/* 나중에 게시물 내용으로 변경 */}
-                    <DiaryButton style={{width : '150px', height : '170px', }}> 
+            <Box style={{ height: '400px', fontWeight: '800', fontSize: '16px', flexDirection: 'column' }}>
+                <span>오늘 키다의 인기 이야기꾼 </span>
+                <div style={{ display: 'flex', flexDirection: 'row', whiteSpace: 'nowrap', margin: '20px' }}>
+                    <DiaryButton style={{width: '150px', height: '170px'}}> 
                         TOP1.
                     </DiaryButton>
-                    <DiaryButton style={{width : '150px', height : '170px', }}>
+                    <DiaryButton style={{width: '150px', height: '170px'}}>
                         TOP2.
                     </DiaryButton>
-                    <DiaryButton style={{width : '150px', height : '170px', }}>
+                    <DiaryButton style={{width: '150px', height: '170px'}}>
                         TOP3.
                     </DiaryButton>
                 </div>
-                <DiaryButton style={{width : '270px', height : '40px', fontWeight: '800', fontSize : '15px'}}>
-                    <text>더 많은 이야기 보러 가기</text>
+                <DiaryButton style={{width: '270px', height: '40px', fontWeight: '800', fontSize: '15px'}}>
+                    <span>더 많은 이야기 보러 가기</span>
                 </DiaryButton>
             </Box>
         </Container>
     );
 }
+
+export default HomePage;

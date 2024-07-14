@@ -3,6 +3,7 @@ import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import UserPage from './pages/UserPage';
 import DiaryList from './pages/DiaryList';
+import WriteDiary from './pages/WriteDiary';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
   {
     path: '/diary',
     element: <DiaryList />,
+  },
+  {
+    path: '/writeDiary',
+    element: <WriteDiary />,
   },
 ]);
 
