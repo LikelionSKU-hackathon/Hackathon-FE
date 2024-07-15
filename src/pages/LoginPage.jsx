@@ -1,10 +1,13 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import * as S from "../styles/page/Login.stlye";
+import Intro from "../components/intro";
+import LoginModule from "../components/loginModule";
 
 export default function LoginPage() {
     return (
-        <div>
-            <h1>로그인 페이지</h1>
-        </div>
+        <S.LoginContainer>
+            <Intro></Intro>
+            <LoginModule></LoginModule>
+        </S.LoginContainer>
     );
 }

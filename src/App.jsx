@@ -16,7 +16,7 @@ const router = createBrowserRouter([
   {
     path: '/user',
     element: <UserPage />,
-  },
+  },  
   {
     path: '/diary',
     element: <DiaryList />,
