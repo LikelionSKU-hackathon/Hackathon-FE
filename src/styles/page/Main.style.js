@@ -19,7 +19,7 @@ export const TextDiv = styled.div`
     width : 300px;
     font-family : Pretendard;
     display : flex;
-    align-items:: flex-start;
+    align-items: flex-start;
     gap: 0px;
     flex-direction: column;
     >h6 {
@@ -56,17 +56,35 @@ export const ButtonBox = styled.button`
 `;
 
 export const ProfileBox = styled.div`
-    width: 280px;
+    width: 330px;
     height: 50px;
     margin: 20px;
-    padding: 10px;
     background: rgba(0,0,0,0.25);
     border-radius: 100px;
     align-items: center;
-    padding: 10px;
     display: flex;
+    gap : 10px;
+`;
 
+export const ProfileText = styled.div`
+    font-family : Pretendard;
+    color : rgb(255, 255, 255);
+    text-align : left;
+    display : flex;
+    flex-direction: column;
+
+    >h6 {
+        font-weight : 700;
+        font-size : 16px;
+        margin-bottom : 0;
+        margin-top : 10px;
+    }
     
+    >p {
+        margin-top : 0;
+        font-weight : 400;
+        font-size : 10px;
+    }
 `;
 
 export const ScrollBox = styled.div`
@@ -90,9 +108,8 @@ export const Container = styled.div`
 `;
 
 export const DiaryButton = styled(NavLink)`
-    width: 130px;
+    width: 158px;
     height: 80px;
-    margin: 10px; /* 버튼 사이 간격 조정 */
     padding: 10px;
     white-space: normal; /* 텍스트 자동 줄바꿈 */
     display: inline-block;
@@ -118,10 +135,11 @@ export const DiaryButton = styled(NavLink)`
 
 export const Circle = styled.div`
     background: rgb(217,217,217);
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    margin: 5px;
+    margin: 6px;
+    padding : 0;
 `;
 
 export const FreeButton = styled.button`

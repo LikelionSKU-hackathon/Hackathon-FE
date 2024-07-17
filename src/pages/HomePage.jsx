@@ -6,8 +6,8 @@ function HomePage() {
     let topic = 'ENFJ로 살면서 느끼는 장점과 단점은?';
     let nickName = '훈이 말고 훈기';
     let age = '20대';
-    let hashtag = [""];
-
+    let hashtag = ["감정고민", "직장생활", "인간관계"];
+    
     return (
         <S.Container>
             <S.TextDiv>
@@ -16,12 +16,12 @@ function HomePage() {
             </S.TextDiv>
             <S.ProfileBox>
                 <S.Circle></S.Circle>
-                <div style={{flexDirection: 'column'}}>
-                    <span style={{fontSize: '15px', color: "white", fontWeight: '400'}}>{music}</span><br/>
-                    <span style={{fontSize: '12px', color: 'rgb(153,153,153)', fontWeight: '400'}}>{music}</span>
-                </div>
+                <S.ProfileText>
+                    <h6>{nickName}</h6>
+                    <p>{age} / #{hashtag[0]} #{hashtag[1]} #{hashtag[2]} </p>
+                </S.ProfileText>
             </S.ProfileBox>
-            <S.Box>ß
+            <S.Box>
                 <span>
                     오늘의 일기 주제 #{diaryNum}<br />
                     {topic}
