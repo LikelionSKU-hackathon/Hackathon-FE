@@ -1,13 +1,17 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { Link , useNavigate, useLocation} from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { isLoginSelector, tokenState } from "../Recoil/TokenAtom";
-import * as S from "../styles/Login.stlye";
+import * as S from "../styles/page/Login.stlye";
 
-export default function LoginPage() {
+import Intro from "../components/intro";
+import Back from "../components/Back";
+
+export default function LoginPageEmail() {
     const [userId, setUserId] = useState('');
     const [pwd, setPwd] = useState('');
+    const isFormValid = userId !== '' && pwd !== '';
     const setAccessToken = useRecoilState(tokenState);
     const navigate = useNavigate();
     const location = useLocation();
@@ -24,26 +28,24 @@ export default function LoginPage() {
 
     return (
         <S.LoginContainer>
-            <h1>쓰담쓰담</h1>
-            <h1>하루의 끝</h1>
-            <h1>나의 마음일기</h1>
-            <h3>오로지 나만을 위한 일기를 써보세요</h3>
-            <h3>ID</h3>
-            <input
+            <Back to = "/login"></Back>
+            <Intro></Intro>
+            <S.InputText>이메일</S.InputText>
+            <S.InputLine
                 type="text"
                 value={userId}
                 autoFocus
-                placeholder="아이디(이메일)을 입력하세요"
+                placeholder="이메일을 입력하세요"
                 onChange={(e) => setUserId(e.target.value)}
             />
-            <h3>Password</h3>
-            <input
+            <S.InputText>비밀번호</S.InputText>
+            <S.InputLine
                 type="password"
                 value={pwd}
                 onChange={(e) => setPwd(e.target.value)}
                 placeholder="비밀번호 입력하세요"
             />
-            <button onClick={tryLogin}>로그인</button>
+            <S.InputSubmit onClick={tryLogin} disabled={!isFormValid}>로그인</S.InputSubmit>
         </S.LoginContainer>
     );
 }

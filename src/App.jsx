@@ -4,6 +4,12 @@ import LoginPage from './pages/LoginPage';
 import UserPage from './pages/UserPage';
 import DiaryList from './pages/DiaryList';
 import WriteDiary from './pages/WriteDiary';
+import LoginPageEmail from './pages/LoginPage.Email';
+import RegisterPage from './pages/RegisterPage';
+import RegisterPageEmail from './pages/RegisterPage.email';
+import RegisterPageWord from './pages/RegisterPage.word';
+import RegisterPageProfile from './pages/RegisterPage.profile';
+import RegisterPageFinal from './pages/RegisterPage.final';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -12,6 +18,30 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <LoginPage />,
+  },
+  {
+    path: '/login/email',
+    element: <LoginPageEmail />,
+  },
+  {
+    path: '/register',
+    element: <RegisterPage />,
+  },
+  {
+    path: '/register/email',
+    element: <RegisterPageEmail />,
+  },
+  {
+    path: '/register/word',
+    element: <RegisterPageWord />,
+  },
+  {
+    path: '/register/profile',
+    element: <RegisterPageProfile/>,
+  },
+  {
+    path: '/register/final',
+    element: <RegisterPageFinal />,
   },
   {
     path: '/user',
