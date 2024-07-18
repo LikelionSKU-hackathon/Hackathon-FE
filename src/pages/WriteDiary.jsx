@@ -41,7 +41,7 @@ const Circle = styled.div`
 `;
 
 const Button = styled.button`
-  width : 300px;
+  width : 95%;
   height : 40px;
   margin : 10px;
   background : rgb(208, 218, 232);

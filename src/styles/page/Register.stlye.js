@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 export const RegisteContainer = styled.div`
     display: flex;
+    position: relative;
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
     height: 100vh;
-    margin-top : 90px;
+    padding-top : 90px;
     h6 {
         font-size: 32px;
         font-weight: 600;
@@ -49,6 +50,33 @@ export const btnEdit = styled.img`
 export const HiddenInput = styled.input`
     display: none;
 `;
+export const Intro = styled.div` 
+    display: flex;
+    width: 83%;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 77px;
+    gap: 0px;
+    h6 {
+        font-size: 24px;
+        font-weight: 600;
+        font-family: Pretendard, sans-serif;
+        text-align: left;
+        margin : 0px 0;
+        color : #555555;
+    }
+    p {
+        font-weight: 300;
+        font-size: 12px;
+        font-family: Pretendard, sans-serif;
+        text-align: left;
+        margin-top : 0px;
+        color : #555555;
+    }
+    span{
+        font-weight: 800;
+    }
+`;
 export const Profile = styled.div`
     width: 80px;
     height: 80px;
@@ -71,6 +99,7 @@ export const Profile2 = styled.div`
 `;
 export const RadioGroupContainer = styled.div`
     display: flex;
+    position: relative;
     width : 100%;
     flex-direction: row;
     gap : 7px;
@@ -110,12 +139,13 @@ export const RadioButtonInput = styled.button`
 `;
 export const WordListContainer = styled.div`
     display: flex;
+    position: relative;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    width: 360px;
     height: 100vh;
-    margin-top : 90px;
-    h6 {
+    padding-top : 0px;
+    >h6 {
         font-size: 32px;
         font-weight: 600;
         font-family: Pretendard, sans-serif;
@@ -126,6 +156,7 @@ export const WordListContainer = styled.div`
         font-size: 13px;
         font-family: Pretendard, sans-serif;
         margin-top : 10px;
+        color : #555555;
         text-decoration: underline;
     }
     input{
@@ -135,39 +166,49 @@ export const WordListContainer = styled.div`
         padding-left : 10px;
     }
 `;
-export const ListContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    height: 100vh;
-    gap : 15px;
-`;
+
 export const ProflePageContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     gap: 15px;
-
 }
+`;
+export const ListContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    height: 300px;
+    overflow-y: auto;
+    box-sizing: border-box;
+    /* 스크롤바 숨기기 */
+    &::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera */
+    }
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 `;
 export const ProfileBox = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    min-width: 300px;
+    width: 83%;
     height: 640px;
     background-color: #D0DAE87F;
     border-radius: 20px;
-    padding: 27px 15px;
-
+    padding: 27px 15px 19px 15px;
+    margin: 0px;
+    box-sizing: border-box;
     hr {
         width : 80%;
         height: 1px;
         background: #555555;
         border: none;
+        margin: 0;
     }
 
     h1 {
@@ -181,9 +222,73 @@ export const ProfileBox = styled.div`
         font-weight: 400;
         font-family: Pretendard, sans-serif;
         text-align: center;
+        margin: 8px 0 17px 0;
     }
 
     .name {
         font-weight: 500;
     }
+`;
+export const FinalPageContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    margin-top: 63px;
+    overflow: hidden;
+    &.party{
+        width: 40px;
+        height: 40px;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        background-image: url('../assets/Login/icon_Party.png');
+    }
+    h1{
+        font-size: 24px;
+        font-weight: 600;
+        font-family: Pretendard, sans-serif;
+        text-align: center;
+    }
+    p{
+        color: #98989E;
+        font-size: 16px;
+        font-weight: 400;
+        font-family: Pretendard, sans-serif;
+        text-align: center;
+    }
+}
+`;
+export const PreviewContainer = styled.div`
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    min-width: 260px;
+    width: 75%;
+    height: 354px;
+`
+export const Preview = styled.img`
+    min-width: 270px;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: url('../assets/Login/icon_Party.png');
+`
+export const FixSubmit = styled.button` 
+    display : flex;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    width: 83%;
+    height: 50px; 
+    boarder-radius: 10px;
+    background: #B5B6BD;
+    color: white;
+    left: 50%;
+    bottom: 3%;
+    transform: translate(-50%, 0);
+    background-color: #93BAF3;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 `;

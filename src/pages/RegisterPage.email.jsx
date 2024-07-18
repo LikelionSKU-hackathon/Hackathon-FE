@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useLocation,useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import * as S from "../styles/page/Register.stlye";
 import * as L from "../styles/page/Login.stlye";
 import profile from "../assets/Login/profile.png";
@@ -51,7 +51,7 @@ export default function RegisterPageEmail() {
     };
     return (
         <S.RegisteContainer>
-            <Back to = "/register"></Back>
+            <Back to="/register"></Back>
             <h6>프로필을</h6>
             <h6>입력해주세요</h6>
 
@@ -70,13 +70,17 @@ export default function RegisterPageEmail() {
             </S.ProfileContainer>
 
             <L.InputText>이메일</L.InputText>
-            <L.InputLine
-                type="text"
-                value={userId}
-                autoFocus
-                placeholder="이메일을 입력하세요"
-                onChange={(e) => setUserId(e.target.value)}
-            />
+            <L.InputContainer>
+                <L.InputLine
+                    type="text"
+                    value={userId}
+                    autoFocus
+                    placeholder="이메일을 입력하세요"
+                    onChange={(e) => setUserId(e.target.value)}
+                />
+                <L.btnCheck><p>중복 확인</p></L.btnCheck>
+            </L.InputContainer>
+
             <L.InputText>비밀번호</L.InputText>
             <L.InputLine
                 type="password"
