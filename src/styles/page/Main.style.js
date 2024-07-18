@@ -1,149 +1,197 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
-export const Box = styled.div`
-    width: 280px;
-    height: 45px;
-    background: rgb(245,245,245);
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    font-size: 12px;
-    font-weight: 400;
-    white-space: pre-line;
-    margin: 20px;
-    padding: 10px;
+// QBox의 question 클래스 배경색 랜덤 배열
+const questionColors = [
+  'linear-gradient(97.42deg, #458FFF 0.29%, #F38B8B 50.17%, #82B6FF 99.06%)',
+  'linear-gradient(84.14deg, #80FF00 4.52%, #FEE33A 48.88%, #FF3838 92.35%)',
+  'linear-gradient(89.97deg, #005DE4 0.02%, #BBD7FF 50.5%, #A68BF3 99.97%)',
+  'linear-gradient(89.97deg, #133D7A 0.02%, #FE3A3A 50.5%, #F3E493 99.97%)',
+  'linear-gradient(82.98deg, #FEE33A 2.56%, #6BD34D 49.21%, #45B1FF 98.95%)',
+];
+
+export const ChangeButton = styled.button`
+  width: 330px;
+  height: 40px;
+  background: rgba(164, 213, 255, 1);
+  align-items: center;
+  font-size: 15px;
+  font-weight: 400;
+  white-space: pre-line;
+  margin-top: 0;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid rgb(208, 218, 232);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+`;
+
+export const QBox = styled(NavLink)`
+  width: 300px;
+  border: 1px solid rgb(208, 218, 232);
+  border-radius: 10px;
+  margin: 10px;
+  color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+
+  &.question {
+    height: 90px;
+    background: ${props => props.bgColor || questionColors[Math.floor(Math.random() * questionColors.length)]};
+  }
+
+  &.history {
+    height: 67px;
+    background: rgba(205, 0, 135, 1);
+  }
+
+  > h6 {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: -0.025em;
+    text-align: left;
+    margin-top: 0px;
+    margin-bottom: 10px;
+  }
+
+  > h5 {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: -0.025em;
+    text-align: right;
+    margin-top: 5px;
+    margin-bottom: 0;
+    padding: 0;
+  }
+
+  > p {
+    font-weight: 500;
+    font-size: 16px;
+    text-align: right;
+    line-height: 20px;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 `;
 
 export const TextDiv = styled.div`
-    width : 300px;
-    font-family : Pretendard;
-    display : flex;
-    align-items: flex-start;
-    gap: 0px;
-    flex-direction: column;
-    >h6 {
-        font-weight : 600;
-        font-size : 32px;
-        text-align : left;
-        margin-top: 100px;
-        margin-bottom : 0;
-    }
-    >p {
-        font-weitht : 400;
-        font-size : 18px;
-        margin-top : 0;
-        color : rgba(111, 112, 117, 1);
-    }
+  width: 330px;
+  display: flex;
+  align-items: flex-start;
+  gap: 0px;
+  flex-direction: column;
+  padding : 15px;
+  > h6 {
+    font-weight: 600;
+    font-size: 32px;
+    text-align: left;
+    margin-top: 100px;
+    margin-bottom: 0;
+  }
 
-
+  > p {
+    font-weight: 400;
+    font-size: 18px;
+    margin-top: 0;
+    color: rgba(111, 112, 117, 1);
+  }
 `;
 
-export const ButtonBox = styled.button`
-    width: 300px;
-    height: 65px;
-    background: rgb(245,245,245);
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-    font-size: 14px;
-    font-weight: 800;
-    white-space: pre-line;
-    margin: 20px;
-    padding: 10px;
-    justify-content: center;
-    border-radius: 0px;
+export const StoryBox = styled.div`
+  width: 330px;
+  height: 410px;
+  top: 763px;
+  left: 15px;
+  gap: 0px;
+  border-radius: 10px 0px 0px 0px;
+  opacity: 0px;
+  background: rgba(127, 127, 127, 0.9);
 `;
 
 export const ProfileBox = styled.div`
-    width: 330px;
-    height: 50px;
-    margin: 20px;
-    background: rgba(0,0,0,0.25);
-    border-radius: 100px;
-    align-items: center;
-    display: flex;
-    gap : 10px;
+  width: 330px;
+  height: 50px;
+  margin: 7px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 100px;
+  align-items: center;
+  display: flex;
+  gap: 10px;
 `;
 
 export const ProfileText = styled.div`
-    font-family : Pretendard;
-    color : rgb(255, 255, 255);
-    text-align : left;
-    display : flex;
-    flex-direction: column;
+  color: rgb(255, 255, 255);
+  text-align: left;
+  display: flex;
+  flex-direction: column;
 
-    >h6 {
-        font-weight : 700;
-        font-size : 16px;
-        margin-bottom : 0;
-        margin-top : 10px;
-    }
-    
-    >p {
-        margin-top : 0;
-        font-weight : 400;
-        font-size : 10px;
-    }
-`;
+  > h6 {
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 0;
+    margin-top: 10px;
+  }
 
-export const ScrollBox = styled.div`
-    width: 100%; /* 부모 요소의 너비에 맞춤 */
-    height: 140px;
+  > p {
+    margin-top: 0;
     font-weight: 400;
-    font-size: 9px;
-    overflow-x: auto; /* 가로 스크롤 활성화 */
-    white-space: nowrap; /* 자식 요소들이 가로로 일렬로 배치되도록 함 */
-    display: flex; /* 플렉스 박스 속성 */
-    align-items: center;
+    font-size: 10px;
+  }
 `;
 
 export const Container = styled.div`
   width: 100vw;
   height: 100vh;
+  max-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
   flex-direction: column;
+  overflow-y: auto;
 `;
 
 export const DiaryButton = styled(NavLink)`
-    width: 158px;
-    height: 80px;
-    padding: 10px;
-    white-space: normal; /* 텍스트 자동 줄바꿈 */
-    display: inline-block;
-    border-radius: 10px;
-    text-align: left;
-    color : rgb(0,0,0);
-    &.free {
-        background : rgb(178,134,255);
-    }
+  width: 138px;
+  height: 80px;
+  padding: 10px;
+  margin: 7px;
+  white-space: normal; /* 텍스트 자동 줄바꿈 */
+  display: inline-block;
+  border-radius: 10px;
+  text-align: left;
+  color: rgb(0, 0, 0);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 
-    &.daily {
-        background : rgb(220, 243, 51);
-    }
-    
-    >p {
-        font-weight: 400;
-        font-size: 14px;
-        font-family : Pretendard;
-        margin : 0;
-        color : black;
-    }
+  &.free {
+    background: rgb(178, 134, 255);
+  }
+
+  &.daily {
+    background: rgb(220, 243, 51);
+  }
+
+  > p {
+    font-weight: 400;
+    font-size: 14px;
+    margin: 0;
+    color: black;
+  }
 `;
 
 export const Circle = styled.div`
-    background: rgb(217,217,217);
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin: 6px;
-    padding : 0;
+  background: rgb(217, 217, 217);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin: 6px;
+  padding: 0;
 `;
 
 export const FreeButton = styled.button`
-    background-image : url('src/assets/Home/FreeTheme.svg');
-    width : 158px;
-    height : 97px;
+  background-image: url('src/assets/Home/FreeTheme.svg');
+  width: 158px;
+  height: 97px;
 `;
