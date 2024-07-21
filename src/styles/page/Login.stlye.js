@@ -100,7 +100,7 @@ export const FixedInputSubmit = styled.button`
     boarder-radius: 10px;
     background: #B5B6BD;
     color: white;
-    left: 50%;
+    left: 50%;1
     bottom: 5%;
     transform: translate(-50%, 0);
     background-color: ${props => (props.disabled ? '#B5B6BD' : '#93BAF3')};
