@@ -10,6 +10,7 @@ export default function RegisterPageWord() {
     const [pwd, setPwd] = useState('');
     const [name, setName] = useState('');
     const [age, setAge] = useState(0);
+    const [cnt, setCnt] = useState(3);
     const fileInputRef = useRef(null);
     const isFormValid = userId !== '' && pwd !== '' && name !== '' && age !== 0;
     const location = useLocation();
@@ -20,7 +21,6 @@ export default function RegisterPageWord() {
     var emoji = ["❤️", "🧩", "🧠", "🏡", "✏️"];
     var tag = ["연애 및 대인관계", "진로 및 취업", "정신건강", "생활문제", "학업 및 자격증"];
     const options = ['Option 1', 'Option 2', 'Option 3', 'Option 4', 'Option 5'];
-    var cnt = 0;
     const [selectedOptions, setSelectedOptions] = useState([]);
     const handleBoxClick = (value) => {
         console.log(value);
@@ -34,15 +34,20 @@ export default function RegisterPageWord() {
             }
         }
     };
+    const handleSubmitClick = (e) => {
+        if (cnt == 3) {
+            navigate('/register/profile');
+        }
+    };
     return (
         <S.WordListContainer>
-            <Back to = "/register/email"></Back>
-            <L.Intro>
-                <h6>님을 위한
+            <Back to="/register/email"></Back>
+            <S.Intro>
+                <h6>'<span>{name}쓰담</span>'님을 위한
                     <br />고민 키워드를 제시해 드릴께요</h6>
                 <p>RWD기반 연령별 최빈도 및 공통 상담주제와<br />
                     초간단 검진결과를 반영한 추천 솔류션입니다.</p>
-            </L.Intro>
+            </S.Intro>
             <p>"요즘내 고민과 유사한 3가지 고민을 골라주세요"</p>
             <S.ListContainer>
                 <WordLine
@@ -50,14 +55,14 @@ export default function RegisterPageWord() {
                     tag={tag[0]}
                     title="연애 중인데 자주 다퉈요"
                     selected={true}
-                    onClick={() => handleBoxClick(option)}
+                    onClick={handleBoxClick}
                 />
                 <WordLine
                     emoji={emoji[0]}
                     tag={tag[0]}
                     title="연애 중인데 자주 다퉈요"
                     selected={false}
-                    onClick={() => handleBoxClick(option)}
+                    onClick={handleBoxClick}
                 />
                 {options.map((word) => (
                     <WordLine
@@ -66,11 +71,14 @@ export default function RegisterPageWord() {
                         tag={tag[0]}
                         title="연애 중인데 자주 다퉈요"
                         selected={selectedOptions.includes(word)}
-                        onClick={() => handleBoxClick(word)}
+                        onClick={handleBoxClick}
                     />
                 ))}
-                <L.InputSubmit onClick={() => handleBoxClick(word)}>입력완료({cnt}/3)</L.InputSubmit>
             </S.ListContainer>
+            <L.InputSubmit
+                onClick={handleSubmitClick}
+                disabled={cnt !== 3}
+            >입력완료({cnt}/3)</L.InputSubmit>
         </S.WordListContainer>
     );
 }

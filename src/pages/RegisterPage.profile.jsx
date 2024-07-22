@@ -5,6 +5,7 @@ import * as L from "../styles/page/Login.stlye";
 import Back from "../components/Back";
 import WordLine from "../components/WordLine";
 import icon from "../assets/Login/icon_edit.png";
+import FixLine from "../components/FixLine";
 export default function RegisterPageProfile() {
     const [userId, setUserId] = useState('');
     const [pwd, setPwd] = useState('');
@@ -35,10 +36,10 @@ export default function RegisterPageProfile() {
     return (
         <S.ProflePageContainer>
             <Back to="/register/word"></Back>
-            <L.Intro>
+            <S.Intro>
                 <h6>쓰담쓰담에서
                     <br />사용할 나의 프로필</h6>
-            </L.Intro>
+            </S.Intro>
             <S.ProfileBox>
                 <S.Profile2
                     id="fileView"
@@ -47,32 +48,32 @@ export default function RegisterPageProfile() {
                     <br />이야기가 기록 될 프로필 입니다 :)</p>
                 <hr></hr>
                 <h1>20대 나의 주요고민</h1>
-                <WordLine
+                <FixLine
                     emoji={emoji[0]}
                     tag={tag[0]}
-                    title="연애 중인데 자주 다퉈요"
-                    selected={true}
+                    title="연애 중인데 자주 다퉈요dydydasdas"
+                    selected={false}
                     onClick={() => handleBoxClick(option)}
-                    onProfile = {true}
                 />
-                <WordLine
-                    emoji={emoji[0]}
-                    tag={tag[0]}
-                    title="연애 중인데 자주 다퉈요"
-                    selected={true}
+                <FixLine
+                    emoji={emoji[1]}
+                    tag={tag[1]}
+                    title="취업 준비가 너무 힘들어요"
+                    selected={false}
                     onClick={() => handleBoxClick(option)}
-                    onProfile = {true}
                 />
-                <WordLine
-                    emoji={emoji[0]}
-                    tag={tag[0]}
-                    title="연애 중인데 자주 다퉈요"
+                <FixLine
+                    emoji={emoji[4]}
+                    tag={tag[4]}
+                    title="졸업 후 진로가 불확실해요"
                     selected={true}
                     onClick={() => handleBoxClick(option)}
-                    onProfile = {true}
                 />
             </S.ProfileBox>
-            <L.InputSubmit><p>확인완료</p></L.InputSubmit>
+            <L.InputSubmit
+                onClick={tryRegister}>
+                <p>확인완료</p>
+            </L.InputSubmit>
         </S.ProflePageContainer>
     );
 }
