@@ -16,8 +16,8 @@ export const IntroContainer = styled.div`
     position: relative;
     flex-direction: column;
     align-items: flex-start;
-    margin-left: 30px;
-    width: 100dvw;
+    margin-left: 0px;
+    width: 83%;
     height: auto;
     h1 {
         font-size: 24px;

@@ -32,7 +32,7 @@ export default function CalendarView(Props) {
       const today = new Date();
       if (day === 0) { return 'sunday'; } // 일요일
       if (day === 6) { return 'saturday'; } // 토요일
-      if (date.toDateString() === today.toDateString()) { console.log("오늘"); return 'today'; } // 오늘 날짜
+      if (date.toDateString() === today.toDateString()) {return 'today'; } // 오늘 날짜
     }
     return null;
   };
@@ -44,9 +44,17 @@ export default function CalendarView(Props) {
     }
     return false;
   };
+
   const onClickDay = (date) => {
-    setShow(true);
-    console.log("클릭된 날짜:", date);
+    //Props.onClick(true);
+    const data = datesWithImages.find(d => d.date.toDateString() === date.toDateString());
+    if (data) {
+      Props.onClick(data);
+    } else {
+      //setClickedData(null);
+      Props.onClick(data);
+    }
+    
   };
 
   datesWithImages = Props.date;
