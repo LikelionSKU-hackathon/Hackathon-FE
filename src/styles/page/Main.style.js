@@ -100,15 +100,27 @@ export const TextDiv = styled.div`
   }
 `;
 
-export const StoryBox = styled.div`
-  width: 330px;
-  height: 410px;
-  top: 763px;
-  left: 15px;
+export const StoryContainer = styled.div`
+  width: 310px;
+  height: 390px;
   gap: 0px;
-  border-radius: 10px 0px 0px 0px;
+  border-radius: 10px;
   opacity: 0px;
   background: rgba(127, 127, 127, 0.9);
+  flex-direction : column;
+  padding : 10px;
+  align-items : center;
+
+  >h3 {
+    padding : 10px 15px;
+    margin : 0;
+    color : rgb(255,255,255);
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 21.48px;
+    letter-spacing: -0.025em;
+    text-align: left;
+  }
 `;
 
 export const ProfileBox = styled.div`
@@ -144,13 +156,14 @@ export const ProfileText = styled.div`
 
 export const Container = styled.div`
   width: 100vw;
-  height: 100vh;
-  max-height: 100vh;
+  min-height: 100vh; /* min-height를 100vh로 설정하여 화면 높이만큼 차지하도록 */
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   overflow-y: auto;
+  margin : 0;
+  padding-bottom: 50px;
 `;
 
 export const DiaryButton = styled(NavLink)`

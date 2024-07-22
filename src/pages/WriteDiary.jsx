@@ -61,6 +61,7 @@ const PublicButton = styled(Button)`
   border: 1px solid ${(props) => (props.active ? 'rgb(79, 132, 210)' : 'rgb(255, 255, 255)')};
   cursor: pointer;
 `;
+import Back from "../components/Back";
 
 export default function WriteDiary() {
   const [activeButton, setActiveButton] = useState(null);
@@ -86,6 +87,7 @@ export default function WriteDiary() {
 
   return (
     <S.Container>
+      <Back to="/"></Back>
       <W.IntroText className = "date">{formattedDate}<br/>{nickname} 님의 {count}번째 쓰임</W.IntroText>
       <W.IntroText className="theme">{theme}</W.IntroText>
       <Emotion onSelect={handleEmotionSelect}/>

@@ -69,6 +69,7 @@ export const Emotion = styled.button`
     border-radius: 100%;
     background: rgb(242, 242, 241);
     margin: 5px;
+    position : relative;
 `;
 
 export const Done = styled.button`

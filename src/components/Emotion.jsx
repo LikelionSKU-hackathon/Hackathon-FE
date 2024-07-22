@@ -26,7 +26,11 @@ const Emotion = ({ onSelect }) => {
 
     return (
         <div>
-            <S.EmotionButton onClick={handleButtonClick} bgImage={selectedImage}></S.EmotionButton>
+            <S.EmotionButton
+                onClick={handleButtonClick}
+                bgImage={selectedImage}
+                hasSelectedImage={!!selectedImage}
+            ></S.EmotionButton>
             {isSelecting && (
                 <S.EmotionSelectionContainer>
                     {images.map((image, index) => (

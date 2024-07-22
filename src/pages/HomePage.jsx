@@ -1,4 +1,5 @@
 import * as S from "../styles/page/Main.style"
+import StoryBox from "../components/StoryBox";
 import { NavLink } from "react-router-dom";
 
 function HomePage() {
@@ -10,8 +11,7 @@ function HomePage() {
     let tag = '연애 및 대인관계';
     
     return (
-        <S.Container>
-            
+        <S.Container> 
             <S.TextDiv>
                 <h6>쓰담쓰담<br/>하루의 끝<br/>나의 마음일기</h6>
                 <p>오로지 나만을 위한 일기를 써보세요</p>
@@ -45,10 +45,15 @@ function HomePage() {
                 <h6>MY<br/>HISTORY</h6>
                 <h5>나의 일기 기록 모아보기</h5>
             </S.QBox>
+            <S.StoryContainer>
+                <h3>
+                    쓰담쓰담<br/>
+                    오늘의 스토리텔러는?
+                </h3>
+                <StoryBox>
 
-            <S.StoryBox>
-
-            </S.StoryBox>
+                </StoryBox>
+            </S.StoryContainer>
         </S.Container>
     );
 }
