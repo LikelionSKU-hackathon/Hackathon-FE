@@ -1,19 +1,22 @@
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 export const StoryBox = styled.div`
-  width: 290px;
-  height: 100px;
+  width: 296px;
   border-radius: 5px;
   border: 2px solid rgba(208, 218, 232, 1);
   background: rgba(255, 255, 255, 1);
-  padding : 10px;
-  align-items : center;
-  text-align : left;
+  padding : 5px;
+  margin : 5px 0;
+  align-item : center;
+  justify-content: center;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 
   >h5 {
     font-size: 11px;
     font-weight: 600;
     line-height: 23px;
+    text-align : left;
     letter-spacing: -0.025em;
     padding-right : 5px;
     display: inline;
@@ -40,13 +43,16 @@ export const StoryBox = styled.div`
 `;
 
 export const StoryDiv = styled.div`
+  width : 290px;
+  height: 40px;
+  margin : 3px;
   padding : 0;
-  margin : 0;
   flex-direction : row;
+  display : flex;
 `;
 
 export const ProfileBox = styled.div`
-  margintop -: 0;
+  margintop : 0;
   width: 195px;
   height: 30px;
   border-radius: 30px;
@@ -55,11 +61,11 @@ export const ProfileBox = styled.div`
   flex-direction : row;
   display : flex;
 
-  >img {
-    width : 30px;
-    height : 30px;
-    border-radius : 50%;
-    object-fit : cover;
+  img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
   }
 `;
 
@@ -76,7 +82,7 @@ export const TextDiv = styled.div`
     padding : 0;
     font-size: 11px;
     font-weight: 700;
-    line-height: 13px;
+    line-height: 10px;
     letter-spacing: -0.025em;
   }
 
@@ -91,7 +97,24 @@ export const TextDiv = styled.div`
 `;
 
 export const CircleButton = styled.button`
-  width : 35px;
-  height : 35px;
-  margin : 0 5px;
+  width : 38px;
+  height : 38px;
+  margin : 3px;
+  border-radius: 50%;
+  object-fit: cover;
+  padding : 0;
+
+
+  &.enlarge {
+    background : #D0DAE8;
+  }
+
+  &.emotion {
+    
+  }
+
+  &.interest {
+    background : #D0DAE8;
+  }
+
 `;

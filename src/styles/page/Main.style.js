@@ -103,13 +103,13 @@ export const TextDiv = styled.div`
 export const StoryContainer = styled.div`
   width: 310px;
   height: 390px;
-  gap: 0px;
   border-radius: 10px;
   opacity: 0px;
   background: rgba(127, 127, 127, 0.9);
   flex-direction : column;
   padding : 10px;
   align-items : center;
+  justify-content: center;
 
   >h3 {
     padding : 10px 15px;
@@ -131,7 +131,6 @@ export const ProfileBox = styled.div`
   border-radius: 100px;
   align-items: center;
   display: flex;
-  gap: 10px;
 `;
 
 export const ProfileText = styled.div`
@@ -207,4 +206,33 @@ export const FreeButton = styled.button`
   background-image: url('src/assets/Home/FreeTheme.svg');
   width: 158px;
   height: 97px;
+`;
+
+export const MoreButton = styled(NavLink)`
+  width: 288px;
+  height: 25px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #BBD7FF;
+  background: #D0DAE8;
+  color: #555555;
+  margin-top: 5px;
+  box-shadow: 0px 4px 4px 0px #00000026;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center; 
+  text-decoration: none;
+  
+  > h6 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16px;
+  }
+
+  &:hover {
+    background-color: #c0c8d8; /* Add hover effect if needed */
+    color: #333333; /* Change text color on hover */
+  }
 `;

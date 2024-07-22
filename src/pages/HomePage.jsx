@@ -3,6 +3,7 @@ import StoryBox from "../components/StoryBox";
 import { NavLink } from "react-router-dom";
 
 function HomePage() {
+
     let diaryNum = 14;
     let topic = '현재 나의 애인과 가치관 차이로 생긴 문제는?';
     let nickName = '훈이 말고 훈기';
@@ -41,7 +42,7 @@ function HomePage() {
                 </S.DiaryButton>  
             </div>
             
-            <S.QBox className="history">
+            <S.QBox className="history"  to="/user">
                 <h6>MY<br/>HISTORY</h6>
                 <h5>나의 일기 기록 모아보기</h5>
             </S.QBox>
@@ -51,8 +52,11 @@ function HomePage() {
                     오늘의 스토리텔러는?
                 </h3>
                 <StoryBox>
-
                 </StoryBox>
+                <StoryBox></StoryBox>
+                <S.MoreButton>
+                    <h6>더 많은 일기 보기&gt;</h6>
+                </S.MoreButton>
             </S.StoryContainer>
         </S.Container>
     );

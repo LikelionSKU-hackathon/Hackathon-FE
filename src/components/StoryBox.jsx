@@ -1,5 +1,6 @@
 import * as S from "../styles/components/StoryBox"
 import React, { useState } from "react"
+import profile from "../assets/Login/profile.png"
 
 export default function StoryBox() {
     let tag = '연애 및 대인관계'
@@ -15,15 +16,17 @@ export default function StoryBox() {
             <p>
                 {tt}
             </p>
-            <S.ProfileBox>
-                <S.StoryDiv>
-                    <img></img>
+            <S.StoryDiv>
+                <S.ProfileBox>
+                    <img src={profile}></img>
                     <S.TextDiv>
                         <h6>{nickName}</h6>
                         <p>{age} / #{tags[0]} #{tags[1]} #{tags[2]}</p>
                     </S.TextDiv>
-                </S.StoryDiv>
-            </S.ProfileBox>
+                </S.ProfileBox>
+                <S.CircleButton className="enlarge"></S.CircleButton>
+                <S.CircleButton className="interest"></S.CircleButton>
+            </S.StoryDiv>
         </S.StoryBox>
     );
 }
