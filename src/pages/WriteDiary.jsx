@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import * as W from "../styles/page/Write.style"
+import * as S from "../styles/page/Main.style"
+import Emotion from "../components/Emotion";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -58,9 +61,11 @@ const PublicButton = styled(Button)`
   border: 1px solid ${(props) => (props.active ? 'rgb(79, 132, 210)' : 'rgb(255, 255, 255)')};
   cursor: pointer;
 `;
+import Back from "../components/Back";
 
 export default function WriteDiary() {
   const [activeButton, setActiveButton] = useState(null);
+  const [emotion, setEmotion] = useState('오늘의 감정');
   const date = new Date();
   const formattedDate = date.toLocaleDateString('ko-KR', {
     year: 'numeric',
@@ -70,33 +75,35 @@ export default function WriteDiary() {
   let nickname = '쓰담';
   let count = '4';
   let theme = '주제쓰는 칸';
-  let emotion = '오늘의 감정';
 
   const handleButtonClick = (button) => {
     setActiveButton(button);
     console.log(button === 'public' ? 0 : 1); // 0 for public, 1 for private
   };
 
+  const handleEmotionSelect = (selectedEmotion) => {
+    setEmotion(selectedEmotion);
+};
+
   return (
-    <Container>
-      <span style={{ color: 'rgb(108,108,108)', fontSize: '14px', fontWeight: '500' }}>{formattedDate}</span>
-      <span style={{ color: 'rgb(108,108,108)', fontSize: '14px', fontWeight: '500' }}>{nickname} 님의 {count}번째 쓰임</span>
-      <span style={{ color: 'rgb(85,85,85)', fontSize: '16px', fontWeight: '700', textDecoration: 'underline' }}>" {theme} "</span>
-      <br />
-      <Circle></Circle>
-      <span style={{ color: 'rgb(85,85,85)', fontSize: '12px', fontWeight: '600' }}>{emotion}</span>
-      <WriteBox placeholder="제목을 입력해주세요"></WriteBox>
-      <WriteBox style={{ height: '180px' }} placeholder="내용 입력하기"></WriteBox>
-      <div style={{ display: 'flex', flexDirection: 'row' }}>
-        <PublicButton active={activeButton === 'public'} onClick={() => handleButtonClick('public')}>
+    <S.Container>
+      <Back to="/"></Back>
+      <W.IntroText className = "date">{formattedDate}<br/>{nickname} 님의 {count}번째 쓰임</W.IntroText>
+      <W.IntroText className="theme">{theme}</W.IntroText>
+      <Emotion onSelect={handleEmotionSelect}/>
+      <W.IntroText className="emotion">{emotion}</W.IntroText>
+      <W.WriteBox className="title" placeholder="제목을 입력해주세요"></W.WriteBox>
+      <W.WriteBox style={{ height: '180px' }} placeholder="내용 입력하기"></W.WriteBox>
+      <W.PublicDiv>
+        <W.PublicButton active={activeButton === 'public'} onClick={() => handleButtonClick('public')}>
           공개
-        </PublicButton>
-        <PublicButton active={activeButton === 'private'} onClick={() => handleButtonClick('private')}>
+        </W.PublicButton>
+        <W.PublicButton active={activeButton === 'private'} onClick={() => handleButtonClick('private')}>
           비공개
-        </PublicButton>
-      </div>
-      <Button>입력완료</Button> 
+        </W.PublicButton>
+      </W.PublicDiv>
+      <W.Done>입력완료</W.Done> 
       {/* onClick 하면 완료 페이지로 넘어가기 */}
-    </Container>
+    </S.Container>
   );
 }
