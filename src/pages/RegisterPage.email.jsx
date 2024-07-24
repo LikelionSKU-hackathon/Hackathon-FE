@@ -10,19 +10,15 @@ export default function RegisterPageEmail() {
     const [userId, setUserId] = useState('');
     const [pwd, setPwd] = useState('');
     const [name, setName] = useState('');
-    const [age, setAge] = useState(0);
+    const [age, setAge] = useState("");
     const fileInputRef = useRef(null);
-    const isFormValid = userId !== '' && pwd !== '' && name !== '' && age !== 0;
-    const location = useLocation();
+    const isFormValid = userId !== '' && pwd !== '' && name !== '' && age !== "";
     const navigate = useNavigate();
-    const { message } = location.state || "1";
-    //console.log({message});
-    // 선택된 나이
-    const handleChange = (value) => {
-        setAge(value);
-    };
+    const location = useLocation();
+    // 받은 주소
+    const message = location.state || {};
     // 프로필 이미지
-    const [profileImage, setProfileImage] = useState({ profile });
+    const [profileImage, setProfileImage] = useState(profile);
     // 이미지 설정
     const handleImageChange = (event) => {
         fileInputRef.current.click();
@@ -36,6 +32,7 @@ export default function RegisterPageEmail() {
                 reader.onload = function (event) {
                     const imageURL = event.target.result;
                     fileView.style.backgroundImage = `url(${imageURL})`;
+                    setProfileImage(window.getComputedStyle(fileView).backgroundImage);
                 };
 
                 reader.readAsDataURL(fileInput.files[fileInput.files.length - 1]);
@@ -44,84 +41,149 @@ export default function RegisterPageEmail() {
     };
     // register 테스트
     const tryRegister = (e) => {
-        console.log('button clicked');
-        e.preventDefault();
-        console.log(`userId: ${userId}, pwd: ${pwd}, name: ${name}, age: ${age}`);
-        navigate('/register/word');
+        if (emailCheck) {
+            if (nameCheck) {
+                console.log('button clicked');
+                e.preventDefault();
+                console.log(`userId: ${userId}, pwd: ${pwd}, name: ${name}, age: ${age}`);
+                navigate('/register/word',
+                    {
+                        state:
+                        {
+                            userId,
+                            pwd, 
+                            name,
+                            age,
+                            profileImage,
+                        }
+                    });
+            } else {
+                alert('닉네임 중복확인을 해주세요');
+            }
+        }
+        else {
+            alert('이메일 중복확인을 해주세요');
+        }
     };
+    // 중복확인 - email
+    const [emailCheck, setEmailCheck] = useState(false);
+    const checkEmail = () => {
+        console.log('check email');
+        console.log(`userId: ${userId}, pwd: ${pwd}, name: ${name}, age: ${age}`);
+        setEmailCheck(true);
+    };
+    // 중복확인 - name
+    const [nameCheck, setNameCheck] = useState(false);
+    const checkName = () => {
+        if (name.length <= 8) {
+            setNameCheck(true);
+        }
+        else {
+            alert('닉네임은 8글자 이내로 입력해주세요');
+        }
+    }
     return (
-        <S.RegisteContainer>
+        <>
             <Back to="/register"></Back>
-            <h6>프로필을</h6>
-            <h6>입력해주세요</h6>
+            <S.RegisteContainer>
 
-            <S.ProfileContainer>
-                <S.Profile
-                    id="fileView"
-                    alt="Profile"
-                />
-                <S.HiddenInput
-                    id="fileInput"
-                    type="file"
-                    accept="image/png, image/jpeg, image/jpg"
-                    ref={fileInputRef}
-                />
-                <S.btnEdit htmlFor="imageInput" src={icon} onClick={handleImageChange} />
-            </S.ProfileContainer>
+                <h6>프로필을</h6>
+                <h6>입력해주세요</h6>
 
-            <L.InputText>이메일</L.InputText>
-            <L.InputContainer>
+                <S.ProfileContainer>
+                    <S.Profile
+                        id="fileView"
+                        alt="Profile"
+                    />
+                    <S.HiddenInput
+                        id="fileInput"
+                        type="file"
+                        accept="image/png, image/jpeg, image/jpg"
+                        ref={fileInputRef}
+                    />
+                    <S.btnEdit
+                        htmlFor="imageInput"
+                        alt="imageInput"
+                        src={icon}
+                        onClick={handleImageChange} />
+                </S.ProfileContainer>
+
+                <L.InputText>이메일</L.InputText>
+                <L.InputContainer>
+                    <L.InputLine
+                        type="text"
+                        value={userId}
+                        autoFocus
+                        placeholder="이메일을 입력하세요"
+                        onChange={(e) => setUserId(e.target.value)}
+                    />
+                    <L.btnCheck
+                        $ischecked={emailCheck.toString()}
+                        onClick={checkEmail}>
+                        {emailCheck ? "확인 완료" : "중복 확인"}
+                    </L.btnCheck>
+                </L.InputContainer>
+
+                <L.InputText>비밀번호</L.InputText>
                 <L.InputLine
-                    type="text"
-                    value={userId}
-                    autoFocus
-                    placeholder="이메일을 입력하세요"
-                    onChange={(e) => setUserId(e.target.value)}
+                    type="password"
+                    value={pwd}
+                    onChange={(e) => setPwd(e.target.value)}
+                    placeholder="비밀번호 입력하세요"
                 />
-                <L.btnCheck><p>중복 확인</p></L.btnCheck>
-            </L.InputContainer>
 
-            <L.InputText>비밀번호</L.InputText>
-            <L.InputLine
-                type="password"
-                value={pwd}
-                onChange={(e) => setPwd(e.target.value)}
-                placeholder="비밀번호 입력하세요"
-            />
-            <L.InputText>닉네임</L.InputText>
-            <L.InputLine
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="8글자 내로 입력"
-            />
-            <L.InputText>나이</L.InputText>
-            <S.RadioGroupContainer>
-                <S.RadioButtonInput
-                    selected={age === 'option1'}
-                    onClick={() => handleChange("10")}>
-                    <p>10대</p>
-                </S.RadioButtonInput>
-                <S.RadioButtonInput
-                    selected={age === 'option2'}
-                    onClick={() => handleChange("20")}
-                >
-                    <p>20대</p>
-                </S.RadioButtonInput>
-                <S.RadioButtonInput
-                    selected={age === 'option3'}
-                    onClick={() => handleChange("30")}
-                >
-                    <p>30대</p>
-                </S.RadioButtonInput>
-                <S.RadioButtonInput
-                    selected={age === 'option3'}
-                    onClick={() => handleChange("40")}
-                >
-                    <p>40대</p>
-                </S.RadioButtonInput>
-            </S.RadioGroupContainer>
-            <L.InputSubmit onClick={tryRegister} disabled={!isFormValid}><p>입력완료</p></L.InputSubmit>
-        </S.RegisteContainer>
+                <L.InputText>닉네임</L.InputText>
+                <L.InputContainer>
+                    <L.InputLine
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        placeholder="8글자 내로 입력"
+                    />
+                    <L.btnCheck
+                        $ischecked={nameCheck.toString()}
+                        onClick={checkName}>
+                        {nameCheck ? "확인 완료" : "중복 확인"}
+                    </L.btnCheck>
+                </L.InputContainer>
+                <L.InputText>나이</L.InputText>
+                <S.RadioGroupContainer>
+                    <S.RadioButtonInput
+                        selected={age == "10대"}
+                        onClick={() => setAge("10대")}>
+                        10대
+                    </S.RadioButtonInput>
+                    <S.RadioButtonInput
+                        selected={age == "20대"}
+                        onClick={() => setAge("20대")}
+                    >
+                        20대
+                    </S.RadioButtonInput>
+                    <S.RadioButtonInput
+                        selected={age === "30대"}
+                        onClick={() => setAge("30대")}
+                    >
+                        30대
+                    </S.RadioButtonInput>
+                    <S.RadioButtonInput
+                        selected={age === "40대"}
+                        onClick={() => setAge("40대")}
+                    >
+                        40대
+                    </S.RadioButtonInput>
+                    <S.RadioButtonInput
+                        selected={age === "50대"}
+                        onClick={() => setAge("50대")}
+                    >
+                        50대
+                    </S.RadioButtonInput>
+                </S.RadioGroupContainer>
+                <L.InputSubmit
+                    onClick={tryRegister}
+                    disabled={!isFormValid}>
+                    <p>입력완료</p>
+                </L.InputSubmit>
+            </S.RegisteContainer>
+        </>
     );
 }

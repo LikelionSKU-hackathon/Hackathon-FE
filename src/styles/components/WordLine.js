@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const WordContainer = styled.div`
+export const WordContainer = styled.button`
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -11,7 +11,7 @@ export const WordContainer = styled.div`
     color: : '#555555';
     margin: 5px 0;
     border-radius: 15px;
-    box-shadow:${props => (props.selected ? 'inset 0 4px 4px rgba(0, 0, 0, 0.25)' : '0 4px 4px rgba(0, 0, 0, 0.25)')};
+    box-shadow :  ${props => (props.selected ? 'inset 0 4px 4px rgba(0, 0, 0, 0.25)' : '0 4px 4px rgba(0, 0, 0, 0.25)')};
 `;
 export const FixContainer = styled.div`
     display: flex;

@@ -16,11 +16,12 @@ import upset from '../assets/myPage/icon_upset.svg';
 
 const emogi = [ang, sad, soso, happy, good, upset];
 export default function UserPage() {
-    const [modalSwitch, setModalSwitch] = useState(true);
+    const [modalSwitch, setModalSwitch] = useState(false);
     const isLogin = useRecoilState(isLoginSelector);
     const today = new Date();
     const [date, setDate] = useState(today);
     const [clickedData, setClickedData] = useState(null);
+    const daysOfWeekNames = ["일", "월", "화", "수", "목", "금", "토"];
     const handleDateChange = (newDate) => {
         setDate(newDate);
     };
@@ -36,14 +37,15 @@ export default function UserPage() {
             />
         }
     }, []);
+    // month는 0부터 시작
     const datesWithImages = [
-        { date: new Date(2024, 6, 1), image: 0, keyword: "제목 1", content: "내용" },
-        { date: new Date(2024, 6, 2), image: 1, keyword: "제목 1", content: "내용이에요.요요요요요요요요요요용" },
-        { date: new Date(2024, 6, 5), image: 4, keyword: "제목 1", content: "내용이에요.요요요요요요요요요요용" },
+        { date: new Date(2024, 6, 1), image: 0, keyword: "제목 1", content: "내용", aiContent: "AAAAAAAAAAAAAAAAAA  AAAAAAAAAAAAAAAAA" },
+        { date: new Date(2024, 6, 2), image: 1, keyword: "제목 2", content: "내용이에요.22222222222222222222222222222" , aiContent: "BBBBBBBBBBBBBBBBBBBB BBBBBBBBBBBBBBBB"},
+        { date: new Date(2024, 6, 5), image: 4, keyword: "제목 3", content: "내용이에요 333333333333333333333333333333333333333333333333333333333  33333333333333333333333333  3333333333333333", aiContent: "CCCC DDD  CCCCCCCCCCCC CCCCCCCCCCCCCCCCCCCCCCCCCCCC  CCCCCCCCCCCCCCCCCCCCCCC CCCCCCCCccc" },
+        { date: new Date(2024, 7, 2), image: 1, keyword: "제목 4", content: "내용이에요. 4444444444444444444444" , aiContent: "DDDD DDDDDDDDDDDDDDDD"},
         // ... more dates
     ];
     const onClickDay = (data) => {
-        console.log(data);
         if (data) {
             setClickedData(data);
             setModalSwitch(true);
@@ -58,25 +60,25 @@ export default function UserPage() {
             <Back></Back>
             <M.ModalContainer show={modalSwitch}>
                 <M.ModalContent>
-                    <M.ModalImage src={emogi[0]}></M.ModalImage>
+                    <M.ModalImage src={clickedData &&emogi[clickedData.image]}></M.ModalImage>
                     <M.CloseButton onClick={() => setModalSwitch(false)} />
                     <span>
-                        <M.ModalDateBold>{clickedData}</M.ModalDateBold>
+                        <M.ModalDateBold>{clickedData && clickedData.date.getFullYear()}</M.ModalDateBold>
                         <M.ModalDate>년</M.ModalDate>
-                        <M.ModalDateBold>7</M.ModalDateBold>
+                        <M.ModalDateBold>{clickedData && clickedData.date.getMonth()}</M.ModalDateBold>
                         <M.ModalDate>월</M.ModalDate>
-                        <M.ModalDateBold>날짜</M.ModalDateBold>
-                        <M.ModalDate>일 x요일의</M.ModalDate>
+                        <M.ModalDateBold>{clickedData && clickedData.date.getDate()}</M.ModalDateBold>
+                        <M.ModalDate>일 {clickedData && daysOfWeekNames[clickedData.date.getDay()]}요일의</M.ModalDate>
                         <M.ModalDateBold>쓰임</M.ModalDateBold>
                     </span>
 
-                    <M.ModalTitle>제목</M.ModalTitle>
+                    <M.ModalTitle>{clickedData && clickedData.keyword}</M.ModalTitle>
                     <M.ModalBodyContain>
-                        <M.ModalBody>내용aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</M.ModalBody>
+                        <M.ModalBody>{clickedData && clickedData.content}</M.ModalBody>
                     </M.ModalBodyContain>
                     <M.ModalExtra>
                         <h3>AI 쓰감 선생님의 한 마디</h3>
-                        <p>고생했어요ㄴㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ</p>
+                        <p>{clickedData && clickedData.aiContent}</p>
                     </M.ModalExtra>
                 </M.ModalContent>
             </M.ModalContainer>

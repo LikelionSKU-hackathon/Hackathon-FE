@@ -3,9 +3,13 @@ import * as S from "../styles/page/Login.stlye";
 import naver from "../assets/Login/logo_naver.png";
 import kakao from "../assets/Login/logo_kakao.png";
 import google from "../assets/Login/logo_google.png";
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function RegisterPage() {
+    const navigate = useNavigate();
+    const handleClick = (addr) => {
+        navigate('/register/email', { state: addr } );
+    };
     return (
         <S.LoginContainer>
             <S.Intro>
@@ -15,25 +19,16 @@ export default function RegisterPage() {
                 <p>오로지 나만을 위한 일기를 써보세요</p>
             </S.Intro>
             <S.ModuleContainer>
-                <S.LoginLine className="naver" to={{
-                    pathname: '/register/email',
-                    state: { message: 'naver' }
-                }}>
-                    <img src={naver} ></img>
+                <S.LoginLine className="naver" onClick={() => handleClick('naver')} >
+                    <img src={naver} alt="icon_naver" ></img>
                     <p> 네이버 계정으로 회원가입</p>
                 </S.LoginLine>
-                <S.LoginLine className="kakao" to={{
-                    pathname: '/register/email',
-                    state: { message: 'kakao' }
-                }}>
-                    <img src={kakao} ></img>
+                <S.LoginLine className="kakao" onClick={() => handleClick('kakao')} >
+                    <img src={kakao} alt="icon_kakao"></img>
                     <p>카카오 계정으로 회원가입</p>
                 </S.LoginLine>
-                <S.LoginLine className="google" to={{
-                    pathname: '/register/email',
-                    state: { message: 'google' }
-                }}>
-                    <img src={google} ></img>
+                <S.LoginLine className="google" onClick={() => handleClick('google')} >
+                    <img src={google} alt="icon_google"></img>
                     <p>Google 계정으로 회원가입</p>
                 </S.LoginLine>
                 <div>

@@ -1,10 +1,16 @@
 import * as S from "../styles/components/WordLine"
-export default function WordLine(props){
-    return(
-        <S.WordContainer selected = {props.selected} onProfile = {props.onProfile}>
-            {props.emoji}
-            <S.WordTag>{props.tag}</S.WordTag>
-            <S.WordTitle>{props.title}</S.WordTitle>
+export default function WordLine({ id, emoji, tag, title, selected,onProfile, onClick }) {
+    const handleClick = () => {
+        onClick(id);
+    };
+    return (
+        <S.WordContainer
+            selected={selected}
+            onProfile={onProfile}
+            onClick={handleClick}>
+            {emoji}
+            <S.WordTag>{tag}</S.WordTag>
+            <S.WordTitle>{title}</S.WordTitle>
         </S.WordContainer>
     );
 }
