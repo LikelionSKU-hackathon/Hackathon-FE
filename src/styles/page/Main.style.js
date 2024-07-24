@@ -248,6 +248,7 @@ export const Title = styled.h6 `
   color: #555555;
   padding : 10px;
   margin : 0;
+  transform: translateX(-15%);
 `;
 
 export const SubTitle = styled.text`
@@ -258,4 +259,5 @@ export const SubTitle = styled.text`
   text-align: left;
   color: #555555;
   padding : 15px;
+  transform: translateX(-15%);
 `;

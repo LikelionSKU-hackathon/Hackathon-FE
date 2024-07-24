@@ -6,7 +6,7 @@ export const ModalContainer = styled.div.attrs((props) => ({
   'data-show': props.show,
 }))`
   display: ${(props) => (props.show ? 'flex' : 'none')};
-  position: fixed;;
+  position: fixed;
   z-index: 1;
   left: 0;
   top: 0;
@@ -17,6 +17,7 @@ export const ModalContainer = styled.div.attrs((props) => ({
   justify-content: center;
   align-items: center;
   z-index: 100;
+  flex-direction : column;
 `;
 
 export const ModalContent = styled.div`
@@ -130,17 +131,38 @@ export const CommentContain = styled.div`
 `;
 
 export const MoreButton = styled(NavLink)`
-    width: 280px;
-    height: 20px;
-    margin: 10px;
-    padding : 10px;
-    background: rgb(208, 218, 232);
-    border: 1px solid rgba(187, 215, 255, 1);
-    border-radius: 10px;
-    font-size: 14px;
-    font-weight: 400; 
-    line-height: 16.94px;
-    color: rgb(85, 85, 85);
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
-    text-align : center;
+  width: 60%;
+  height: 10px;
+  padding: 20px;
+  background: #D0DAE8;
+  border: 1px solid #BBD7FF;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 400; 
+  line-height: 16.94px;
+  color: rgb(85, 85, 85);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+  text-align : center;
+`;
+
+export const ModalHeader = styled.div`
+  letter-spacing: -0.025em;
+  text-align: left;
+  color : #FFFFFF;
+  transform: translateX(-20%);
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  > h6 {
+    margin : 5px;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 28.64px;
+    
+  }
+  >p {
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 14.32px;
+  }
 `;

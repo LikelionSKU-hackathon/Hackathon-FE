@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import * as W from "../styles/page/Write.style"
 import * as S from "../styles/page/Main.style"
 import Emotion from "../components/Emotion";
@@ -8,6 +9,7 @@ export default function WriteDiary() {
   const [activeButton, setActiveButton] = useState(null);
   const [emotion, setEmotion] = useState('오늘의 감정');
   const date = new Date();
+  const navigate = useNavigate();
   const formattedDate = date.toLocaleDateString('ko-KR', {
     year: 'numeric',
     month: 'long',
@@ -24,7 +26,13 @@ export default function WriteDiary() {
 
   const handleEmotionSelect = (selectedEmotion) => {
     setEmotion(selectedEmotion);
-};
+  };
+
+  const handleDoneClick = () => {
+    navigate('/?modal=true')
+
+  }
+
 
   return (
     <S.Container>
@@ -43,7 +51,7 @@ export default function WriteDiary() {
           비공개
         </W.PublicButton>
       </W.PublicDiv>
-      <W.Done to="/">입력완료</W.Done> 
+      <W.Done onClick={handleDoneClick}>입력완료</W.Done> 
       {/* onClick 하면 완료 페이지로 넘어가기 */}
     </S.Container>
   );
