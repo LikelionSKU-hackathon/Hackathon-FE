@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 export const IntroText = styled.text`
@@ -72,19 +73,20 @@ export const Emotion = styled.button`
     position : relative;
 `;
 
-export const Done = styled.button`
-    width: 300px;
-    height: 40px;
+export const Done = styled(NavLink)`
+    width: 280px;
+    height: 20px;
     margin: 10px;
     padding : 10px;
     background: rgb(208, 218, 232);
-    border: 1px solid rgba(187, 215, 255, 1)
+    border: 1px solid rgba(187, 215, 255, 1);
     border-radius: 10px;
     font-size: 14px;
     font-weight: 400; 
     line-height: 16.94px;
     color: rgb(85, 85, 85);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+    text-align : center;
 `;
 
 export const PublicDiv = styled.div`

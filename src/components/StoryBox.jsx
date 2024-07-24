@@ -1,5 +1,6 @@
 import * as S from "../styles/components/StoryBox"
 import React, { useState } from "react"
+import profile from "../assets/Login/profile.png"
 
 export default function StoryBox() {
     let tag = '연애 및 대인관계'
@@ -9,21 +10,33 @@ export default function StoryBox() {
     let age = '20대'
     let tags = ['감정고민', '직장생활', '인간관계'];
 
+    const [liked, setLiked] = useState(false);
+    const [likeCount, setLikeCount] = useState(0);
+  
+    const handleLike = () => {
+      setLiked(prelike => !liked);
+      setLikeCount(preCount => (liked ? preCount-1 : preCount + 1));
+    };
+
     return(
         <S.StoryBox>
             <h5>#{tag}</h5><h5 className="title">{title}</h5>
             <p>
                 {tt}
             </p>
-            <S.ProfileBox>
-                <S.StoryDiv>
-                    <img></img>
+            <S.StoryDiv>
+                <S.ProfileBox>
+                    <img src={profile}></img>
                     <S.TextDiv>
                         <h6>{nickName}</h6>
                         <p>{age} / #{tags[0]} #{tags[1]} #{tags[2]}</p>
                     </S.TextDiv>
-                </S.StoryDiv>
-            </S.ProfileBox>
+                </S.ProfileBox>
+                <S.CircleButton className="enlarge"></S.CircleButton>
+                <S.CircleButton className='liked' onClick={handleLike}>
+                    {liked ? <S.SHeartFilled /> : <S.SHeartOutLined />}
+                </S.CircleButton>
+            </S.StoryDiv>
         </S.StoryBox>
     );
 }

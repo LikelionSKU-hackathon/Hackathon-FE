@@ -2,65 +2,6 @@ import React, { useState } from "react";
 import * as W from "../styles/page/Write.style"
 import * as S from "../styles/page/Main.style"
 import Emotion from "../components/Emotion";
-import styled from "styled-components";
-
-const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center; 
-  flex-direction: column;
-`;
-
-const WriteBox = styled.textarea`
-  width: 280px;
-  height: 20px;
-  background: rgb(208,218,232);
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  font-size: 13px;
-  font-weight: 500;
-  margin: 10px;
-  padding: 10px;
-  border: none;
-  border-radius: 10px;
-  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-  overflow-wrap: break-word;
-  word-break: break-all;
-  white-space: pre-wrap;
-  resize: none;
-  overflow-y: auto;
-`;
-
-const Circle = styled.div`
-  width: 70px;
-  height: 70px;
-  border: 2px rgb(85, 85, 85) dotted;
-  border-radius: 100%;
-  background: rgb(242,242,241);
-  margin: 5px;
-`;
-
-const Button = styled.button`
-  width : 95%;
-  height : 40px;
-  margin : 10px;
-  background : rgb(208, 218, 232);
-  border : 1px rgb(255,255,255);
-  border-radius : 10px;
-  text-size : 14px;
-  text-weight : 500;
-  text-color : rgb(85,85,85);
-`;
-
-const PublicButton = styled(Button)`
-  width : 140px;
-  background: ${(props) => (props.active ? 'rgb(147, 186, 243)' : 'rgb(208, 218, 232)')};
-  border: 1px solid ${(props) => (props.active ? 'rgb(79, 132, 210)' : 'rgb(255, 255, 255)')};
-  cursor: pointer;
-`;
 import Back from "../components/Back";
 
 export default function WriteDiary() {
@@ -102,7 +43,7 @@ export default function WriteDiary() {
           비공개
         </W.PublicButton>
       </W.PublicDiv>
-      <W.Done>입력완료</W.Done> 
+      <W.Done to="/">입력완료</W.Done> 
       {/* onClick 하면 완료 페이지로 넘어가기 */}
     </S.Container>
   );

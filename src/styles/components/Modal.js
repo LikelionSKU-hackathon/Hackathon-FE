@@ -1,4 +1,4 @@
-import React from 'react';
+import { NavLink } from "react-router-dom";
 import styled from 'styled-components';
 
 // 모달 스타일 정의
@@ -24,11 +24,11 @@ export const ModalContent = styled.div`
   flex-direction: column;
   position: relative;
   align-items: center;
-  background-color: #fefefe;
+  background-image : url(/public/img/BG_Paper.png);
   margin: 5% auto;
   padding: 20px;
   border: 1px solid #888;
-  width: 80%;
+  width: 60%;
   max-width: 600px;
   position: relative;
   border-radius: 10px;
@@ -39,6 +39,7 @@ export const CloseButton = styled.button`
   width: 16px;
   height: 16px;
   position: absolute;
+  padding : 0;
   border: none;
   top: 5%;
   right: 5%;
@@ -86,12 +87,16 @@ export const ModalBodyContain = styled.div`
   display: block;
 `
 export const ModalBody = styled.p`
+  width : 100%;
   font-size: 12px;
   font-family: Pretendard;
   font-weight: 400;
   color : #555;
   text-align: center;
   padding: 5px;
+  white-space: pre-wrap; 
+  overflow-wrap: break-word; 
+  word-break: break-word; 
 `;
 
 export const ModalExtra = styled.div`
@@ -100,6 +105,8 @@ export const ModalExtra = styled.div`
   background-image: url(src/assets/myPage/bg_answer.png);
   background-size: cover;
   background-repeat: no-repeat;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+
   h3{
     color: white;
     font-weight: 700;
@@ -114,4 +121,26 @@ export const ModalExtra = styled.div`
     font-family: Pretendard;
     padding : 0px 0px 0px 10px;
   };
+`;
+
+export const CommentContain = styled.div`
+  width : 80%;
+  border-top : 1px solid rgba(85, 85, 85, 1);
+
+`;
+
+export const MoreButton = styled(NavLink)`
+    width: 280px;
+    height: 20px;
+    margin: 10px;
+    padding : 10px;
+    background: rgb(208, 218, 232);
+    border: 1px solid rgba(187, 215, 255, 1);
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 400; 
+    line-height: 16.94px;
+    color: rgb(85, 85, 85);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+    text-align : center;
 `;
