@@ -22,30 +22,49 @@ export default function LoginPageEmail() {
     const tryLogin = (e) => {
         e.preventDefault();
         console.log(`userId: ${userId}, pwd: ${pwd}`);
-        setAccessToken('access -fake-token');
-        navigate(from); // HomePage
+        if (login()) {
+
+        }
+        else {
+            setIsErr(true);
+        }
+        //setAccessToken('access -fake-token');
+        //navigate(from); // HomePage
     }
+    // 더미
+    const login = () => {
+        return false;
+    }
+    // 오류 출력
+    const [isErr, setIsErr] = useState(false);
 
     return (
-        <S.LoginContainer>
+        <>
             <Back to = "/login"></Back>
-            <Intro></Intro>
-            <S.InputText>이메일</S.InputText>
-            <S.InputLine
-                type="text"
-                value={userId}
-                autoFocus
-                placeholder="이메일을 입력하세요"
-                onChange={(e) => setUserId(e.target.value)}
-            />
-            <S.InputText>비밀번호</S.InputText>
-            <S.InputLine
-                type="password"
-                value={pwd}
-                onChange={(e) => setPwd(e.target.value)}
-                placeholder="비밀번호 입력하세요"
-            />
-            <S.InputSubmit onClick={tryLogin} disabled={!isFormValid}>로그인</S.InputSubmit>
-        </S.LoginContainer>
+            <S.LoginContainer>
+
+                <Intro></Intro>
+                <S.ErrText
+                    disabled={!isErr}
+                >
+                    입력한 정보가 문제가 있습니다. 다시 한 번 확인해주시길 바랍니다</S.ErrText>
+                <S.InputText>이메일</S.InputText>
+                <S.InputLine
+                    type="text"
+                    value={userId}
+                    autoFocus
+                    placeholder="이메일을 입력하세요"
+                    onChange={(e) => {setUserId(e.target.value); setIsErr(false);}}
+                />
+                <S.InputText>비밀번호</S.InputText>
+                <S.InputLine
+                    type="password"
+                    value={pwd}
+                    onChange={(e) => {setPwd(e.target.value); setIsErr(false);}}
+                    placeholder="비밀번호 입력하세요"
+                />
+                <S.InputSubmit onClick={tryLogin} disabled={!isFormValid}>로그인</S.InputSubmit>
+            </S.LoginContainer>
+        </>
     );
 }

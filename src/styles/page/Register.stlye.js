@@ -6,7 +6,7 @@ export const RegisteContainer = styled.div`
     align-items: flex-start;
     width: 100%;
     height: 100vh;
-    padding-top : 90px;
+    padding-top : 70px;
     h6 {
         font-size: 32px;
         font-weight: 600;
@@ -30,7 +30,7 @@ export const ProfileContainer = styled.div`
     position: relative;
     width: 80px;
     height: 80px;
-    margin : 20px 0;
+    margin : 10px 0;
 `;
 export const btnEdit = styled.img`
     position: absolute;
@@ -55,15 +55,14 @@ export const Intro = styled.div`
     width: 83%;
     flex-direction: column;
     align-items: flex-start;
-    margin-top: 77px;
-    gap: 0px;
+    margin-left: 0px;
     h6 {
         font-size: 24px;
         font-weight: 600;
         font-family: Pretendard, sans-serif;
         text-align: left;
-        margin : 0px 0;
         color : #555555;
+        margin : 10px 0;
     }
     p {
         font-weight: 300;
@@ -78,14 +77,14 @@ export const Intro = styled.div`
     }
 `;
 export const Profile = styled.div`
-    width: 80px;
-    height: 80px;
+    width: 81px;
+    height: 81px;
     border-radius: 50%;
     object-fit: cover;
     border: 2px solid #ccc;
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    background-image: url();
+    background-image: url(/src/assets/Login/profile.png);
 `;
 export const Profile2 = styled.div`
     width: 87px;
@@ -107,17 +106,18 @@ export const RadioGroupContainer = styled.div`
 
 export const RadioButtonInput = styled.button`
     display: flex;
+    position: relative;
     justify-content : center;
+    align-items: center;
     width : 70px;
     height : 40px;
     padding: 0;
-    border: none;
     border-radius: 0%;
-    border-bottom: 1px solid #B5B6BD;
+    border-bottom: 1px solid #D7D8E0;
     outline: none;
     background-color: ${props => (props.selected ? '#93BAF3' : 'white')};
-
-    color: #B5B6BD;
+    color: ${props => (props.selected ? 'white' : '#B5B6BD')};
+    box-shadow: ${props => (props.selected ? 'inset 0 4px 4px rgba(0, 0, 0, 0.25)' : 'none')};
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s;
     font-size: 16px;
@@ -129,13 +129,14 @@ export const RadioButtonInput = styled.button`
     }
     &:focus {
         outline: none;
-        border-bottom: 2px solid gray;
+        box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.25);
     }
-    .p{
-        font-weight: 500;
-        font-size: 16px;
-        font-family: Pretendard, sans-serif;
-    }
+    
+    font-weight: 500;
+    font-size: 16px;
+    font-family: Pretendard, sans-serif;
+    text-align: center;
+    
 `;
 export const WordListContainer = styled.div`
     display: flex;
@@ -144,6 +145,7 @@ export const WordListContainer = styled.div`
     align-items: center;
     width: 360px;
     height: 100vh;
+    margin-top : 70px;
     padding-top : 0px;
     >h6 {
         font-size: 32px;
@@ -169,11 +171,18 @@ export const WordListContainer = styled.div`
 
 export const ProflePageContainer = styled.div`
     display: flex;
+    position: relative;
     flex-direction: column;
     align-items: center;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
-    gap: 15px;
+    padding-top : 70px;
+    h6 {
+        font-size: 32px;
+        font-weight: 600;
+        font-family: Pretendard, sans-serif;
+        margin : 0px 0;
+    }
 }
 `;
 export const ListContainer = styled.div`
@@ -197,11 +206,11 @@ export const ProfileBox = styled.div`
     align-items: center;
     min-width: 300px;
     width: 83%;
-    height: 640px;
+    height: auto;
     background-color: #D0DAE87F;
     border-radius: 20px;
     padding: 27px 15px 19px 15px;
-    margin: 0px;
+    margin-top: 35px;
     box-sizing: border-box;
     hr {
         width : 80%;

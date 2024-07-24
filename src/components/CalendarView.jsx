@@ -16,7 +16,6 @@ let datesWithImages;
 const emogi = [ang, sad, soso, happy, good, upset];
 export default function CalendarView(Props) {
   const [value, setValue] = useState(new Date());
-  const [show, setShow] = useState(false);
   const renderTileContent = ({ date, view }) => {
     const dateInfo = datesWithImages.find(d => d.date.toDateString() === date.toDateString());
     return (
@@ -35,14 +34,6 @@ export default function CalendarView(Props) {
       if (date.toDateString() === today.toDateString()) {return 'today'; } // 오늘 날짜
     }
     return null;
-  };
-  const tileDisabled = ({ date, view }) => {
-    // 현재 달 외의 타일을 비활성화
-    if (view === 'month') {
-      const currentMonth = value.getMonth();
-      return date.getMonth() !== currentMonth;
-    }
-    return false;
   };
 
   const onClickDay = (date) => {
@@ -74,7 +65,6 @@ export default function CalendarView(Props) {
         next2Label={null} // 다음 해 버튼 숨기기
         prevLabel={<S.CalendarSpan style={{ fontSize: '13px' }}>&lt; 지난달</S.CalendarSpan>}
         nextLabel={<S.CalendarSpan style={{ fontSize: '13px' }}>다음달 &gt;</S.CalendarSpan>}
-
         navigationLabel={({ date, label, locale, view }) => {
           if (view === 'month') {
             return (
@@ -85,7 +75,6 @@ export default function CalendarView(Props) {
           }
           return label;
         }}
-        tileDisabled={tileDisabled}
         maxDetail="month"
         minDetail="month"
       />
