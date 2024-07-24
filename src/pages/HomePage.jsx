@@ -54,8 +54,8 @@ function HomePage() {
                 <StoryBox>
                 </StoryBox>
                 <StoryBox></StoryBox>
-                <S.MoreButton>
-                    <h6>더 많은 일기 보기&gt;</h6>
+                <S.MoreButton to="/diary">
+                    <h6>더 많은 일기 보기 &gt;</h6>
                 </S.MoreButton>
             </S.StoryContainer>
         </S.Container>

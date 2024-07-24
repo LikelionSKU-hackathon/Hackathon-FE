@@ -10,6 +10,14 @@ export default function StoryBox() {
     let age = '20대'
     let tags = ['감정고민', '직장생활', '인간관계'];
 
+    const [liked, setLiked] = useState(false);
+    const [likeCount, setLikeCount] = useState(0);
+  
+    const handleLike = () => {
+      setLiked(prelike => !liked);
+      setLikeCount(preCount => (liked ? preCount-1 : preCount + 1));
+    };
+
     return(
         <S.StoryBox>
             <h5>#{tag}</h5><h5 className="title">{title}</h5>
@@ -25,7 +33,9 @@ export default function StoryBox() {
                     </S.TextDiv>
                 </S.ProfileBox>
                 <S.CircleButton className="enlarge"></S.CircleButton>
-                <S.CircleButton className="interest"></S.CircleButton>
+                <S.CircleButton className='liked' onClick={handleLike}>
+                    {liked ? <S.SHeartFilled /> : <S.SHeartOutLined />}
+                </S.CircleButton>
             </S.StoryDiv>
         </S.StoryBox>
     );
