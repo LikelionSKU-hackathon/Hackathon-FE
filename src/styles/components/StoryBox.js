@@ -61,7 +61,8 @@ export const StoryDiv = styled.div`
 export const ProfileBox = styled.div`
   margintop : 0;
   width: 195px;
-  height: 30px;
+  height: 28px;
+  margin : 3px;
   border-radius: 30px;
   padding : 5px;
   background : rgba(0,0,0,0.5);
@@ -114,13 +115,10 @@ export const CircleButton = styled.button`
   justify-content: center;
   background-color : transparent;
 
-
-  &.enlarge {
-    background : #D0DAE8;
-  }
-
-  &.emotion {
-    
+  img {
+    width : 38px;
+    height : 38px;
+    position: static;
   }
 
   &.liked {

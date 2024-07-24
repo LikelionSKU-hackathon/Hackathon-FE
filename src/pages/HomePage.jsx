@@ -1,9 +1,9 @@
 import * as S from "../styles/page/Main.style"
+import * as M from "../styles/components/Modal";
 import StoryBox from "../components/StoryBox";
 import { NavLink } from "react-router-dom";
 
 function HomePage() {
-
     let diaryNum = 14;
     let topic = '현재 나의 애인과 가치관 차이로 생긴 문제는?';
     let nickName = '훈이 말고 훈기';
