@@ -33,7 +33,17 @@ export const Intro = styled.div`
         font-weight: 800;
     }
 `;
+export const ErrText = styled.p` 
+    font-weight: 500;
+    /*font-size: clamp(10px, 2vw, 56px);*/
+    font-size: 10px;
+    font-family: Pretendard, sans-serif;
+    color : #DD0000;
+    margin-top : 0px;
+    display: ${({ disabled }) => (disabled ? 'none' : 'block')};
+`;
 export const InputText = styled.p` 
+    margin: 0px;
     font-weight: 500;
     font-size: clamp(14px, 2vw, 56px);
     /*font-size: 14px;*/
@@ -58,11 +68,13 @@ export const InputLine = styled.input`
     font-size: 18px;
     outline: none;
     border: none;
-    color : #B5B6BD;
+    color : #555555;
     border-bottom: 1px solid #B5B6BD;
+    &::placeholder {
+        color: #B5B6BD;
+    }
 `;
 export const InputHide = styled.button` 
-    position: absolute;
     right: 10px;
     top: 50%;
     transform: translateY(-50%);
@@ -82,12 +94,12 @@ export const InputSubmit = styled.button`
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 50px; 
+    height: 43px; 
     boarder-radius: 10px;
     background: #B5B6BD;
     color: white;
     margin : 35px 0;
-    
+    background-color: ${props => (props.disabled ? '#B5B6BD' : '#93BAF3')};
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 `;
 export const FixedInputSubmit = styled.button` 
@@ -106,27 +118,25 @@ export const FixedInputSubmit = styled.button`
     background-color: ${props => (props.disabled ? '#B5B6BD' : '#93BAF3')};
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 `;
-export const btnCheck = styled.button` 
+export const btnCheck = styled.button`
     display : flex;
-    position: fixed;
+    position: absolute;
     align-items: center;
     justify-content: center;
-    width: 53px;
+    width: 63px;
     height: 20px; 
     right: 0%;
-    bottom: 3%;
-    transform: translate(-50%, 0);
-    boarder-radius: 10px;
+    top : 50%;
+    transform: translate( 0%, -50%);
     background: none;
-    color: #B5B6BD;
-    margin : 35px 0;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-    p{
-        font-size: clamp(14px, 2vw, 52px);
-        /*font-size: 14px;*/
-        font-weight: 500;
-        font-family: Pretendard, sans-serif;
-    }
+    padding: 0;
+    color: ${props => (props.$ischecked ? '#555555' : '#B5B6BD')};
+    /*font-size: clamp(14px, 2vw, 52px);*/
+    text-align: right;
+    font-size: 14px;
+    text-align: right;
+    font-weight: 500;
+    font-family: Pretendard, sans-serif;
 `;
 export const ModuleContainer = styled.div`
     display: flex;
@@ -140,7 +150,7 @@ export const ModuleContainer = styled.div`
 
 
 
-export const LoginLine = styled(Link)`
+export const LoginLine = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-start;
