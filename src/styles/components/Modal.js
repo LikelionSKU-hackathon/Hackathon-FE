@@ -125,9 +125,56 @@ export const ModalExtra = styled.div`
 `;
 
 export const CommentContain = styled.div`
-  width : 80%;
+  width : 90%;
   border-top : 1px solid rgba(85, 85, 85, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align : center;
+  margin : 4px;
+  >h3 {
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 16.8px;
+    letter-spacing: -0.025em;
+    padding : 0;
+  }
+`;
 
+export const CommentDiv = styled.div`
+  width : 100%;
+  height: 70px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+`
+
+export const Comment = styled.div`
+  width : 90%;
+  height : 15px;
+  padding: 5px 10px;
+  background: #D0DAE880;
+  font-size: 10px;
+  line-height: 14px;
+  letter-spacing: -0.025em;
+  text-align: left;
+  margin: 5px auto;
+  border-radius : 20px;
+  box-shadow: 0px 4px 4px 0px #00000040;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+
+  >h5 {
+    font-weight: 600;
+    margin : 0;
+  }
+
+  >p {
+    font-weight: 400;
+    margin-left : 5px;
+  }
 `;
 
 export const MoreButton = styled(NavLink)`

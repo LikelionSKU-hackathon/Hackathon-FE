@@ -124,10 +124,6 @@ export const CircleButton = styled.button`
   &.liked {
     border: 2px dotted #D9D9D9;  
   }
-
-  &:hover {
-    border: 2px dotted #D9D9D9;  
-  }
 `;
 
 export const SHeartFilled = styled(HeartFilled)`
