@@ -28,7 +28,7 @@ export default function OtherDiaryModal(){
               <M.ModalDate>일 {dayOfWeek}요일의</M.ModalDate>
               <M.ModalDateBold>쓰임</M.ModalDateBold>
             </>
-          );
+        );
     };
 
     return(

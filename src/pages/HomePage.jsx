@@ -26,6 +26,10 @@ function HomePage() {
             setModalSwitch(false);
         }
     }, [location.search]);
+
+    const handleStoryBoxClick = () => {
+        setModalSwitch(true);
+    };
     
     let diaryNum = 14;
     let topic = '현재 나의 애인과 가치관 차이로 생긴 문제는?';
@@ -77,8 +81,8 @@ function HomePage() {
                     쓰담쓰담<br/>
                     오늘의 스토리텔러는?
                 </h3>
-                <StoryBox></StoryBox>
-                <StoryBox></StoryBox>
+                <StoryBox onClick={handleStoryBoxClick}></StoryBox>
+                <StoryBox onClick={handleStoryBoxClick}></StoryBox>
                 <S.MoreButton to="/diary">
                     <h6>더 많은 일기 보기 &gt;</h6>
                 </S.MoreButton>
