@@ -58,7 +58,7 @@ export default function RegisterPageProfile() {
     // 이미지 설정
     const setImage = (event) => {
         const fileView = document.getElementById('fileView');
-        if(message)
+        if(profileImage)
             fileView.style.backgroundImage = `url(${profileImage})`;
         // fileInputRef.current.click();
         // const fileInput = profileImage;
@@ -72,11 +72,23 @@ export default function RegisterPageProfile() {
         // reader.readAsDataURL(fileInput.files[fileInput.files.length - 1]);
 
     };
+    // next
     const tryRegister = (e) => {
         console.log('button clicked');
         e.preventDefault();
         console.log(`userId: ${userId}, pwd: ${pwd}, name: ${name}, age: ${age}`);
-        navigate('/register/final');
+        navigate('/register/final',
+                {
+                    state:
+                    {
+                        userId,
+                        pwd,
+                        name,
+                        age,
+                        profileImage,
+                        selectedOptions
+                    }
+                });
     }
     // test
     useEffect(() => {
@@ -85,7 +97,7 @@ export default function RegisterPageProfile() {
             setPwd(message.pwd);
             setName(message.name);
             setAge(message.age);
-            setProfileImage(message.img);
+            setProfileImage(message.profileImage);
             setSelectedOptions(message.selectedOptions);
             setImage();
             console.log("데이터 확인 in /profile");
@@ -96,7 +108,7 @@ export default function RegisterPageProfile() {
         }
     }, []);
 
-
+    setImage();
     return (
         <>
             <Back to="/register/word"></Back>
@@ -113,9 +125,29 @@ export default function RegisterPageProfile() {
                         <br />이야기가 기록 될 프로필 입니다 :)</p>
                     <hr></hr>
                     <h1>{age} 나의 주요고민</h1>
-                    {message && (
+                    {message && selectedOptions[0] && (
                         <>
-
+                            <FixLine
+                                emoji={options[selectedOptions[0]][0]}
+                                tag={options[selectedOptions[0]][1]}
+                                title={options[selectedOptions[0]][2]}
+                                selected={false}
+                                onClick={() => handleBoxClick(selectedOptions[0])}
+                            />
+                            <FixLine
+                                emoji={options[selectedOptions[1]][0]}
+                                tag={options[selectedOptions[1]][1]}
+                                title={options[selectedOptions[1]][2]}
+                                selected={false}
+                                onClick={() => handleBoxClick(selectedOptions[1])}
+                            />
+                            <FixLine
+                                emoji={options[selectedOptions[2]][0]}
+                                tag={options[selectedOptions[2]][1]}
+                                title={options[selectedOptions[2]][2]}
+                                selected={true}
+                                onClick={() => handleBoxClick(selectedOptions[2])}
+                            />
                         </>
                     )}
                 </S.ProfileBox>

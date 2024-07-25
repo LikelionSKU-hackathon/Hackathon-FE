@@ -4,7 +4,6 @@ import * as S from "../styles/page/Register.stlye";
 import * as L from "../styles/page/Login.stlye";
 import Back from "../components/Back";
 import WordLine from "../components/WordLine";
-import icon from "../assets/Login/icon_edit.png";
 
 export default function RegisterPageWord() {
     const [userId, setUserId] = useState("");
@@ -14,11 +13,11 @@ export default function RegisterPageWord() {
     const [profileImage, setProfileImage] = useState();
     const [emojis, setEmoji] = useState(
         {
-            "연애 및 대인관계" : "❤️",
-            "진로 및 취업" : "🧩",
-            "정신건강" : "🧠",
-            "생활문제" : "🏡",
-            "학업 및 자격증" : "✏️",
+            "연애 및 대인관계": "❤️",
+            "진로 및 취업": "🧩",
+            "정신건강": "🧠",
+            "생활문제": "🏡",
+            "학업 및 자격증": "✏️",
         }
     );
     const fileInputRef = useRef(null);
@@ -26,21 +25,6 @@ export default function RegisterPageWord() {
     const navigate = useNavigate();
     const location = useLocation();
     const message = location.state || {};
-    useEffect(() => {
-        if (message) {
-            setUserId(message.userId);
-            setPwd(message.pwd);
-            setName(message.name);
-            setAge(message.age);
-            setProfileImage(message.img);
-            console.log("데이터 확인");
-        }
-        else {
-            alert("데이터 없음");
-            //navigate('/register/email');
-        }
-    }, []);
-
 
     var emoji = ["❤️", "🧩", "🧠", "🏡", "✏️"];
     var tag = ["연애 및 대인관계", "진로 및 취업", "정신건강", "생활문제", "학업 및 자격증"];
@@ -88,23 +72,38 @@ export default function RegisterPageWord() {
             }
         });
     };
-    
+    // test
+    useEffect(() => {
+        if (message) {
+            setUserId(message.userId);
+            setPwd(message.pwd);
+            setName(message.name);
+            setAge(message.age);
+            setProfileImage(message.profileImage);
+            console.log("데이터 확인 in /word");
+        }
+        else {
+            alert("데이터 없음");
+            //navigate('/register/email');
+        }
+    }, []);
+
     // 다음 이동
     const handleSubmitClick = (e) => {
         console.log(selectedOptions);
         if (selectedOptions.length == 3) {
             navigate('/register/profile',
-            {
-                state:
                 {
-                    userId,
-                    pwd, 
-                    name,
-                    age,
-                    profileImage,
-                    selectedOptions
-                }
-            });
+                    state:
+                    {
+                        userId,
+                        pwd,
+                        name,
+                        age,
+                        profileImage,
+                        selectedOptions
+                    }
+                });
         }
     };
     return (
@@ -118,7 +117,7 @@ export default function RegisterPageWord() {
                         초간단 검진결과를 반영한 추천 솔류션입니다.</p>
                 </S.Intro>
                 <p>"요즘내 고민과 유사한 3가지 고민을 골라주세요"</p>
-                <img src={profileImage}></img>
+
                 <S.ListContainer>
                     {options.map((word, index) => (
                         <WordLine

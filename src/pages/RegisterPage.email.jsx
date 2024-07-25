@@ -24,15 +24,15 @@ export default function RegisterPageEmail() {
         fileInputRef.current.click();
         const fileInput = document.getElementById('fileInput');
         const fileView = document.getElementById('fileView');
-
         fileInput.addEventListener('change', function (event) {
             if (fileInput.files && fileInput.files[fileInput.files.length - 1]) {
                 const reader = new FileReader();
 
                 reader.onload = function (event) {
                     const imageURL = event.target.result;
+                    setProfileImage(imageURL);
                     fileView.style.backgroundImage = `url(${imageURL})`;
-                    setProfileImage(window.getComputedStyle(fileView).backgroundImage);
+
                 };
 
                 reader.readAsDataURL(fileInput.files[fileInput.files.length - 1]);
@@ -46,12 +46,13 @@ export default function RegisterPageEmail() {
                 console.log('button clicked');
                 e.preventDefault();
                 console.log(`userId: ${userId}, pwd: ${pwd}, name: ${name}, age: ${age}`);
+                setProfileImage(window.getComputedStyle(fileView).backgroundImage);
                 navigate('/register/word',
                     {
                         state:
                         {
                             userId,
-                            pwd, 
+                            pwd,
                             name,
                             age,
                             profileImage,
@@ -81,6 +82,10 @@ export default function RegisterPageEmail() {
         else {
             alert('닉네임은 8글자 이내로 입력해주세요');
         }
+        if (profileImage)
+            console.log("profileImage: not null !!!!");
+        else
+            console.log('profileImage: null');
     }
     return (
         <>
