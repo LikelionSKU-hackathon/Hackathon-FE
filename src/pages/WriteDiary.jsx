@@ -29,8 +29,7 @@ export default function WriteDiary() {
   };
 
   const handleDoneClick = () => {
-    navigate('/?modal=true')
-
+    navigate('/?modal=MyDiary');
   }
 
 

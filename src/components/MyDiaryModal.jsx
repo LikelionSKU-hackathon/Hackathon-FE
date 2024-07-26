@@ -8,7 +8,7 @@ import upset from '../assets/myPage/icon_upset.svg';
 
 const emogi = [ang, sad, soso, happy, good, upset];
 
-export default function MyDiaryModal(){
+export default function MyDiaryModal({ setModalSwitch }){
     const getFormattedDate = () => {
         const date = new Date();
         const year = date.getFullYear();
