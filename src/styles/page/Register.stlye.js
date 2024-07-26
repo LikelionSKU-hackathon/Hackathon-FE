@@ -52,7 +52,7 @@ export const HiddenInput = styled.input`
 `;
 export const Intro = styled.div` 
     display: flex;
-    width: 83%;
+    width: 95%;
     flex-direction: column;
     align-items: flex-start;
     margin-left: 0px;
@@ -240,11 +240,12 @@ export const ProfileBox = styled.div`
 `;
 export const FinalPageContainer = styled.div`
     display: flex;
+    position: relative;
     flex-direction: column;
-    align-items: center;
-    width: 100vw;
+    align-items: flex-start;
+    width: 100%;
     height: 100vh;
-    margin-top: 63px;
+    padding-top : 70px;
     overflow: hidden;
     &.party{
         width: 40px;
@@ -254,12 +255,14 @@ export const FinalPageContainer = styled.div`
         background-image: url('../assets/Login/icon_Party.png');
     }
     h1{
+        margin: 15px 0;
         font-size: 24px;
         font-weight: 600;
         font-family: Pretendard, sans-serif;
         text-align: center;
     }
     p{
+        margin: 0px 0 10px 0;
         color: #98989E;
         font-size: 16px;
         font-weight: 400;
@@ -282,7 +285,7 @@ export const Preview = styled.img`
     width: 100%;
     height: 100%;
     background-repeat: no-repeat;
-    background-size: 100% 100%;
+    background-size: contain;
     background-image: url('../assets/Login/icon_Party.png');
 `
 export const FixSubmit = styled.button` 

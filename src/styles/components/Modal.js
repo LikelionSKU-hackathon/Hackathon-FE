@@ -2,11 +2,9 @@ import { NavLink } from "react-router-dom";
 import styled from 'styled-components';
 
 // 모달 스타일 정의
-export const ModalContainer = styled.div.attrs((props) => ({
-  'data-show': props.show,
-}))`
-  display: ${(props) => (props.show ? 'flex' : 'none')};
-  position: fixed;
+export const ModalContainer = styled.div`
+  display: ${props => (props.show ? 'flex' : 'none')};
+  position: fixed;;
   z-index: 1;
   left: 0;
   top: 0;
@@ -17,7 +15,6 @@ export const ModalContainer = styled.div.attrs((props) => ({
   justify-content: center;
   align-items: center;
   z-index: 100;
-  flex-direction : column;
 `;
 
 export const ModalContent = styled.div`
@@ -101,10 +98,11 @@ export const ModalBody = styled.p`
 `;
 
 export const ModalExtra = styled.div`
-  width: 290px;
+  width: 100%;
   height: 110px;
+  background-color: rgba(0, 0, 0, 0);
   background-image: url(src/assets/myPage/bg_answer.png);
-  background-size: cover;
+  background-size: 100% 100%;
   background-repeat: no-repeat;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
 
@@ -125,91 +123,23 @@ export const ModalExtra = styled.div`
 `;
 
 export const CommentContain = styled.div`
-  width : 90%;
+  width : 80%;
   border-top : 1px solid rgba(85, 85, 85, 1);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align : center;
-  margin : 4px;
-  >h3 {
-    font-size: 12px;
-    font-weight: 600;
-    line-height: 16.8px;
-    letter-spacing: -0.025em;
-    padding : 0;
-  }
-`;
 
-export const CommentDiv = styled.div`
-  width : 100%;
-  height: 70px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-`
-
-export const Comment = styled.div`
-  width : 90%;
-  height : 15px;
-  padding: 5px 10px;
-  background: #D0DAE880;
-  font-size: 10px;
-  line-height: 14px;
-  letter-spacing: -0.025em;
-  text-align: left;
-  margin: 5px auto;
-  border-radius : 20px;
-  box-shadow: 0px 4px 4px 0px #00000040;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-
-  >h5 {
-    font-weight: 600;
-    margin : 0;
-  }
-
-  >p {
-    font-weight: 400;
-    margin-left : 5px;
-  }
 `;
 
 export const MoreButton = styled(NavLink)`
-  width: 60%;
-  height: 10px;
-  padding: 20px;
-  background: #D0DAE8;
-  border: 1px solid #BBD7FF;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 400; 
-  line-height: 16.94px;
-  color: rgb(85, 85, 85);
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
-  text-align : center;
-`;
-
-export const ModalHeader = styled.div`
-  letter-spacing: -0.025em;
-  text-align: left;
-  color : #FFFFFF;
-  transform: translateX(-20%);
-  justify-content: flex-start;
-  align-items: flex-start;
-
-  > h6 {
-    margin : 5px;
-    font-size: 24px;
-    font-weight: 700;
-    line-height: 28.64px;
-    
-  }
-  >p {
-    font-size: 12px;
-    font-weight: 300;
-    line-height: 14.32px;
-  }
+    width: 280px;
+    height: 20px;
+    margin: 10px;
+    padding : 10px;
+    background: rgb(208, 218, 232);
+    border: 1px solid rgba(187, 215, 255, 1);
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 400; 
+    line-height: 16.94px;
+    color: rgb(85, 85, 85);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+    text-align : center;
 `;
