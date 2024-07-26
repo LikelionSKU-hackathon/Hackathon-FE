@@ -8,7 +8,7 @@ export const UserPageContainer = styled.div`
     align-items: center;
     justify-content: flex-start;
     width: 100dvw;
-    height: 100vh;
+    height: 100dvh;
     padding-top: 86px;
 `;
 export const IntroContainer = styled.div`
@@ -17,13 +17,13 @@ export const IntroContainer = styled.div`
     flex-direction: column;
     align-items: flex-start;
     margin-left: 0px;
-    width: 83%;
+    width: 88%;
     height: auto;
     h1 {
         font-size: 24px;
         font-weight: 700;
         font-family: Pretendard, sans-serif;
-        color: #55555;
+        color: #555555;
         margin-bottom: 10px;
     }
     p {

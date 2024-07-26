@@ -4,6 +4,8 @@ import * as S from "../styles/page/Register.stlye";
 import * as L from "../styles/page/Login.stlye";
 import Back from "../components/Back";
 import WordLine from "../components/WordLine";
+import { useRecoilState } from 'recoil';
+import { ProfileState } from "../Recoil/TokenAtom";
 
 export default function RegisterPageWord() {
     const [userId, setUserId] = useState("");
@@ -23,9 +25,12 @@ export default function RegisterPageWord() {
     const fileInputRef = useRef(null);
     const isFormValid = userId !== '' && pwd !== '' && name !== '' && age !== "" && profileImage !== null;
     const navigate = useNavigate();
+    // state 불러오기
     const location = useLocation();
     const message = location.state || {};
 
+    const profile = useRecoilState(ProfileState);
+    console.log(profile);
     var emoji = ["❤️", "🧩", "🧠", "🏡", "✏️"];
     var tag = ["연애 및 대인관계", "진로 및 취업", "정신건강", "생활문제", "학업 및 자격증"];
     const options = [
@@ -74,6 +79,7 @@ export default function RegisterPageWord() {
     };
     // test
     useEffect(() => {
+        // state 적용
         if (message) {
             setUserId(message.userId);
             setPwd(message.pwd);
@@ -86,6 +92,19 @@ export default function RegisterPageWord() {
             alert("데이터 없음");
             //navigate('/register/email');
         }
+        
+        // recoil 불러오기
+        // if (profile) {
+        //     setUserId(profile.id);
+        //     setPwd(profile.pwd);
+        //     setName(profile.nickname);
+        //     setAge(profile.age);
+        //     setProfileImage(profile.profileImage);
+        //     console.log("데이터 확인 in /word");
+        // }
+        // else {
+        //     alert("데이터 없음");
+        // }
     }, []);
 
     // 다음 이동

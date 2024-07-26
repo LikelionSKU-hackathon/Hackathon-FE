@@ -2,9 +2,11 @@ import React, { useEffect, useState, useRef } from "react";
 import { useLocation, useNavigate } from 'react-router-dom';
 import * as S from "../styles/page/Register.stlye";
 import * as L from "../styles/page/Login.stlye";
-import profile from "../assets/Login/profile.png";
+import icon_profile from "../assets/Login/profile.png";
 import icon from "../assets/Login/icon_edit.png";
 import Back from "../components/Back";
+import { useRecoilState } from 'recoil';
+import { ProfileState } from "../Recoil/TokenAtom";
 
 export default function RegisterPageEmail() {
     const [userId, setUserId] = useState('');
@@ -13,12 +15,14 @@ export default function RegisterPageEmail() {
     const [age, setAge] = useState("");
     const fileInputRef = useRef(null);
     const isFormValid = userId !== '' && pwd !== '' && name !== '' && age !== "";
+    // recoil
+    const [profile, setProfile] = useRecoilState(ProfileState);
     const navigate = useNavigate();
     const location = useLocation();
     // 받은 주소
     const message = location.state || {};
     // 프로필 이미지
-    const [profileImage, setProfileImage] = useState(profile);
+    const [profileImage, setProfileImage] = useState(icon_profile);
     // 이미지 설정
     const handleImageChange = (event) => {
         fileInputRef.current.click();
@@ -39,6 +43,7 @@ export default function RegisterPageEmail() {
             }
         });
     };
+
     // register 테스트
     const tryRegister = (e) => {
         if (emailCheck) {
@@ -46,7 +51,9 @@ export default function RegisterPageEmail() {
                 console.log('button clicked');
                 e.preventDefault();
                 console.log(`userId: ${userId}, pwd: ${pwd}, name: ${name}, age: ${age}`);
-                setProfileImage(window.getComputedStyle(fileView).backgroundImage);
+                if(profileImage !== icon_profile)
+                    setProfileImage(window.getComputedStyle(fileView).backgroundImage);
+                //이동 및 데이터 전송
                 navigate('/register/word',
                     {
                         state:
@@ -58,6 +65,16 @@ export default function RegisterPageEmail() {
                             profileImage,
                         }
                     });
+
+                // recoil 저장
+                // setProfile({
+                //     id: userId,
+                //     nickname: name,
+                //     age: age,
+                //     profilePicture: profileImage
+                // });
+                // console.log(profile);
+                //navigate('/register/word');
             } else {
                 alert('닉네임 중복확인을 해주세요');
             }
@@ -82,10 +99,6 @@ export default function RegisterPageEmail() {
         else {
             alert('닉네임은 8글자 이내로 입력해주세요');
         }
-        if (profileImage)
-            console.log("profileImage: not null !!!!");
-        else
-            console.log('profileImage: null');
     }
     return (
         <>
@@ -120,7 +133,7 @@ export default function RegisterPageEmail() {
                         value={userId}
                         autoFocus
                         placeholder="이메일을 입력하세요"
-                        onChange={(e) => setUserId(e.target.value)}
+                        onChange={(e) => {setUserId(e.target.value); setEmailCheck(false);}}
                     />
                     <L.btnCheck
                         $ischecked={emailCheck.toString()}

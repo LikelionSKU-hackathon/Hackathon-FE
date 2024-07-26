@@ -12,7 +12,7 @@ export default function LoginPageEmail() {
     const [userId, setUserId] = useState('');
     const [pwd, setPwd] = useState('');
     const isFormValid = userId !== '' && pwd !== '';
-    const setAccessToken = useRecoilState(tokenState);
+    const [accessToken, setAccessToken] = useRecoilState(tokenState);
     const navigate = useNavigate();
     const location = useLocation();
     // 이전 페이지
@@ -23,7 +23,9 @@ export default function LoginPageEmail() {
         e.preventDefault();
         console.log(`userId: ${userId}, pwd: ${pwd}`);
         if (login()) {
-
+            setAccessToken({userId : userId, pwd : pwd});
+            console.log(accessToken);
+            navigate(from); 
         }
         else {
             setIsErr(true);
@@ -33,7 +35,7 @@ export default function LoginPageEmail() {
     }
     // 더미
     const login = () => {
-        return false;
+        return true;
     }
     // 오류 출력
     const [isErr, setIsErr] = useState(false);
@@ -42,7 +44,6 @@ export default function LoginPageEmail() {
         <>
             <Back to = "/login"></Back>
             <S.LoginContainer>
-
                 <Intro></Intro>
                 <S.ErrText
                     disabled={!isErr}
