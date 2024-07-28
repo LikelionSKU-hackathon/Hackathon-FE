@@ -1,16 +1,18 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import { isLoginSelector, tokenState } from "../Recoil/TokenAtom";
 import * as S from "../styles/page/Login.stlye";
 
 import Intro from "../components/intro";
 import Back from "../components/Back";
 
+import { useRecoilState } from 'recoil';
+import { isLoginSelector, tokenState } from "../Recoil/TokenAtom";
+
 export default function LoginPageEmail() {
     const [userId, setUserId] = useState('');
     const [pwd, setPwd] = useState('');
+    const [token, setToken] = useRecoilState(tokenState);
     const isFormValid = userId !== '' && pwd !== '';
     const navigate = useNavigate();
     const location = useLocation();
@@ -22,7 +24,7 @@ export default function LoginPageEmail() {
         e.preventDefault();
         console.log(`userId: ${userId}, pwd: ${pwd}`);
         if (login()) {
-            setAccessToken({userId : userId, pwd : pwd});
+            setToken({userId : userId, pwd : pwd});
             navigate(from); 
         }
         else {
