@@ -24,14 +24,14 @@ export default function UserPage() {
     useEffect(() => {
         console.log(isLogin);
         // login 확인
-        // if (!isLogin[0]) {
-        //     alert("로그인이 필요합니다.");
-        //     navigate('/login', { replace: true, state: { redirectedFrom: window.location.pathname } });
-        // }
-        // else{
-        //     console.log("로그인 되어있음");
-        //     console.log(isLogin);
-        // }
+        if (!isLogin[0]) {
+            alert("로그인이 필요합니다.");
+            navigate('/login', { replace: true, state: { redirectedFrom: window.location.pathname } });
+        }
+        else{
+            console.log("로그인 되어있음");
+            console.log(isLogin);
+        }
     }, []);
     // month는 0부터 시작
     const datesWithImages = [

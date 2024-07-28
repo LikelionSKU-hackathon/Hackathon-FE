@@ -12,7 +12,6 @@ export default function LoginPageEmail() {
     const [userId, setUserId] = useState('');
     const [pwd, setPwd] = useState('');
     const isFormValid = userId !== '' && pwd !== '';
-    const [accessToken, setAccessToken] = useRecoilState(tokenState);
     const navigate = useNavigate();
     const location = useLocation();
     // 이전 페이지
@@ -24,14 +23,11 @@ export default function LoginPageEmail() {
         console.log(`userId: ${userId}, pwd: ${pwd}`);
         if (login()) {
             setAccessToken({userId : userId, pwd : pwd});
-            console.log(accessToken);
             navigate(from); 
         }
         else {
             setIsErr(true);
         }
-        //setAccessToken('access -fake-token');
-        //navigate(from); // HomePage
     }
     // 더미
     const login = () => {
@@ -39,7 +35,19 @@ export default function LoginPageEmail() {
     }
     // 오류 출력
     const [isErr, setIsErr] = useState(false);
-
+    const isLogin = useRecoilState(isLoginSelector);
+    const currentLocation = useLocation();
+    useEffect(() => {
+        console.log(isLogin);
+        // login 확인
+        if (isLogin[0]) {
+            alert("로그인 되어있음");
+            navigate('/', { replace: true, state: { redirectedFrom: window.location.pathname } });
+        }
+        else{
+            console.log("로그인 안됨");
+        }
+    }, []);
     return (
         <>
             <Back to = "/login"></Back>

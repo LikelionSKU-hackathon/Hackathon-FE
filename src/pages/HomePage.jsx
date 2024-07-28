@@ -5,13 +5,15 @@ import StoryBox from "../components/StoryBox";
 import { useLocation } from "react-router-dom";
 import OtherDiaryModal from '../components/OtherDiaryModal';
 import MyDiaryModal from '../components/MyDiaryModal';
-
+import { useRecoilState } from "recoil";
+import { isLoginSelector, tokenState } from "../Recoil/TokenAtom";
 function HomePage() {
     const [modalSwitch, setModalSwitch] = useState(false);
     const [currentModal, setCurrentModal] = useState(null);
     const location = useLocation();
-
+    const login = useRecoilState(isLoginSelector);
     useEffect(() => {
+        console.log(login);
         const query = new URLSearchParams(location.search);
         const modalType = query.get('modal');
         if (modalType === 'MyDiary') {
