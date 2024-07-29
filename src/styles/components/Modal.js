@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 import styled from 'styled-components';
-
+import BG from "../../assets/BG_Paper.png";
 // 모달 스타일 정의
 export const ModalContainer = styled.div`
   display: ${props => (props.show ? 'flex' : 'none')};
@@ -22,7 +22,7 @@ export const ModalContent = styled.div`
   flex-direction: column;
   position: relative;
   align-items: center;
-  background-image : url(/public/img/BG_Paper.png);
+  background-image : url(${BG});
   margin: 5% auto;
   padding: 20px;
   border: 1px solid #888;

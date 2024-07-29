@@ -40,7 +40,7 @@ export default function MyDiaryModal({ setModalSwitch }){
             </p>
             </M.ModalHeader>
             <M.ModalContent> 
-                <M.ModalImage src={emogi[0]}></M.ModalImage>
+                <M.ModalImage src={emogi[0]} alt="emoji"></M.ModalImage>
                 <M.CloseButton onClick={() => setModalSwitch(false)} />
                 <span>
                     {getFormattedDate()}
