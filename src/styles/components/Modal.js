@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom";
 import styled from 'styled-components';
 import BG from "../../assets/BG_Paper.png";
+import Close from "../../assets/myPage/icon_close.svg";
+import  BG_Answer from "../../assets/myPage/bg_answer.png";
 // 모달 스타일 정의
 export const ModalContainer = styled.div`
   display: ${props => (props.show ? 'flex' : 'none')};
@@ -41,7 +43,7 @@ export const CloseButton = styled.button`
   border: none;
   top: 5%;
   right: 5%;
-  background-image: url(src/assets/myPage/icon_close.svg);
+  background-image: url(${Close});
   background-size: contain;
   background-repeat: no-repeat;
 `;
@@ -101,7 +103,7 @@ export const ModalExtra = styled.div`
   width: 100%;
   height: 110px;
   background-color: rgba(0, 0, 0, 0);
-  background-image: url(src/assets/myPage/bg_answer.png);
+  background-image: url(${BG_Answer});
   background-size: 100% 100%;
   background-repeat: no-repeat;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
