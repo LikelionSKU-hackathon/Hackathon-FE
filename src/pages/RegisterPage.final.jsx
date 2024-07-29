@@ -23,19 +23,13 @@ export default function RegisterPageFinal() {
         console.log(`userId: ${userId}, pwd: ${pwd}, name: ${name}, age: ${age}`);
         navigate('/login/email');
     }
-    // test
+    // 로그인 여부 확인
+    const savedToken = sessionStorage.getItem('user');
     useEffect(() => {
-        if (message) {
-            setUserId(message.userId);
-            setPwd(message.pwd);
-            setName(message.name);
-            setAge(message.age);
-            setProfileImage(message.profileImage);
-            console.log("데이터 확인 in / final");
-        }
-        else {
-            alert("데이터 없음");
-            //navigate('/register/email');
+        // login 확인
+        if (savedToken) {
+            alert("이미 로그인 됨.");
+            navigate('/', { replace: true, state: { redirectedFrom: window.location.pathname } });
         }
     }, []);
     return (

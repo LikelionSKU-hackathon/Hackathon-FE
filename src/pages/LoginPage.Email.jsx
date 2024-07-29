@@ -8,7 +8,7 @@ import Back from "../components/Back";
 
 import { useRecoilState } from 'recoil';
 import { isLoginSelector, tokenState } from "../Recoil/TokenAtom";
-
+import preview from "../assets/Login/icon_Preview.svg";
 export default function LoginPageEmail() {
     const [userId, setUserId] = useState('');
     const [pwd, setPwd] = useState('');
@@ -24,7 +24,14 @@ export default function LoginPageEmail() {
         e.preventDefault();
         console.log(`userId: ${userId}, pwd: ${pwd}`);
         if (login()) {
-            setToken({userId : userId, pwd : pwd});
+            sessionStorage.setItem('user', JSON.stringify({
+                userId: userId,
+                pwd: pwd,
+                name: "기묘둠",
+                age: "20대",
+                options: [1, 2, 3],
+                profile: { preview }
+            }));
             navigate(from); 
         }
         else {
@@ -39,15 +46,13 @@ export default function LoginPageEmail() {
     const [isErr, setIsErr] = useState(false);
     const isLogin = useRecoilState(isLoginSelector);
     const currentLocation = useLocation();
+    // 로그인 여부 확인
+    const savedToken = sessionStorage.getItem('user');
     useEffect(() => {
-        console.log(isLogin);
         // login 확인
-        if (isLogin[0]) {
-            alert("로그인 되어있음");
+        if (savedToken) {
+            alert("이미 로그인 됨.");
             navigate('/', { replace: true, state: { redirectedFrom: window.location.pathname } });
-        }
-        else{
-            console.log("로그인 안됨");
         }
     }, []);
     return (

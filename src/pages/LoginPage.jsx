@@ -6,18 +6,14 @@ import { useRecoilState } from "recoil";
 import { isLoginSelector, tokenState } from "../Recoil/TokenAtom";
 import { useNavigate,Navigate, useLocation } from "react-router-dom";
 export default function LoginPage() {
-    const isLogin = useRecoilState(isLoginSelector);
-    const currentLocation = useLocation();
     const navigate = useNavigate();
+    // 로그인 여부 확인
+    const savedToken = sessionStorage.getItem('user');
     useEffect(() => {
-        console.log(isLogin);
         // login 확인
-        if (isLogin[0]) {
-            alert("로그인 되어있음");
+        if (savedToken) {
+            alert("이미 로그인 됨.");
             navigate('/', { replace: true, state: { redirectedFrom: window.location.pathname } });
-        }
-        else{
-            console.log("로그인 안됨");
         }
     }, []);
     return (

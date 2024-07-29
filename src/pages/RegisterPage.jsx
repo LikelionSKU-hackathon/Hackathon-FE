@@ -8,8 +8,17 @@ import { useNavigate } from 'react-router-dom';
 export default function RegisterPage() {
     const navigate = useNavigate();
     const handleClick = (addr) => {
-        navigate('/register/email', { state: addr } );
+        navigate('/register/email', { state: addr });
     };
+    // 로그인 여부 확인
+    const savedToken = sessionStorage.getItem('user');
+    useEffect(() => {
+        // login 확인
+        if (savedToken) {
+            alert("이미 로그인 됨.");
+            navigate('/', { replace: true, state: { redirectedFrom: window.location.pathname } });
+        }
+    }, []);
     return (
         <S.LoginContainer>
             <S.Intro>

@@ -3,18 +3,6 @@ import { atom, selector } from 'recoil'
 export const tokenState = atom({
     key: 'tokenState',
     default: undefined,
-    effects: [
-        ({ onSet }) => {
-            onSet(newToken => {
-                if (newToken) {
-                    sessionStorage.setItem('token', newToken);
-                } else {
-                    sessionStorage.removeItem('token');
-                }
-                console.log('newToken', newToken);
-            });
-        }
-    ]
 })
 export const ProfileState = atom({
     key: 'profile',

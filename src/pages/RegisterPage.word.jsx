@@ -78,33 +78,14 @@ export default function RegisterPageWord() {
         });
     };
     // test
+    // 로그인 여부 확인
+    const savedToken = sessionStorage.getItem('user');
     useEffect(() => {
-        // state 적용
-        if (message) {
-            setUserId(message.userId);
-            setPwd(message.pwd);
-            setName(message.name);
-            setAge(message.age);
-            setProfileImage(message.profileImage);
-            console.log("데이터 확인 in /word");
+        // login 확인
+        if (savedToken) {
+            alert("이미 로그인 됨.");
+            navigate('/', { replace: true, state: { redirectedFrom: window.location.pathname } });
         }
-        else {
-            alert("데이터 없음");
-            //navigate('/register/email');
-        }
-        
-        // recoil 불러오기
-        // if (profile) {
-        //     setUserId(profile.id);
-        //     setPwd(profile.pwd);
-        //     setName(profile.nickname);
-        //     setAge(profile.age);
-        //     setProfileImage(profile.profileImage);
-        //     console.log("데이터 확인 in /word");
-        // }
-        // else {
-        //     alert("데이터 없음");
-        // }
     }, []);
 
     // 다음 이동

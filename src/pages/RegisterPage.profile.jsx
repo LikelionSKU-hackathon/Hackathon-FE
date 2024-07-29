@@ -91,20 +91,13 @@ export default function RegisterPageProfile() {
                 });
     }
     // test
+    // 로그인 여부 확인
+    const savedToken = sessionStorage.getItem('user');
     useEffect(() => {
-        if (message) {
-            setUserId(message.userId);
-            setPwd(message.pwd);
-            setName(message.name);
-            setAge(message.age);
-            setProfileImage(message.profileImage);
-            setSelectedOptions(message.selectedOptions);
-            setImage();
-            console.log("데이터 확인 in /profile");
-        }
-        else {
-            alert("데이터 없음");
-            //navigate('/register/email');
+        // login 확인
+        if (savedToken) {
+            alert("이미 로그인 됨.");
+            navigate('/', { replace: true, state: { redirectedFrom: window.location.pathname } });
         }
     }, []);
 

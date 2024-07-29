@@ -43,7 +43,15 @@ export default function RegisterPageEmail() {
             }
         });
     };
-
+    // 로그인 여부 확인
+    const savedToken = sessionStorage.getItem('user');
+    useEffect(() => {
+        // login 확인
+        if (savedToken) {
+            alert("이미 로그인 됨.");
+            navigate('/', { replace: true, state: { redirectedFrom: window.location.pathname } });
+        }
+    }, []);
     // register 테스트
     const tryRegister = (e) => {
         if (emailCheck) {
@@ -65,16 +73,6 @@ export default function RegisterPageEmail() {
                             profileImage,
                         }
                     });
-
-                // recoil 저장
-                // setProfile({
-                //     id: userId,
-                //     nickname: name,
-                //     age: age,
-                //     profilePicture: profileImage
-                // });
-                // console.log(profile);
-                //navigate('/register/word');
             } else {
                 alert('닉네임 중복확인을 해주세요');
             }
