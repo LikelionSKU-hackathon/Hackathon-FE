@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import styled from 'styled-components';
 import BG from "../../assets/BG_Paper.png";
 import Close from "../../assets/myPage/icon_close.svg";
-import  BG_Answer from "../../assets/myPage/bg_answer.png";
+import  BG_Answer from "../../assets/myPage/bg_answer.svg";
 // 모달 스타일 정의
 export const ModalContainer = styled.div`
   display: ${props => (props.show ? 'flex' : 'none')};
@@ -26,10 +26,11 @@ export const ModalContent = styled.div`
   align-items: center;
   background-image : url(${BG});
   margin: 5% auto;
-  padding: 20px;
+  padding: 45px 15px 10px 15px;
   border: 1px solid #888;
-  width: 60%;
-  max-width: 600px;
+  width: 88%;
+  max-width: 320px;
+  height: auto;
   position: relative;
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -102,11 +103,11 @@ export const ModalBody = styled.p`
 export const ModalExtra = styled.div`
   width: 100%;
   height: 110px;
-  background-color: rgba(0, 0, 0, 0);
+  /*background-color: rgba(0, 255, 0, 1);*/
   background-image: url(${BG_Answer});
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+  padding: 7px;
 
   h3{
     color: white;
