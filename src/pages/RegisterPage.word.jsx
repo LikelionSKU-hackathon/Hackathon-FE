@@ -82,10 +82,20 @@ export default function RegisterPageWord() {
     const savedToken = sessionStorage.getItem('user');
     useEffect(() => {
         // login 확인
+        console.log("user : " + savedToken);
         if (savedToken) {
             alert("이미 로그인 됨.");
             navigate('/', { replace: true, state: { redirectedFrom: window.location.pathname } });
         }
+        else{
+            if (message) {
+                setUserId(message.userId);
+                setPwd(message.pwd);
+                setName(message.name);
+                setAge(message.age);
+                setProfileImage(message.profileImage);
+                console.log("데이터 확인 in /word");
+        }}
     }, []);
 
     // 다음 이동

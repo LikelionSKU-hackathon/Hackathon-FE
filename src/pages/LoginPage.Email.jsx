@@ -9,6 +9,7 @@ import Back from "../components/Back";
 import { useRecoilState } from 'recoil';
 import { isLoginSelector, tokenState } from "../Recoil/TokenAtom";
 import preview from "../assets/Login/icon_Preview.svg";
+import axios from 'axios';
 export default function LoginPageEmail() {
     const [userId, setUserId] = useState('');
     const [pwd, setPwd] = useState('');
@@ -19,11 +20,18 @@ export default function LoginPageEmail() {
     // 이전 페이지
     const from = location.state?.redirectedFrom || '/';
 
-    // login 테스트
-    const tryLogin = (e) => {
-        e.preventDefault();
+    // login 요청
+    const tryLogin = async () => {
         console.log(`userId: ${userId}, pwd: ${pwd}`);
-        if (login()) {
+        const url = 'https://sub.skuhackathon.shop/members/login';
+        try {
+            const response = await axios.post(url, {
+                email: userId,
+                password: pwd,
+            }); `    `
+            console.log("보냈어용");
+            console.log(response.data);
+            console.log(response.status);
             sessionStorage.setItem('user', JSON.stringify({
                 userId: userId,
                 pwd: pwd,
@@ -32,16 +40,14 @@ export default function LoginPageEmail() {
                 options: [1, 2, 3],
                 profile: { preview }
             }));
-            navigate(from); 
-        }
-        else {
+            navigate(from);
+        } catch (error) {
+            console.log("에러에용");
+            console.error('Error:', error);
             setIsErr(true);
         }
     }
-    // 더미
-    const login = () => {
-        return true;
-    }
+
     // 오류 출력
     const [isErr, setIsErr] = useState(false);
     const isLogin = useRecoilState(isLoginSelector);
@@ -57,7 +63,7 @@ export default function LoginPageEmail() {
     }, []);
     return (
         <>
-            <Back to = "/login"></Back>
+            <Back to="/login"></Back>
             <S.LoginContainer>
                 <Intro></Intro>
                 <S.ErrText
@@ -70,13 +76,13 @@ export default function LoginPageEmail() {
                     value={userId}
                     autoFocus
                     placeholder="이메일을 입력하세요"
-                    onChange={(e) => {setUserId(e.target.value); setIsErr(false);}}
+                    onChange={(e) => { setUserId(e.target.value); setIsErr(false); }}
                 />
                 <S.InputText>비밀번호</S.InputText>
                 <S.InputLine
                     type="password"
                     value={pwd}
-                    onChange={(e) => {setPwd(e.target.value); setIsErr(false);}}
+                    onChange={(e) => { setPwd(e.target.value); setIsErr(false); }}
                     placeholder="비밀번호 입력하세요"
                 />
                 <S.InputSubmit onClick={tryLogin} disabled={!isFormValid}>로그인</S.InputSubmit>
