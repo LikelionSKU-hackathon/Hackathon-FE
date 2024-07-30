@@ -5,8 +5,10 @@ import StoryBox from "../components/StoryBox";
 import { useLocation } from "react-router-dom";
 import OtherDiaryModal from '../components/OtherDiaryModal';
 import MyDiaryModal from '../components/MyDiaryModal';
+import axios from 'axios';
 
 function HomePage() {
+    const [userData, setUserData] = useState(null);
     const [modalSwitch, setModalSwitch] = useState(false);
     const [currentModal, setCurrentModal] = useState(null);
     const location = useLocation();
@@ -36,6 +38,7 @@ function HomePage() {
     let hashtag = ["감정고민", "직장생활", "인간관계"];
     let topic = '현재 나의 애인과 가치관 차이로 생긴 문제는?';
     let tag = '연애 및 대인관계';
+    const imgurl = '';
 
     return (
         <S.Container>

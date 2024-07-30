@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import styled from 'styled-components';
+import { HeartFilled } from "@ant-design/icons";
 
 // 모달 스타일 정의
 export const ModalContainer = styled.div.attrs((props) => ({
@@ -31,7 +32,6 @@ export const ModalContent = styled.div`
   border: 1px solid #888;
   width: 60%;
   max-width: 600px;
-  position: relative;
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 `;
@@ -86,6 +86,7 @@ export const ModalBodyContain = styled.div`
   width: 290px;
   height: 110px;
   display: block;
+  position: relative;
 `
 export const ModalBody = styled.p`
   width : 100%;
@@ -98,6 +99,7 @@ export const ModalBody = styled.p`
   white-space: pre-wrap; 
   overflow-wrap: break-word; 
   word-break: break-word; 
+  margin-bottom : 10px;
 `;
 
 export const ModalExtra = styled.div`
@@ -124,9 +126,15 @@ export const ModalExtra = styled.div`
   };
 `;
 
+export const Line = styled.div`
+  width : 100%;
+  height : 1px;
+  background: #555555;
+  margin: 4px 0 ;
+`
+
 export const CommentContain = styled.div`
   width : 90%;
-  border-top : 1px solid rgba(85, 85, 85, 1);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -143,6 +151,7 @@ export const CommentContain = styled.div`
 `;
 
 export const CommentDiv = styled.div`
+  position: relative;
   width : 100%;
   height: 70px;
   overflow-y: auto;
@@ -212,4 +221,42 @@ export const ModalHeader = styled.div`
     font-weight: 300;
     line-height: 14.32px;
   }
+`;
+
+export const ModalLike = styled.div`
+  width : 100%;
+  height : 30px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-direction: column;
+  > div {
+    width: 27px;
+    height: 27px;
+    border: 1px solid #E3E8EF;
+    box-shadow: 0px 4px 4px 0px #00000026;
+    background: #93BAF3;
+    border-radius: 50%;
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding : 0;
+    margin : 0;
+
+    > h6 {
+      font-size: 5px;
+      font-weight: 600;
+      line-height: 7px;
+      letter-spacing: -0.025em;
+      text-align: center;
+      color: #FFF;
+      margin: 0;
+    }
+  }
+`;
+
+export const SHeartFilled = styled(HeartFilled)`
+  font-size: 10px;
+  color : #DD0000;  
 `;

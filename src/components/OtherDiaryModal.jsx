@@ -41,9 +41,14 @@ export default function OtherDiaryModal({ setModalSwitch }){
 
             <M.ModalTitle>제목</M.ModalTitle>
             <M.ModalBodyContain>
-                <M.ModalBody>내용aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</M.ModalBody>
+                <M.ModalBody>
+                    내용aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                </M.ModalBody>
+                
             </M.ModalBodyContain>
             <M.CommentContain>
+                <M.ModalLike><div><M.SHeartFilled /><h6>19</h6></div></M.ModalLike>
+                <M.Line />
                 <h3>이 이야기에 달린 코멘트들</h3>
                 <M.CommentDiv>
                     <M.Comment>

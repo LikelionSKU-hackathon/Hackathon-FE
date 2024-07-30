@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 export const IntroText = styled.text`
+    margin-top : 20px;
     &.theme {
         font-size: 16px;
         font-weight: 700;
