@@ -12,23 +12,22 @@ import happy from '../assets/myPage/icon_happy.svg';
 import sad from '../assets/myPage/icon_sad.svg';
 import soso from '../assets/myPage/icon_soso.svg';
 import upset from '../assets/myPage/icon_upset.svg';
+import axios from 'axios';
 
-const emogi = [ang, sad, soso, happy, good, upset];
 export default function UserPage() {
     const [modalSwitch, setModalSwitch] = useState(false);
     const [token, setToken] = useRecoilState(tokenState);
     const [clickedData, setClickedData] = useState(null);
     const daysOfWeekNames = ["일", "월", "화", "수", "목", "금", "토"];
+    const emogi = {"화나요":ang,"슬퍼요" : sad, "그저그래요":soso, "행복해요":happy, "뿌듯해요":good, "속상해요":upset};
     const navigate = useNavigate();
     // 로그인 여부 확인
     const savedToken =JSON.parse(sessionStorage.getItem('user'));
     useEffect(() => {
-        console.log("--------------------------------");
-        console.log(savedToken);
         // login 확인
         if (!savedToken) {
             alert("로그인이 필요합니다.");
-            navigate('/login', { replace: true, state: { redirectedFrom: window.location.pathname } });
+            //navigate('/login', { replace: true, state: { redirectedFrom: window.location.pathname } });
         }
         else{
             console.log("로그인 되어있음");
@@ -36,17 +35,29 @@ export default function UserPage() {
         }
     }, []);
     // month는 0부터 시작
-    const dermy = [
-        { date: new Date(2024, 6, 1), image: 0, keyword: "제목 1", content: "내용", aiContent: "AAAAAAAAAAAAAAAAAA  AAAAAAAAAAAAAAAAA" },
-        { date: new Date(2024, 6, 2), image: 1, keyword: "제목 2", content: "내용이에요.22222222222222222222222222222", aiContent: "BBBBBBBBBBBBBBBBBBBB BBBBBBBBBBBBBBBB" },
-        { date: new Date(2024, 6, 5), image: 4, keyword: "제목 3", content: "내용이에요 33333333333 3333333333 3333333333333333333333333 33333333333  33333333333333333333333333  3333333333333333", aiContent: "CCCC DDD  CCCCCCCCCCCC CCCCCCCCCCCCCCCCCCCCCCCCCCCC  CCCCCCCCCCCCCCCCCCCCCCC CCCCCCCCccc" },
-        { date: new Date(2024, 7, 2), image: 1, keyword: "제목 4", content: "내용이에요. 4444444444444444444444", aiContent: "DDDD DDDDDDDDDDDDDDDD" },
+    const datesWitImages = [
+        { date: new Date(2024, 6, 1), image: "화나요", title: "제목 1", content: "내용", aiComments: "AAAAAAAAAAAAAAAAAA  AAAAAAAAAAAAAAAAA" },
+        { date: new Date(2024, 6, 2), image: "슬퍼요", title: "제목 2", content: "내용이에요.22222222222222222222222222222", aiComments: "BBBBBBBBBBBBBBBBBBBB BBBBBBBBBBBBBBBB" },
+        { date: new Date(2024, 6, 5), image: "그저그래요", title: "제목 3", content: "내용이에요 33333333333 3333333333 3333333333333333333333333 33333333333  33333333333333333333333333  3333333333333333", aiContent: "CCCC DDD  CCCCCCCCCCCC CCCCCCCCCCCCCCCCCCCCCCCCCCCC  CCCCCCCCCCCCCCCCCCCCCCC CCCCCCCCccc" },
+        { date: new Date(2024, 7, 2), image: "행복해요", title: "제목 4", content: "내용이에요. 4444444444444444444444", aiComments: "DDDD DDDDDDDDDDDDDDDD" },
         // ... more dates
     ];
-    const DiaryDate = tryGetDiaryDate();
-    function tryGetDiaryDate() {
-        return dermy;
+
+    const tryGetDiaryDate= async () => {
+        const userId = 1;
+        let date;
+        axios.get(`https://sub.skuhackathon.shop/diary/${userId}/diaries`)
+            .then(response => {
+                console.log(response.data)
+                    if (!response.result)
+                    date = response.data
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+            });
+        //return date;
     }
+    const datesWitImages1 = tryGetDiaryDate();
     const onClickDay = (data) => {
         if (data) {
             setClickedData(data);
@@ -75,13 +86,13 @@ export default function UserPage() {
                             <M.ModalDateBold>쓰임</M.ModalDateBold>
                         </span>
 
-                        <M.ModalTitle>{clickedData && clickedData.keyword}</M.ModalTitle>
+                        <M.ModalTitle>{clickedData && clickedData.title}</M.ModalTitle>
                         <M.ModalBodyContain>
                             <M.ModalBody>{clickedData && clickedData.content}</M.ModalBody>
                         </M.ModalBodyContain>
                         <M.ModalExtra>
                             <h3>AI 쓰감 선생님의 한 마디</h3>
-                            <p>{clickedData && clickedData.aiContent}</p>
+                            <p>{clickedData && clickedData.aiComments}</p>
                         </M.ModalExtra>
                     </M.ModalContent>
                 </M.ModalContainer>
@@ -90,7 +101,7 @@ export default function UserPage() {
                     <p>과거의 나는 어떤 기록을 남겼을까요?</p>
                     <p>지난 나의 자취를 보며 스스로를 쓰담어주세요</p>
                 </S.IntroContainer>
-                <CalendarView date={DiaryDate} onClick={onClickDay} />
+                <CalendarView date={datesWitImages} onClick={onClickDay} />
             </S.UserPageContainer>
         </>
     );

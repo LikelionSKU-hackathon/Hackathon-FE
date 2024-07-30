@@ -13,7 +13,7 @@ import upset from '../assets/myPage/icon_upset.svg';
 
 // 날짜와 이미지를 포함한 데이터
 let datesWithImages;
-const emogi = [ang, sad, soso, happy, good, upset];
+const emogi = {"화나요":ang,"슬퍼요" : sad, "그저그래요":soso, "행복해요":happy, "뿌듯해요":good, "속상해요":upset};
 export default function CalendarView(Props) {
   const [value, setValue] = useState(new Date());
   const renderTileContent = ({ date, view }) => {

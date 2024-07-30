@@ -4,11 +4,12 @@ import * as S from "../styles/page/Register.stlye";
 import * as L from "../styles/page/Login.stlye";
 import Back from "../components/Back";
 import FixLine from "../components/FixLine";
+import axios from 'axios';
 export default function RegisterPageProfile() {
     const [userId, setUserId] = useState('');
     const [pwd, setPwd] = useState('');
     const [name, setName] = useState('');
-    const [age, setAge] = useState(0);
+    const [age, setAge] = useState();
     const [profileImage, setProfileImage] = useState();
     const [selectedOptions, setSelectedOptions] = useState([]);
     const fileInputRef = useRef(null);
@@ -16,7 +17,7 @@ export default function RegisterPageProfile() {
     const location = useLocation();
     const navigate = useNavigate();
     const message = location.state || {};
-    console.log({message});
+    console.log({ message });
     const [emojis, setEmoji] = useState(
         {
             "연애 및 대인관계": "❤️",
@@ -58,37 +59,30 @@ export default function RegisterPageProfile() {
     // 이미지 설정
     const setImage = (event) => {
         const fileView = document.getElementById('fileView');
-        if(profileImage)
+        if (profileImage)
             fileView.style.backgroundImage = `url(${profileImage})`;
-        // fileInputRef.current.click();
-        // const fileInput = profileImage;
-        // const fileView = document.getElementById('fileView');
-        // const reader = new FileReader();
-        // reader.onload = function (event) {
-        //     const imageURL = event.target.result;
-        //     fileView.style.backgroundImage = `url(${imageURL})`;
-        //     setProfileImage(window.getComputedStyle(fileView).backgroundImage);
-        // };
-        // reader.readAsDataURL(fileInput.files[fileInput.files.length - 1]);
-
     };
-    // next
-    const tryRegister = (e) => {
-        console.log('button clicked');
-        e.preventDefault();
+    // 가입 테스트
+    const tryRegister = async () => {
         console.log(`userId: ${userId}, pwd: ${pwd}, name: ${name}, age: ${age}`);
-        navigate('/register/final',
-                {
-                    state:
-                    {
-                        userId,
-                        pwd,
-                        name,
-                        age,
-                        profileImage,
-                        selectedOptions
-                    }
-                });
+        // 가입 요청
+        const url = 'https://sub.skuhackathon.shop/members/signup';
+        try {
+            const response = await axios.post(url, {
+                username: name,
+                email: userId,
+                password: pwd,
+                age_group: age,
+                role: selectedOptions,
+                profileImage: profileImage,
+            });`    `
+            console.log("보냈어용");
+            console.log(response.data);
+            console.log(response.status);
+        } catch (error) {
+            console.log("에러에용");
+            console.error('Error:', error);
+        }
     }
     // test
     // 로그인 여부 확인
@@ -98,6 +92,18 @@ export default function RegisterPageProfile() {
         if (savedToken) {
             alert("이미 로그인 됨.");
             navigate('/', { replace: true, state: { redirectedFrom: window.location.pathname } });
+        }
+        else {
+            if (message) {
+                setUserId(message.userId);
+                setPwd(message.pwd);
+                setName(message.name);
+                setAge(message.age);
+                setProfileImage(message.profileImage);
+                setSelectedOptions(message.selectedOptions);
+                setImage();
+                console.log("데이터 확인 in /profile");
+            }
         }
     }, []);
 
@@ -118,7 +124,7 @@ export default function RegisterPageProfile() {
                         <br />이야기가 기록 될 프로필 입니다 :)</p>
                     <hr></hr>
                     <h1>{age} 나의 주요고민</h1>
-                    {message && selectedOptions[0] && (
+                    {message != null && selectedOptions[0] != null&& (
                         <>
                             <FixLine
                                 emoji={options[selectedOptions[0]][0]}

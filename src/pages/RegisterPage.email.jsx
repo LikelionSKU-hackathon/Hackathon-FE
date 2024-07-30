@@ -7,6 +7,7 @@ import icon from "../assets/Login/icon_edit.png";
 import Back from "../components/Back";
 import { useRecoilState } from 'recoil';
 import { ProfileState } from "../Recoil/TokenAtom";
+import axios from 'axios';
 
 export default function RegisterPageEmail() {
     const [userId, setUserId] = useState('');
@@ -59,8 +60,9 @@ export default function RegisterPageEmail() {
                 console.log('button clicked');
                 e.preventDefault();
                 console.log(`userId: ${userId}, pwd: ${pwd}, name: ${name}, age: ${age}`);
-                if(profileImage !== icon_profile)
+                if (profileImage !== icon_profile)
                     setProfileImage(window.getComputedStyle(fileView).backgroundImage);
+
                 //이동 및 데이터 전송
                 navigate('/register/word',
                     {
@@ -86,13 +88,35 @@ export default function RegisterPageEmail() {
     const checkEmail = () => {
         console.log('check email');
         console.log(`userId: ${userId}, pwd: ${pwd}, name: ${name}, age: ${age}`);
-        setEmailCheck(true);
+        axios.get(`https://sub.skuhackathon.shop/members/checkEmail/${userId}`)
+            .then(response => {
+                console.log(response)
+                if (response.data.code == "COMMON200") {
+                    // 중복이 없다면(false)
+                    if (!response.result)
+                        setEmailCheck(true);
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                setEmailCheck(false);
+            });
+
     };
     // 중복확인 - name
     const [nameCheck, setNameCheck] = useState(false);
     const checkName = () => {
         if (name.length <= 8) {
-            setNameCheck(true);
+            axios.get(`https://sub.skuhackathon.shop/members/checkUsername/${name}`)
+                .then(response => {
+                    // 중복이 없다면(false)
+                    if (!response.result)
+                        setNameCheck(true);
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    setNameCheck(false);
+                });
         }
         else {
             alert('닉네임은 8글자 이내로 입력해주세요');
@@ -131,7 +155,7 @@ export default function RegisterPageEmail() {
                         value={userId}
                         autoFocus
                         placeholder="이메일을 입력하세요"
-                        onChange={(e) => {setUserId(e.target.value); setEmailCheck(false);}}
+                        onChange={(e) => { setUserId(e.target.value); setEmailCheck(false); }}
                     />
                     <L.btnCheck
                         $ischecked={emailCheck.toString()}
@@ -153,7 +177,7 @@ export default function RegisterPageEmail() {
                     <L.InputLine
                         type="text"
                         value={name}
-                        onChange={(e) => setName(e.target.value)}
+                        onChange={(e) => { setName(e.target.value); setNameCheck(false); }}
                         placeholder="8글자 내로 입력"
                     />
                     <L.btnCheck
