@@ -90,6 +90,7 @@ export const TextDiv = styled.div`
     text-align: left;
     margin-top: 100px;
     margin-bottom: 0;
+    color : #000000;
   }
 
   > p {

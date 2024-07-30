@@ -8,7 +8,12 @@ import MyDiaryModal from '../components/MyDiaryModal';
 import axios from 'axios';
 
 function HomePage() {
-    const [userData, setUserData] = useState(null);
+    const [userData, setUserData] = useState({
+        username: '',
+        ageGroup: '',
+        profileImage: '',
+        memberKeyword: []
+    });
     const [modalSwitch, setModalSwitch] = useState(false);
     const [currentModal, setCurrentModal] = useState(null);
     const location = useLocation();
@@ -28,17 +33,23 @@ function HomePage() {
         }
     }, [location.search]);
 
+    useEffect(() => {
+        axios.get('https://sub.skuhackathon.shop/members/')
+            .then(response => {
+                setUserData(response.data.result);
+            })
+            .catch(error => {
+                console.error('Error fetching user data:', error);
+            });
+    }, []);
+
     const handleStoryBoxClick = () => {
         setModalSwitch(true);
         setCurrentModal('OtherDiary');
     };
 
-    let nickName = '훈이 말고 훈기';
-    let age = '20대';
-    let hashtag = ["감정고민", "직장생활", "인간관계"];
     let topic = '현재 나의 애인과 가치관 차이로 생긴 문제는?';
     let tag = '연애 및 대인관계';
-    const imgurl = '';
 
     return (
         <S.Container>
@@ -51,10 +62,12 @@ function HomePage() {
             </S.TextDiv>
 
             <S.ProfileBox>
-                <S.Circle></S.Circle>
+                <S.Circle>
+                    {userData.profileImage && <img src={userData.profileImage} alt="Profile" />}
+                </S.Circle>
                 <S.ProfileText>
-                    <h6>{nickName}</h6>
-                    <p>{age} / #{hashtag[0]} #{hashtag[1]} #{hashtag[2]} </p>
+                    <h6>{userData.username || '기본 이름'}</h6>
+                    <p>{userData.ageGroup || '기본 나이'} / #{userData.memberKeyword.length > 0 ? userData.memberKeyword.join(' #') : '기본 키워드'}</p>
                 </S.ProfileText>
             </S.ProfileBox>
 
