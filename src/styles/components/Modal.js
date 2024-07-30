@@ -1,13 +1,14 @@
 import { NavLink } from "react-router-dom";
 import styled from 'styled-components';
+import BG from "../../assets/BG_Paper.png";
+import Close from "../../assets/myPage/icon_close.svg";
+import  BG_Answer from "../../assets/myPage/bg_answer.svg";
 import { HeartFilled } from "@ant-design/icons";
 
 // 모달 스타일 정의
-export const ModalContainer = styled.div.attrs((props) => ({
-  'data-show': props.show,
-}))`
-  display: ${(props) => (props.show ? 'flex' : 'none')};
-  position: fixed;
+export const ModalContainer = styled.div`
+  display: ${props => (props.show ? 'flex' : 'none')};
+  position: fixed;;
   z-index: 1;
   left: 0;
   top: 0;
@@ -26,12 +27,14 @@ export const ModalContent = styled.div`
   flex-direction: column;
   position: relative;
   align-items: center;
-  background-image : url(/public/img/BG_Paper.png);
+  background-image : url(${BG});
   margin: 5% auto;
-  padding: 20px;
+  padding: 45px 15px 10px 15px;
   border: 1px solid #888;
-  width: 60%;
-  max-width: 600px;
+  width: 88%;
+  max-width: 320px;
+  height: auto;
+  position: relative;
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 `;
@@ -44,7 +47,7 @@ export const CloseButton = styled.button`
   border: none;
   top: 5%;
   right: 5%;
-  background-image: url(src/assets/myPage/icon_close.svg);
+  background-image: url(${Close});
   background-size: contain;
   background-repeat: no-repeat;
 `;
@@ -103,12 +106,13 @@ export const ModalBody = styled.p`
 `;
 
 export const ModalExtra = styled.div`
-  width: 290px;
+  width: 100%;
   height: 110px;
-  background-image: url(src/assets/myPage/bg_answer.png);
-  background-size: cover;
+  /*background-color: rgba(0, 255, 0, 1);*/
+  background-image: url(${BG_Answer});
+  background-size: 100% 100%;
   background-repeat: no-repeat;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+  padding: 7px;
 
   h3{
     color: white;
@@ -187,18 +191,20 @@ export const Comment = styled.div`
 `;
 
 export const MoreButton = styled(NavLink)`
-  width: 60%;
-  height: 10px;
-  padding: 20px;
-  background: #D0DAE8;
-  border: 1px solid #BBD7FF;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 400; 
-  line-height: 16.94px;
-  color: rgb(85, 85, 85);
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
-  text-align : center;
+    width: 88%;
+    max-width: 320px;
+    height: 20px;
+    margin: 10px;
+    padding : 10px 15px;
+    background: rgb(208, 218, 232);
+    border: 1px solid rgba(187, 215, 255, 1);
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 400; 
+    line-height: 16.94px;
+    color: rgb(85, 85, 85);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+    text-align : center;
 `;
 
 export const ModalHeader = styled.div`

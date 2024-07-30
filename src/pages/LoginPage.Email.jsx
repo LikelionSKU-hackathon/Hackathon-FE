@@ -1,18 +1,19 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useRecoilState } from "recoil";
-import { isLoginSelector, tokenState } from "../Recoil/TokenAtom";
 import * as S from "../styles/page/Login.stlye";
 
 import Intro from "../components/intro";
 import Back from "../components/Back";
 
+import { useRecoilState } from 'recoil';
+import { isLoginSelector, tokenState } from "../Recoil/TokenAtom";
+import preview from "../assets/Login/icon_Preview.svg";
 export default function LoginPageEmail() {
     const [userId, setUserId] = useState('');
     const [pwd, setPwd] = useState('');
+    const [token, setToken] = useRecoilState(tokenState);
     const isFormValid = userId !== '' && pwd !== '';
-    const setAccessToken = useRecoilState(tokenState);
     const navigate = useNavigate();
     const location = useLocation();
     // 이전 페이지
@@ -23,26 +24,41 @@ export default function LoginPageEmail() {
         e.preventDefault();
         console.log(`userId: ${userId}, pwd: ${pwd}`);
         if (login()) {
-
+            sessionStorage.setItem('user', JSON.stringify({
+                userId: userId,
+                pwd: pwd,
+                name: "기묘둠",
+                age: "20대",
+                options: [1, 2, 3],
+                profile: { preview }
+            }));
+            navigate(from); 
         }
         else {
             setIsErr(true);
         }
-        //setAccessToken('access -fake-token');
-        //navigate(from); // HomePage
     }
     // 더미
     const login = () => {
-        return false;
+        return true;
     }
     // 오류 출력
     const [isErr, setIsErr] = useState(false);
-
+    const isLogin = useRecoilState(isLoginSelector);
+    const currentLocation = useLocation();
+    // 로그인 여부 확인
+    const savedToken = sessionStorage.getItem('user');
+    useEffect(() => {
+        // login 확인
+        if (savedToken) {
+            alert("이미 로그인 됨.");
+            navigate('/', { replace: true, state: { redirectedFrom: window.location.pathname } });
+        }
+    }, []);
     return (
         <>
             <Back to = "/login"></Back>
             <S.LoginContainer>
-
                 <Intro></Intro>
                 <S.ErrText
                     disabled={!isErr}
