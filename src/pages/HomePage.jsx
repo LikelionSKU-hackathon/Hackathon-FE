@@ -5,10 +5,7 @@ import StoryBox from "../components/StoryBox";
 import { useLocation } from "react-router-dom";
 import OtherDiaryModal from '../components/OtherDiaryModal';
 import MyDiaryModal from '../components/MyDiaryModal';
-<<<<<<< HEAD
 import axios from 'axios';
-=======
->>>>>>> 6490692708ba4cbcbc80e41a6bae31962fb0b778
 import { useRecoilState } from "recoil";
 import { isLoginSelector, tokenState } from "../Recoil/TokenAtom";
 function HomePage() {
