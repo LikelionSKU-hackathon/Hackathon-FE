@@ -8,8 +8,7 @@ import { HeartFilled } from "@ant-design/icons";
 // 모달 스타일 정의
 export const ModalContainer = styled.div`
   display: ${props => (props.show ? 'flex' : 'none')};
-  position: fixed;;
-  z-index: 1;
+  position: fixed;
   left: 0;
   top: 0;
   width: 100%;

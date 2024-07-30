@@ -25,7 +25,7 @@ export const ChangeButton = styled.button`
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 `;
 
-export const QBox = styled(NavLink)`
+export const QBox = styled.div`
   width: 300px;
   border: 1px solid rgb(208, 218, 232);
   border-radius: 10px;

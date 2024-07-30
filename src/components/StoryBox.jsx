@@ -22,9 +22,11 @@ export default function StoryBox({ onClick }) {
     const [likeCount, setLikeCount] = useState(0);
     const [modalSwitch, setModalSwitch] = useState(false);
   
-    const handleLike = () => {
-      setLiked(prelike => !liked);
-      setLikeCount(preCount => (liked ? preCount-1 : preCount + 1));
+    const handleLike = (event) => {
+        event.stopPropagation();
+        event.preventDefault();
+        setLiked(prelike => !liked);
+        setLikeCount(preCount => (liked ? preCount-1 : preCount + 1));
     };
 
     return(
