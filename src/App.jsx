@@ -10,6 +10,7 @@ import RegisterPageEmail from './pages/RegisterPage.email';
 import RegisterPageWord from './pages/RegisterPage.word';
 import RegisterPageProfile from './pages/RegisterPage.profile';
 import RegisterPageFinal from './pages/RegisterPage.final';
+import WriteFreeDiary from './pages/WriteFreeDiary';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
   {
     path: '/writeDiary',
     element: <WriteDiary />,
+  },
+  {
+    path: '/writeFreeDiary',
+    element: <WriteFreeDiary />,
   },
 ]);
 

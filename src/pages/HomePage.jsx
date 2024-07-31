@@ -5,9 +5,10 @@ import StoryBox from "../components/StoryBox";
 import { useLocation } from "react-router-dom";
 import OtherDiaryModal from '../components/OtherDiaryModal';
 import MyDiaryModal from '../components/MyDiaryModal';
-import axios from 'axios';
+import { getUserData, getAIQuestionData } from '../api/userAPI';
 import { useRecoilState } from "recoil";
-import { isLoginSelector, tokenState } from "../Recoil/TokenAtom";
+import { isLoginSelector } from "../Recoil/TokenAtom";
+
 function HomePage() {
     const [userData, setUserData] = useState({
         username: '',
@@ -15,12 +16,18 @@ function HomePage() {
         profileImage: '',
         memberKeyword: []
     });
+    const [questionData, setQuestionData] = useState({
+        memberId: 0,
+        category: '',
+        content: ''
+    });
     const [modalSwitch, setModalSwitch] = useState(false);
     const [currentModal, setCurrentModal] = useState(null);
     const location = useLocation();
-    const login = useRecoilState(isLoginSelector);
+    const [login] = useRecoilState(isLoginSelector);
+
     useEffect(() => {
-        console.log(login);
+        // Modal 상태 설정
         const query = new URLSearchParams(location.search);
         const modalType = query.get('modal');
         if (modalType === 'MyDiary') {
@@ -36,22 +43,36 @@ function HomePage() {
     }, [location.search]);
 
     useEffect(() => {
-        axios.get('https://sub.skuhackathon.shop/members/')
-            .then(response => {
-                setUserData(response.data.result);
-            })
-            .catch(error => {
-                console.error('Error fetching user data:', error);
-            });
-    }, []);
+        if (login) {
+            const fetchUserData = async () => {
+                try {
+                    const token = localStorage.getItem('token'); // 토큰을 로컬 스토리지에서 가져옴
+                    const userData = await getUserData(token);
+                    setUserData(userData);
+                } catch (error) {
+                    console.error('Error fetching user data:', error);
+                }
+            };
+
+            const fetchAIQuestionData = async () => {
+                try {
+                    const token = localStorage.getItem('token'); // 토큰을 로컬 스토리지에서 가져옴
+                    const questionData = await getAIQuestionData(token);
+                    setQuestionData(questionData);
+                } catch (error) {
+                    console.error('Error fetching AI question data:', error);
+                }
+            };
+
+            fetchUserData();
+            fetchAIQuestionData();
+        }
+    }, [login]);
 
     const handleStoryBoxClick = () => {
         setModalSwitch(true);
         setCurrentModal('OtherDiary');
     };
-
-    let topic = '현재 나의 애인과 가치관 차이로 생긴 문제는?';
-    let tag = '연애 및 대인관계';
 
     return (
         <S.Container>
@@ -75,13 +96,13 @@ function HomePage() {
 
             <S.QBox className="question">
                 <h6>TODAY<br />QUESTION</h6>
-                <h5>#{tag}</h5>
-                <p>Q. {topic}</p>
+                <h5>#{questionData.category || 'category'}</h5>
+                <p>Q. {questionData.content || 'content'}</p>
             </S.QBox>
             <S.ChangeButton>주제 변경하기</S.ChangeButton>
 
             <div style={{ gap: '14px' }}>
-                <S.DiaryButton className="free" to="/WriteDiary">
+                <S.DiaryButton className="free" to="/WriteFreeDiary">
                     <p>MY STORY<br />자유주제로<br />일기쓰기</p>
                 </S.DiaryButton>
                 <S.DiaryButton className="daily" to="/WriteDiary">
@@ -104,6 +125,7 @@ function HomePage() {
                     <h6>더 많은 일기 보기 &gt;</h6>
                 </S.MoreButton>
             </S.StoryContainer>
+            
         </S.Container>
     );
 }

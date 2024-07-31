@@ -177,6 +177,8 @@ export const Comment = styled.div`
   flex-shrink: 0;
   display: flex;
   align-items: center;
+  color: #555555;
+
 
   >h5 {
     font-weight: 600;
