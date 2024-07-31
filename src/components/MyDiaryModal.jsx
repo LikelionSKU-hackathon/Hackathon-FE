@@ -1,4 +1,5 @@
-import * as M from "../styles/components/Modal"
+import React from 'react';
+import * as M from "../styles/components/Modal";
 import ang from '../assets/myPage/icon_ang.svg';
 import good from '../assets/myPage/icon_good.svg';
 import happy from '../assets/myPage/icon_happy.svg';
@@ -8,15 +9,15 @@ import upset from '../assets/myPage/icon_upset.svg';
 
 const emogi = [ang, sad, soso, happy, good, upset];
 
-export default function MyDiaryModal({ setModalSwitch }){
+export default function MyDiaryModal({ setModalSwitch, title, content, date, aiComments }) {
     const getFormattedDate = () => {
-        const date = new Date();
-        const year = date.getFullYear();
-        const month = date.getMonth() + 1;
-        const day = date.getDate();
+        const dateObj = new Date(date);
+        const year = dateObj.getFullYear();
+        const month = dateObj.getMonth() + 1;
+        const day = dateObj.getDate();
         const daysOfWeek = ['일', '월', '화', '수', '목', '금', '토'];
-        const dayOfWeek = daysOfWeek[date.getDay()];
-    
+        const dayOfWeek = daysOfWeek[dateObj.getDay()];
+
         return (
             <>
               <M.ModalDateBold>{year}</M.ModalDateBold>
@@ -40,19 +41,19 @@ export default function MyDiaryModal({ setModalSwitch }){
             </p>
             </M.ModalHeader>
             <M.ModalContent> 
-                <M.ModalImage src={emogi[0]} alt="emoji"></M.ModalImage>
+                <M.ModalImage src={emogi[0]} alt="emoji" />
                 <M.CloseButton onClick={() => setModalSwitch(false)} />
                 <span>
                     {getFormattedDate()}
                 </span>
 
-                <M.ModalTitle>제목</M.ModalTitle>
+                <M.ModalTitle>{title}</M.ModalTitle>
                 <M.ModalBodyContain>
-                    <M.ModalBody>내용aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</M.ModalBody>
+                    <M.ModalBody>{content}</M.ModalBody>
                 </M.ModalBodyContain>
                 <M.ModalExtra>
                     <h3>AI 쓰감 선생님의 한 마디</h3>
-                    <p>고생했어요ㄴㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ</p>
+                    <p>{aiComments}</p>
                 </M.ModalExtra>
             </M.ModalContent>
             <M.MoreButton to="/diary">더 많은 이야기 보러가기</M.MoreButton>

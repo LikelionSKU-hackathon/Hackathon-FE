@@ -66,16 +66,16 @@ export default function WriteFreePage() {
         moodId: moodId, 
         questionId: 0,
         public: activeButton === 'public',
-        aiComments: [],
       }, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json'
         }
       });
-  
+      const { id } = response.data;
+      console.log('Created diary ID:', id);
+      navigate('/?modal=MyDiary', { state: { id } });
       console.log('Response:', response.data);
-      navigate('/?modal=MyDiary');
     } catch (error) {
       if (error.response) {
         console.error('서버 응답 오류:', error.response.data);
