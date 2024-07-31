@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import * as S from "../styles/page/Main.style";
 import * as M from "../styles/components/Modal";
 import StoryBox from "../components/StoryBox";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import OtherDiaryModal from '../components/OtherDiaryModal';
 import MyDiaryModal from '../components/MyDiaryModal';
 import { getUserData, getAIQuestionData } from '../api/userAPI';
@@ -12,6 +12,7 @@ function HomePage() {
     console.log("토큰 내용", savedToken);
 
     const [userData, setUserData] = useState({
+        memberId: 0,  // memberId 초기값 추가
         username: '',
         ageGroup: '',
         profileImage: '',
@@ -25,9 +26,11 @@ function HomePage() {
     const handleChangeButtonClick = () => {
         window.location.reload();
     };
+    
     const [modalSwitch, setModalSwitch] = useState(false);
     const [currentModal, setCurrentModal] = useState(null);
     const location = useLocation();
+    const navigate = useNavigate();  // navigate 함수 추가
 
     useEffect(() => {
         // Modal 상태 설정
@@ -90,6 +93,15 @@ function HomePage() {
         setModalSwitch(true);
         setCurrentModal('OtherDiary');
     };
+
+    const handleWriteFreeDiaryClick = () => {
+        if (userData.memberId) { // memberId가 있는지 확인
+            navigate(`/WriteFreeDiary?memberId=${userData.memberId}`);
+        } else {
+            console.error('Member ID is not available');
+        }
+    };
+
     console.log("AI Question Data:", questionData);
     return (
         <S.Container>
@@ -124,7 +136,7 @@ function HomePage() {
             <S.ChangeButton onClick={handleChangeButtonClick}>주제 변경하기</S.ChangeButton>
 
             <div style={{ gap: '14px' }}>
-                <S.DiaryButton className="free" to="/WriteFreeDiary">
+                <S.DiaryButton className="free" onClick={handleWriteFreeDiaryClick}>
                     <p>MY STORY<br />자유주제로<br />일기쓰기</p>
                 </S.DiaryButton>
                 <S.DiaryButton className="daily" to="/WriteDiary">

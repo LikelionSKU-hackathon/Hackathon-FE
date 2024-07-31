@@ -9,7 +9,7 @@ export const getUserData = async(token) =>{
         });
         return response.data;
     } catch (error) {
-        console.error('Error user data', error);
+        console.error('사용자 데이터 가져오기 에러', error);
         return {};
     }
 };
@@ -25,13 +25,20 @@ export const getAIQuestionData = async(token) => {
         return response.data;
     } catch (error) {
         console.error('AI 질문 데이터 가져오기 에러:', error);
-        if (error.response) {
-            console.error('Response error:', error.response.data);
-        } else if (error.request) {
-            console.error('Request error:', error.request);
-        } else {
-            console.error('Error message:', error.message);
-        }
         return null;
     }
 }
+
+export const getPreInfo = async (memberId, token) => {
+    try {
+        const response = await axios.get(`/diary/pre-info/${memberId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Pre-info data 가져오기 에러:', error);
+        return null;
+    }
+};

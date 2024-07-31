@@ -19,7 +19,7 @@ export const ChangeButton = styled.button`
   font-size: 15px;
   font-weight: 400;
   white-space: pre-line;
-  margin-top: 0;
+  margin-top: 7px;
   margin-bottom: 10px;
   padding: 10px;
   border: 1px solid rgb(208, 218, 232);
