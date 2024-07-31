@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import * as S from "../styles/page/Login.stlye";
 
 import Intro from "../components/intro";
@@ -8,8 +8,8 @@ import Back from "../components/Back";
 
 import { useRecoilState } from 'recoil';
 import { isLoginSelector, tokenState } from "../Recoil/TokenAtom";
-import preview from "../assets/Login/icon_Preview.svg";
 import axios from 'axios';
+
 export default function LoginPageEmail() {
     const [userId, setUserId] = useState('');
     const [pwd, setPwd] = useState('');
@@ -22,36 +22,52 @@ export default function LoginPageEmail() {
 
     // login 요청
     const tryLogin = async () => {
-        console.log(`userId: ${userId}, pwd: ${pwd}`);
-        const url = 'https://sub.skuhackathon.shop/members/login';
-        try {
-            const response = await axios.post(url, {
-                email: userId,
-                password: pwd,
-            }); `    `
-            console.log("보냈어용");
-            console.log(response.data);
-            console.log(response.status);
-            sessionStorage.setItem('user', JSON.stringify({
-                userId: userId,
-                pwd: pwd,
-                name: "기묘둠",
-                age: "20대",
-                options: [1, 2, 3],
-                profile: { preview }
-            }));
-            navigate(from);
-        } catch (error) {
-            console.log("에러에용");
-            console.error('Error:', error);
-            setIsErr(true);
-        }
-    }
+        const requestBody = {
+            email: userId,
+            password: pwd
+        };
+        axios.post('https://sub.skuhackathon.shop/members/login', requestBody, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': '*/*'
+            }
+        })
+            .then(async response => {
+                console.log("보냈어용");
+                console.log(response.data);
+                if (response.status == 200) {
+                    const result = response.data.result;
+                    const jwtToken = result.accessToken;
+                    const userData = await axios.get('https://sub.skuhackathon.shop/members/', {
+                        headers: {
+                            'Accept': '*/*',
+                            'Authorization': `Bearer ${jwtToken}`  // JWT 토큰 설정
+                        }
+                    });
+                    console.log("성공");
+                    console.log(userData.data.result);
+                    const userResult = userData.data.result;
+                    sessionStorage.setItem('token', jwtToken);
+                    sessionStorage.setItem('user', JSON.stringify({
+                        userId: result.memberId,
+                        email: result.email,
+                        ageGroup: userResult.ageGroup,
+                        userName : userResult.userName,
+                        profileImage : userResult.profileImage,
+                        memberKeyword : userResult.memberKeyword
+                    }));
+                    navigate(from);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+
+    };
+
 
     // 오류 출력
     const [isErr, setIsErr] = useState(false);
-    const isLogin = useRecoilState(isLoginSelector);
-    const currentLocation = useLocation();
     // 로그인 여부 확인
     const savedToken = sessionStorage.getItem('user');
     useEffect(() => {
