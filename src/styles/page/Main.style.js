@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import BG from "../../assets/BG_Paper.png";
 
 // QBox의 question 클래스 배경색 랜덤 배열
 const questionColors = [
@@ -23,6 +24,7 @@ export const ChangeButton = styled.button`
   padding: 10px;
   border: 1px solid rgb(208, 218, 232);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  color : #000000;
 `;
 
 export const QBox = styled.div`
@@ -37,7 +39,8 @@ export const QBox = styled.div`
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 
   &.question {
-    height: 90px;
+    min-height: 90px;
+    height : auto;
     background: ${props => props.bgColor || questionColors[Math.floor(Math.random() * questionColors.length)]};
   }
 
@@ -77,6 +80,40 @@ export const QBox = styled.div`
   }
 `;
 
+export const HistoryBox = styled(NavLink)`
+  width: 300px;
+  border: 1px solid rgb(208, 218, 232);
+  border-radius: 10px;
+  margin: 10px;
+  color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  height: 67px;
+  background: rgba(205, 0, 135, 1);
+  > h6 {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: -0.025em;
+    text-align: left;
+    margin-top: 0px;
+    margin-bottom: 10px;
+  }
+
+  > h5 {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: -0.025em;
+    text-align: right;
+    margin-top: 5px;
+    margin-bottom: 0;
+    padding: 0;
+  }
+`;
+
 export const TextDiv = styled.div`
   width: 330px;
   display: flex;
@@ -86,11 +123,12 @@ export const TextDiv = styled.div`
   padding : 15px;
   > h6 {
     font-weight: 600;
-    font-size: 32px;
+    font-size: 33px;
     text-align: left;
     margin-top: 100px;
     margin-bottom: 0;
     color : #000000;
+    line-height: 42px;
   }
 
   > p {
@@ -134,9 +172,11 @@ export const ProfileBox = styled.div`
   border-radius: 100px;
   align-items: center;
   display: flex;
+  box-shadow: 0px 4px 4px 0px #00000040;
 `;
 
 export const ProfileText = styled.div`
+  margin-right : 5px;
   color: rgb(255, 255, 255);
   text-align: left;
   display: flex;
@@ -166,6 +206,7 @@ export const Container = styled.div`
   overflow-y: auto;
   margin : 0;
   padding-bottom: 50px;
+  background-image : url(${BG});
 `;
 
 export const DiaryButton = styled(NavLink)`
@@ -203,6 +244,11 @@ export const Circle = styled.div`
   border-radius: 50%;
   margin: 6px;
   padding: 0;
+  > img {
+    height: 100%;
+    border-radius: 50%;
+    object-fit: fill;
+  }
 `;
 
 export const FreeButton = styled.button`

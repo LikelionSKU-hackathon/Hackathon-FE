@@ -6,25 +6,28 @@ import { useLocation } from "react-router-dom";
 import OtherDiaryModal from '../components/OtherDiaryModal';
 import MyDiaryModal from '../components/MyDiaryModal';
 import { getUserData, getAIQuestionData } from '../api/userAPI';
-import { useRecoilState } from "recoil";
-import { isLoginSelector } from "../Recoil/TokenAtom";
 
 function HomePage() {
+    const savedToken = sessionStorage.getItem('user');
+    console.log("토큰 내용", savedToken);
+
     const [userData, setUserData] = useState({
         username: '',
         ageGroup: '',
         profileImage: '',
-        memberKeyword: []
+        keywordList: [],
     });
     const [questionData, setQuestionData] = useState({
         memberId: 0,
-        category: '',
-        content: ''
+        category: 'category',
+        content: 'content'
     });
+    const handleChangeButtonClick = () => {
+        window.location.reload();
+    };
     const [modalSwitch, setModalSwitch] = useState(false);
     const [currentModal, setCurrentModal] = useState(null);
     const location = useLocation();
-    const [login] = useRecoilState(isLoginSelector);
 
     useEffect(() => {
         // Modal 상태 설정
@@ -43,40 +46,54 @@ function HomePage() {
     }, [location.search]);
 
     useEffect(() => {
-        if (login) {
-            const fetchUserData = async () => {
-                try {
-                    const token = localStorage.getItem('token'); // 토큰을 로컬 스토리지에서 가져옴
-                    const userData = await getUserData(token);
-                    setUserData(userData);
-                } catch (error) {
-                    console.error('Error fetching user data:', error);
+        const fetchUserData = async () => {
+            try {
+                const token = sessionStorage.getItem('token'); // 토큰을 세션 스토리지에서 가져옴
+                if (token) {
+                    const response = await getUserData(token);
+                    setUserData(response.result);
+                } else {
+                    console.error('No token found in sessionStorage.');
                 }
-            };
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            }
+        };
 
-            const fetchAIQuestionData = async () => {
-                try {
-                    const token = localStorage.getItem('token'); // 토큰을 로컬 스토리지에서 가져옴
-                    const questionData = await getAIQuestionData(token);
-                    setQuestionData(questionData);
-                } catch (error) {
-                    console.error('Error fetching AI question data:', error);
+        const fetchAIQuestionData = async () => {
+            try {
+                const token = sessionStorage.getItem('token');
+                if (token) {
+                    const response = await getAIQuestionData(token);
+                    if (response) {
+                        setQuestionData(response.result);
+                    }
+                    
+                } else {
+                    console.error('No token found in sessionStorage.');
                 }
-            };
+            } catch (error) {
+                console.error('AI question data 불러오기 error:', error);
+            }
+        };
 
-            fetchUserData();
-            fetchAIQuestionData();
-        }
-    }, [login]);
+        fetchUserData();
+        fetchAIQuestionData();
+    }, []);
+
+    useEffect(() => {
+        console.log("User Data:", userData);
+        console.log("User Category", userData.keywordList);
+    }, [userData]); // userData가 변경될 때마다 실행
 
     const handleStoryBoxClick = () => {
         setModalSwitch(true);
         setCurrentModal('OtherDiary');
     };
-
+    console.log("AI Question Data:", questionData);
     return (
         <S.Container>
-            <M.ModalContainer show={modalSwitch}>
+            <M.ModalContainer show={modalSwitch ? 'true' : undefined}>
                 {currentModal === 'MyDiary' ? <MyDiaryModal setModalSwitch={setModalSwitch} /> : currentModal === 'OtherDiary' ? <OtherDiaryModal setModalSwitch={setModalSwitch} /> : null}
             </M.ModalContainer>
             <S.TextDiv>
@@ -89,17 +106,22 @@ function HomePage() {
                     {userData.profileImage && <img src={userData.profileImage} alt="Profile" />}
                 </S.Circle>
                 <S.ProfileText>
-                    <h6>{userData.username || '기본 이름'}</h6>
-                    <p>{userData.ageGroup || '기본 나이'} / #{userData.memberKeyword.length > 0 ? userData.memberKeyword.join(' #') : '기본 키워드'}</p>
+                    <h6>{userData.username || '로그인 해주세요'}</h6>
+                    <p>
+                        {userData.ageGroup} / 
+                        #{userData.keywordList.length > 0 
+                            ? userData.keywordList.map(keyword => keyword.category).join('# ') 
+                            : '키워드'}
+                    </p>
                 </S.ProfileText>
             </S.ProfileBox>
 
             <S.QBox className="question">
                 <h6>TODAY<br />QUESTION</h6>
-                <h5>#{questionData.category || 'category'}</h5>
-                <p>Q. {questionData.content || 'content'}</p>
+                <h5># {questionData.category || 'AI 연동 중'}</h5>
+                <p>Q. {questionData.content || 'AI 연동 중'}</p>
             </S.QBox>
-            <S.ChangeButton>주제 변경하기</S.ChangeButton>
+            <S.ChangeButton onClick={handleChangeButtonClick}>주제 변경하기</S.ChangeButton>
 
             <div style={{ gap: '14px' }}>
                 <S.DiaryButton className="free" to="/WriteFreeDiary">
@@ -110,10 +132,10 @@ function HomePage() {
                 </S.DiaryButton>
             </div>
 
-            <S.QBox className="history" to="/user">
+            <S.HistoryBox to="/user">
                 <h6>MY<br />HISTORY</h6>
                 <h5>나의 일기 기록 모아보기</h5>
-            </S.QBox>
+            </S.HistoryBox>
             <S.StoryContainer>
                 <h3>
                     쓰담쓰담<br />
@@ -125,7 +147,6 @@ function HomePage() {
                     <h6>더 많은 일기 보기 &gt;</h6>
                 </S.MoreButton>
             </S.StoryContainer>
-            
         </S.Container>
     );
 }

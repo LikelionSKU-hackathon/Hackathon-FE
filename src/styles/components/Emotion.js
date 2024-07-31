@@ -4,8 +4,8 @@ export const EmotionButton = styled.button`
     width: 70px;
     height: 70px;
     border: ${(props) => (props.hasSelectedImage ? "none" : "2px dotted rgb(85, 85, 85)")};
-    border-radius: 100%;
-    background: ${(props) => `url(${props.bgImage}) no-repeat center/cover`};
+    border-radius: 50%;
+    background: ${(props) => props.bgImage ? `url(${props.bgImage}) no-repeat center/cover` : 'transparent'};
     margin: 5px;
     outline: none;
     cursor: pointer;
@@ -30,7 +30,7 @@ export const EmotionSelectionContainer = styled.div`
 export const EmotionOption = styled.img`
     width: 40px;
     height: 40px;
-    border-radius: 100%;
+    border-radius: 50%;
     border: 2px solid transparent;
     cursor: pointer;
     margin-bottom: 0;
