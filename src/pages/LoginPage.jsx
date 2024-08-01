@@ -8,7 +8,7 @@ import { useNavigate,Navigate, useLocation } from "react-router-dom";
 export default function LoginPage() {
     const navigate = useNavigate();
     // 로그인 여부 확인
-    const savedToken = sessionStorage.getItem('user');
+    const savedToken = JSON.parse(sessionStorage.getItem('login'));
     useEffect(() => {
         // login 확인
         if (savedToken) {

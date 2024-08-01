@@ -24,12 +24,20 @@ export default function RegisterPageFinal() {
         navigate('/login/email');
     }
     // 로그인 여부 확인
-    const savedToken = sessionStorage.getItem('user');
+    const savedToken = JSON.parse(sessionStorage.getItem('login'));
     useEffect(() => {
         // login 확인
         if (savedToken) {
             alert("이미 로그인 됨.");
             navigate('/', { replace: true, state: { redirectedFrom: window.location.pathname } });
+        }
+        else{
+            console.log("data 1: " + Object.entries(message));
+            setUserId(message.userId);
+            setPwd(message.pwd);
+            setName(message.name);
+            setAge(message.age);
+            setProfileImage(message.profileImage);
         }
     }, []);
     return (

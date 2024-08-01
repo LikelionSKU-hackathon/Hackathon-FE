@@ -48,6 +48,7 @@ export default function LoginPageEmail() {
                     console.log(userData.data.result);
                     const userResult = userData.data.result;
                     sessionStorage.setItem('token', jwtToken);
+                    sessionStorage.setItem('login',true);
                     sessionStorage.setItem('user', JSON.stringify({
                         userId: result.memberId,
                         email: result.email,
@@ -69,10 +70,10 @@ export default function LoginPageEmail() {
     // 오류 출력
     const [isErr, setIsErr] = useState(false);
     // 로그인 여부 확인
-    const savedToken = sessionStorage.getItem('user');
+    const login = sessionStorage.getItem('login');
     useEffect(() => {
         // login 확인
-        if (savedToken) {
+        if (login) {
             alert("이미 로그인 됨.");
             navigate('/', { replace: true, state: { redirectedFrom: window.location.pathname } });
         }
