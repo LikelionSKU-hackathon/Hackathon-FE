@@ -31,10 +31,15 @@ export default function OtherDiaryModal({ setModalSwitch }){
         );
     };
 
+    const handleClose = () => {
+        setModalSwitch(false); // 모달 상태 업데이트
+        navigate('?'); // URL에서 쿼리 파라미터 제거
+    };
+
     return(
         <M.ModalContent>
             <M.ModalImage src={emogi[0]}></M.ModalImage>
-            <M.CloseButton onClick={() => setModalSwitch(false)} />
+            <M.CloseButton onClick={handleClose} />
             <span>
                 {getFormattedDate()}
             </span>

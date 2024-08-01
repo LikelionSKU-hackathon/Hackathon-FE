@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import OtherDiaryModal from '../components/OtherDiaryModal';
 import MyDiaryModal from '../components/MyDiaryModal';
 import { getUserData, getAIQuestionData } from '../api/userAPI';
+import { getPopularDiary } from '../api/diaryAPI';
 
 function HomePage() {
     const [userData, setUserData] = useState({
@@ -19,6 +20,9 @@ function HomePage() {
         memberId: 0,
         category: 'category',
         content: 'content'
+    });
+    const [popularDiary, setPopularDiary] = useState({
+
     });
     const [modalSwitch, setModalSwitch] = useState(false);
     const [currentModal, setCurrentModal] = useState(null);
@@ -72,6 +76,18 @@ function HomePage() {
                 }
             } catch (error) {
                 console.error('AI question data 불러오기 error:', error);
+            }
+        };
+
+        const fetchPopularDiary = async () => {
+            try{
+                const response = await getPopularDiary();
+                if (response) {
+                    setPopularDiary(response);
+                }
+                    
+            } catch (error) {
+                console.error('오늘의 일기 불러오기 error: ', error);
             }
         };
 

@@ -235,7 +235,7 @@ export const DiaryButton = styled(NavLink)`
   > p {
     position: absolute;
     bottom : 10px;
-    left : 10px;
+    left : 10px;g
     font-weight: 400;
     font-size: 14px;
     margin: 0;
