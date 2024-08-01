@@ -17,45 +17,8 @@ export default function RegisterPageProfile() {
     const location = useLocation();
     const navigate = useNavigate();
     const message = location.state || {};
-    console.log({ message });
-    const [emojis, setEmoji] = useState(
-        {
-            "연애 및 대인관계": "❤️",
-            "진로 및 취업": "🧩",
-            "정신건강": "🧠",
-            "생활문제": "🏡",
-            "학업 및 자격증": "✏️",
-        }
-    );
-    var emoji = ["❤️", "🧩", "🧠", "🏡", "✏️"];
-    var tag = ["연애 및 대인관계", "진로 및 취업", "정신건강", "생활문제", "학업 및 자격증"];
-    const options = [
-        [
-            emojis["연애 및 대인관계"],
-            tag[0],
-            "1111"
-        ],
-        [
-            emojis["정신건강"],
-            tag[1],
-            "연2222"
-        ],
-        [
-            emojis["학업 및 자격증"],
-            tag[3],
-            "연애 3333"
-        ],
-        [
-            emojis["생활문제"],
-            tag[4],
-            "연애 444"
-        ],
-        [
-            emojis["진로 및 취업"],
-            tag[2],
-            "연애 55"
-        ],
-    ];
+    const [options, setoptions] = useState();
+
     // 이미지 설정
     const setImage = (event) => {
         const fileView = document.getElementById('fileView');
@@ -64,45 +27,80 @@ export default function RegisterPageProfile() {
     };
     // 가입 테스트
     const tryRegister = async () => {
-        console.log(`userId: ${userId}, pwd: ${pwd}, name: ${name}, age: ${age}`);
-        // 가입 요청
-        const url = 'https://sub.skuhackathon.shop/members/signup';
-        try {
-            const response = await axios.post(url, {
-                username: name,
-                email: userId,
-                password: pwd,
-                age_group: age,
-                role: selectedOptions,
-                profileImage: profileImage,
-            });`    `
-            console.log("보냈어용");
-            console.log(response.data);
-            console.log(response.status);
-        } catch (error) {
-            console.log("에러에용");
-            console.error('Error:', error);
-        }
+        const userData = JSON.parse(sessionStorage.getItem('user'));
+        console.log("data 0: " + message.selectedOptions);
+        // 키워드 전송
+        axios.post(`https://sub.skuhackathon.shop/keyword/${userData.userId}`,
+        {
+            keywordIdList: message.selectedOptions
+        },
+        {
+            headers: {
+                'Accept': '*/*',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            console.log("response last 0: " + response.data); 
+                    console.log("response last: " + response);
+                    navigate('/register/final',
+                        {
+                            state:
+                            {
+                                userId,
+                                pwd,
+                                name,
+                                age,
+                                profileImage,
+                                selectedOptions
+                            }
+                        });
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            alert("오류 발생. 다시 시도해주세요.");
+        });
     }
     // test
     // 로그인 여부 확인
-    const savedToken = sessionStorage.getItem('user');
     useEffect(() => {
         // login 확인
-        if (savedToken) {
+        const login = sessionStorage.getItem('login');
+        if (login) {
             alert("이미 로그인 됨.");
             navigate('/', { replace: true, state: { redirectedFrom: window.location.pathname } });
         }
         else {
             if (message) {
-                setUserId(message.userId);
-                setPwd(message.pwd);
+                const option = message.option;
+                const selected = message.selectedOptions;
+                const op = []
+                op.push(option.find(item => item.id === selected[0]));
+                op.push(option.find(item => item.id === selected[1]));
+                op.push(option.find(item => item.id === selected[2]));
+                setoptions(op);
                 setName(message.name);
-                setAge(message.age);
+                // TODO : 이미지 설정
                 setProfileImage(message.profileImage);
-                setSelectedOptions(message.selectedOptions);
-                setImage();
-                console.log("데이터 확인 in /profile");
+
+                const userData = JSON.parse(sessionStorage.getItem('user'));
+                
+
+                // const info = axios.get('https://sub.skuhackathon.shop/members/', {
+                //     headers: {
+                //         'Accept': '*/*',
+                //         'Authorization': `Bearer ${jwtToken}`
+                //     }
+                // });
+                // console.log("data 2: " + info);
+                // setUserId(userData.userId);
+                // setPwd(userData.pwd);
+                // setName(userData.userName);
+                // setAge(userData.ageGroup);
+                // setProfileImage(userData.profileImage);
+                // setoptions(userData.memberKeyword);
+                // setImage();
+                // console.log("데이터 확인 in /profile");
             }
         }
     }, []);
@@ -124,28 +122,25 @@ export default function RegisterPageProfile() {
                         <br />이야기가 기록 될 프로필 입니다 :)</p>
                     <hr></hr>
                     <h1>{age} 나의 주요고민</h1>
-                    {message != null && selectedOptions[0] != null&& (
+                    {options != null && options[0] != null&& (
                         <>
                             <FixLine
-                                emoji={options[selectedOptions[0]][0]}
-                                tag={options[selectedOptions[0]][1]}
-                                title={options[selectedOptions[0]][2]}
+                                emoji={options[0].emoji}
+                                tag={options[0].category}
+                                title={options[0].name}
                                 selected={false}
-                                onClick={() => handleBoxClick(selectedOptions[0])}
                             />
                             <FixLine
-                                emoji={options[selectedOptions[1]][0]}
-                                tag={options[selectedOptions[1]][1]}
-                                title={options[selectedOptions[1]][2]}
+                                emoji={options[1].emoji}
+                                tag={options[1].category}
+                                title={options[1].name}
                                 selected={false}
-                                onClick={() => handleBoxClick(selectedOptions[1])}
                             />
                             <FixLine
-                                emoji={options[selectedOptions[2]][0]}
-                                tag={options[selectedOptions[2]][1]}
-                                title={options[selectedOptions[2]][2]}
+                                emoji={options[2].emoji}
+                                tag={options[2].category}
+                                title={options[2].name}
                                 selected={true}
-                                onClick={() => handleBoxClick(selectedOptions[2])}
                             />
                         </>
                     )}

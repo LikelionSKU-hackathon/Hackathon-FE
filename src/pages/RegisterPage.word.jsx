@@ -1,69 +1,25 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import * as S from "../styles/page/Register.stlye";
 import * as L from "../styles/page/Login.stlye";
 import Back from "../components/Back";
 import WordLine from "../components/WordLine";
-import { useRecoilState } from 'recoil';
-import { ProfileState } from "../Recoil/TokenAtom";
-
+import axios from 'axios';
 export default function RegisterPageWord() {
     const [userId, setUserId] = useState("");
     const [pwd, setPwd] = useState("");
     const [name, setName] = useState("");
     const [age, setAge] = useState("");
     const [profileImage, setProfileImage] = useState();
-    const [emojis, setEmoji] = useState(
-        {
-            "연애 및 대인관계": "❤️",
-            "진로 및 취업": "🧩",
-            "정신건강": "🧠",
-            "생활문제": "🏡",
-            "학업 및 자격증": "✏️",
-        }
-    );
+    const [option, setOption] = useState();
     const fileInputRef = useRef(null);
     const isFormValid = userId !== '' && pwd !== '' && name !== '' && age !== "" && profileImage !== null;
     const navigate = useNavigate();
-    // state 불러오기
     const location = useLocation();
     const message = location.state || {};
-
-    const profile = useRecoilState(ProfileState);
-    console.log(profile);
-    var emoji = ["❤️", "🧩", "🧠", "🏡", "✏️"];
-    var tag = ["연애 및 대인관계", "진로 및 취업", "정신건강", "생활문제", "학업 및 자격증"];
-    const options = [
-        [
-            emojis["연애 및 대인관계"],
-            tag[0],
-            "1111"
-        ],
-        [
-            emojis["정신건강"],
-            tag[1],
-            "연2222"
-        ],
-        [
-            emojis["학업 및 자격증"],
-            tag[3],
-            "연애 3333"
-        ],
-        [
-            emojis["생활문제"],
-            tag[4],
-            "연애 444"
-        ],
-        [
-            emojis["진로 및 취업"],
-            tag[2],
-            "연애 55"
-        ],
-    ];
     const [selectedOptions, setSelectedOptions] = useState([]);
 
     const handleBoxClick = (id) => {
-        console.log(`userId: ${userId}, pwd: ${pwd}, name: ${name}, age: ${age}`);
         setSelectedOptions((prevSelectedOptions) => {
             if (prevSelectedOptions.includes(id)) {
                 return prevSelectedOptions.filter((optionId) => optionId !== id);
@@ -79,29 +35,50 @@ export default function RegisterPageWord() {
     };
     // test
     // 로그인 여부 확인
-    const savedToken = sessionStorage.getItem('user');
+    const login = sessionStorage.getItem('login');
+    const userData = JSON.parse(sessionStorage.getItem('user'));
+    console.log("data 0: " + message.profileImage);
+    console.log("data 1: " + Object.entries(message));
     useEffect(() => {
         // login 확인
-        console.log("user : " + savedToken);
-        if (savedToken) {
-            alert("이미 로그인 됨.");
+        //console.log("user : " + savedToken);
+        if (login) {
+            alert("이미 설정 됨.");
             navigate('/', { replace: true, state: { redirectedFrom: window.location.pathname } });
         }
-        else{
-            if (message) {
-                setUserId(message.userId);
-                setPwd(message.pwd);
-                setName(message.name);
-                setAge(message.age);
+        else {
+            const token = sessionStorage.getItem('token')
+            console.log("data 1: " + token);
+            setUserId(userData.userId);
+            setName(userData.userName);
+            setAge(userData.age);
+            console.log("profileImage: " + message.profileImage);
+            if(userData.profileImage)
+                setProfileImage(userData.profileImage);
+            else
                 setProfileImage(message.profileImage);
-                console.log("데이터 확인 in /word");
-        }}
+            // 선택지 불러오기
+            axios.get(`https://sub.skuhackathon.shop/keyword/${userData.userId}`)
+                .then(response => {
+                    if (response.data.code == "COMMON200") {
+                        if (!response.result) {
+                            console.log("option: " + response.data.result.keywordList[0].id);
+                            setOption(response.data.result.keywordList);
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
+        }
     }, []);
 
     // 다음 이동
     const handleSubmitClick = (e) => {
-        console.log(selectedOptions);
+        console.log("options : " + selectedOptions);
         if (selectedOptions.length == 3) {
+            console.log("전송시작");
+            // 키워드 전송
             navigate('/register/profile',
                 {
                     state:
@@ -111,9 +88,11 @@ export default function RegisterPageWord() {
                         name,
                         age,
                         profileImage,
-                        selectedOptions
+                        selectedOptions,
+                        option
                     }
                 });
+
         }
     };
     return (
@@ -129,14 +108,14 @@ export default function RegisterPageWord() {
                 <p>"요즘내 고민과 유사한 3가지 고민을 골라주세요"</p>
 
                 <S.ListContainer>
-                    {options.map((word, index) => (
+                    {option && option.map((word, index) => (
                         <WordLine
-                            id={index}
-                            key={word}
-                            emoji={word[0]}
-                            tag={word[1]}
-                            title={word[2]}
-                            selected={selectedOptions.includes(index)}
+                            id={word.id}
+                            key={word.id}
+                            emoji={word.emoji}
+                            tag={word.category}
+                            title={word.name}
+                            selected={selectedOptions.includes(word.id)}
                             onClick={handleBoxClick}
                         />
                     ))}

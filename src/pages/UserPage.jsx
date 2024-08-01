@@ -22,16 +22,16 @@ export default function UserPage() {
     const emogi = {"화나요":ang,"슬퍼요" : sad, "그저그래요":soso, "행복해요":happy, "뿌듯해요":good, "속상해요":upset};
     const navigate = useNavigate();
     // 로그인 여부 확인
-    const savedToken =JSON.parse(sessionStorage.getItem('user'));
+    const login =JSON.parse(sessionStorage.getItem('login'));
     useEffect(() => {
+        console.log(login);
         // login 확인
-        if (!savedToken) {
+        if (!login) {
             alert("로그인이 필요합니다.");
-            //navigate('/login', { replace: true, state: { redirectedFrom: window.location.pathname } });
+            navigate('/login', { replace: true, state: { redirectedFrom: window.location.pathname } });
         }
         else{
             console.log("로그인 되어있음");
-            console.log({savedToken});
         }
     }, []);
     // month는 0부터 시작
@@ -44,9 +44,10 @@ export default function UserPage() {
     ];
 
     const tryGetDiaryDate= async () => {
-        const userId = 1;
         let date;
-        axios.get(`https://sub.skuhackathon.shop/diary/${userId}/diaries`)
+        const userData = JSON.parse(sessionStorage.getItem('user'));
+        const token = sessionStorage.getItem('token')
+        axios.get(`https://sub.skuhackathon.shop/diary/${userData.userID}/diaries`)
             .then(response => {
                 console.log(response.data)
                     if (!response.result)

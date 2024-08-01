@@ -11,10 +11,10 @@ export default function RegisterPage() {
         navigate('/register/email', { state: addr });
     };
     // 로그인 여부 확인
-    const savedToken = sessionStorage.getItem('user');
+    const login = sessionStorage.getItem('login');
     useEffect(() => {
         // login 확인
-        if (savedToken) {
+        if (login) {
             alert("이미 로그인 됨.");
             navigate('/', { replace: true, state: { redirectedFrom: window.location.pathname } });
         }

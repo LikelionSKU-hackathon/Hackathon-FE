@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useLocation, useNavigate } from 'react-router-dom';
+import { renderMatches, useLocation, useNavigate } from 'react-router-dom';
 import * as S from "../styles/page/Register.stlye";
 import * as L from "../styles/page/Login.stlye";
 import icon_profile from "../assets/Login/profile.png";
@@ -16,8 +16,7 @@ export default function RegisterPageEmail() {
     const [age, setAge] = useState("");
     const fileInputRef = useRef(null);
     const isFormValid = userId !== '' && pwd !== '' && name !== '' && age !== "";
-    // recoil
-    const [profile, setProfile] = useRecoilState(ProfileState);
+    const formData = new FormData();
     const navigate = useNavigate();
     const location = useLocation();
     // 받은 주소
@@ -32,47 +31,108 @@ export default function RegisterPageEmail() {
         fileInput.addEventListener('change', function (event) {
             if (fileInput.files && fileInput.files[fileInput.files.length - 1]) {
                 const reader = new FileReader();
-
+                console.log("0");
                 reader.onload = function (event) {
+                    console.log("1");
                     const imageURL = event.target.result;
                     setProfileImage(imageURL);
                     fileView.style.backgroundImage = `url(${imageURL})`;
+                    console.log("2");
 
                 };
-
+                console.log("3");
                 reader.readAsDataURL(fileInput.files[fileInput.files.length - 1]);
             }
         });
     };
     // 로그인 여부 확인
-    const savedToken = sessionStorage.getItem('user');
+    const login = sessionStorage.getItem('login');
     useEffect(() => {
         // login 확인
-        if (savedToken) {
+        console.log("isLogin : " + login);
+        if (login) {
             alert("이미 로그인 됨.");
             navigate('/', { replace: true, state: { redirectedFrom: window.location.pathname } });
         }
     }, []);
+    async function addFormdata() {
+        // 이미지 설정
+        formData.append('username', name);
+        formData.append('email', userId);
+        formData.append('password', pwd);
+        formData.append('age_group', age);
+        formData.append('role', 'ROLE_USER');
+        // 이미지 설정
+        if (profileImage == icon_profile) {
+            console.log("기본이미지");
+            try {
+                const response = await fetch(icon_profile);
+                const blob = await response.blob();
+                const file = new File([blob], "profile.png", { type: blob.type });
+                formData.append('profileImage', file);
+                console.log("기본이미지 끝");
+            } catch (error) {
+                console.error('Error converting image to Blob:', error);
+            }
+        } else {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[fileInput.files.length - 1];
+            formData.append('profileImage', file);
+        }
+    }
     // register 테스트
-    const tryRegister = (e) => {
+    const tryRegister = async () => {
         if (emailCheck) {
             if (nameCheck) {
-                console.log('button clicked');
-                e.preventDefault();
-                console.log(`userId: ${userId}, pwd: ${pwd}, name: ${name}, age: ${age}`);
-                if (profileImage !== icon_profile)
-                    setProfileImage(window.getComputedStyle(fileView).backgroundImage);
-
-                //이동 및 데이터 전송
-                navigate('/register/word',
+                // 가입 요청
+                console.log("시작이어용");
+                console.log("대기");
+                await addFormdata();
+                console.log("대기 끝");
+                axios.post('https://sub.skuhackathon.shop/members/signup'
+                    , formData,
                     {
-                        state:
-                        {
-                            userId,
-                            pwd,
-                            name,
-                            age,
-                            profileImage,
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    })
+                    .then(response => {
+                        console.log("보냈어용");
+                        console.log(response.data);
+                        console.log(response.status);
+
+                        //이동 및 데이터 전송
+                        sessionStorage.setItem('user', JSON.stringify({
+                            userId: response.data.result.memberId,
+                            email: userId,
+                            ageGroup: age,
+                            userName: response.data.result.username,
+                            memberKeyword: []
+                        }));
+                        navigate('/register/word',
+                            {
+                                state:
+                                {
+                                    userId,
+                                    pwd,
+                                    name,
+                                    age,
+                                    profileImage,
+                                }
+                            });
+                    })
+
+                    .catch(error => {
+                        console.log("에러났어용");
+                        console.error('Error fetching data:', error.response.data);
+                        if (error.response.data.result.email)
+                            alert(error.response.data.data.result.email);
+                        if (error.response.data.result.password)
+                            alert(error.response.data.result.password);
+                        if (error.response.data.result.profileImage)
+                            alert("프로필 이미지 등록에 실패했습니다.");
+                        if (error.response.data.code == "member4005") {
+                            alert("이미 존재하는 계정입니다.");
                         }
                     });
             } else {
@@ -90,7 +150,6 @@ export default function RegisterPageEmail() {
         console.log(`userId: ${userId}, pwd: ${pwd}, name: ${name}, age: ${age}`);
         axios.get(`https://sub.skuhackathon.shop/members/checkEmail/${userId}`)
             .then(response => {
-                console.log(response)
                 if (response.data.code == "COMMON200") {
                     // 중복이 없다면(false)
                     if (!response.result)
