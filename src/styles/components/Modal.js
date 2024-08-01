@@ -33,7 +33,6 @@ export const ModalContent = styled.div`
   width: 88%;
   max-width: 320px;
   height: auto;
-  position: relative;
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 `;
@@ -65,13 +64,17 @@ export const ModalDate = styled.h3`
   font-weight: 400;
   color : #555;
   margin-right: 5px;
+  padding : 0;
+  margin-bottom: 4px;
 `;
 export const ModalDateBold = styled.h3`
-display: inline-block;
+  display: inline-block;
   font-size: 16px;
   font-family: Pretendard;
   font-weight: 700;
   color : #555;
+  padding : 0;
+  margin-bottom: 4px;
 `;
 export const ModalTitle = styled.h3`
   font-size: 15px;
@@ -82,7 +85,11 @@ export const ModalTitle = styled.h3`
   text-align: center;
   word-wrap: break-word; 
   overflow-wrap: break-word; 
-  white-space: pre-wrap; 
+  white-space: pre-wrap;
+  text-decoration: underline;
+  margin-top: 4px;
+  margin-bottom : 3px;
+  padding: 0;
 `;
 export const ModalBodyContain = styled.div`
   width: 290px;
@@ -100,8 +107,10 @@ export const ModalBody = styled.p`
   padding: 5px;
   white-space: pre-wrap; 
   overflow-wrap: break-word; 
-  word-break: break-word; 
+  word-break: break-word;
+  margin-top: 3px;
   margin-bottom : 10px;
+  padding : 0;
 `;
 
 export const ModalExtra = styled.div`

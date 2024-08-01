@@ -2,13 +2,13 @@ import { HeartOutlined, HeartFilled } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
-
 export const StoryBox = styled(NavLink)`
-  width: 300px;
+  width: 93%;
+  max-width : 300px;
   border-radius: 5px;
   border: 2px solid rgba(208, 218, 232, 1);
   background: rgba(255, 255, 255, 1);
-  padding : 5px;
+  padding : 10px;
   margin : 5px 0;
   align-item : center;
   justify-content: center;
@@ -62,7 +62,7 @@ export const ProfileBox = styled.div`
   margintop : 0;
   width: 195px;
   height: 28px;
-  margin : 3px;
+  margin : 3px 0 3px -3px;
   border-radius: 30px;
   padding : 5px;
   background : rgba(0,0,0,0.5);

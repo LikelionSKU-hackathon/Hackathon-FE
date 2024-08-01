@@ -20,14 +20,13 @@ export default function WriteFreePage() {
   const [token, setToken] = useState('');
   const location = useLocation();
   const memberId = new URLSearchParams(location.search).get('memberId');
+  console.log('memberId: ', memberId)
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchPreInfo = async () => {
       const getToken = sessionStorage.getItem('token');
       setToken(getToken);
-      console.log("memberId:", memberId);
-      console.log("token:", getToken);
       if (memberId && getToken) {
         const data = await getPreInfo(memberId, getToken);
         if (data && data.isSuccess) {
@@ -60,7 +59,7 @@ export default function WriteFreePage() {
   
     try {
       const response = await axios.post('/diary/diaries', {
-        title: title,
+        title: '자유주제 ' + title,
         content: content,
         memberId: memberId, 
         moodId: moodId, 
@@ -92,7 +91,7 @@ export default function WriteFreePage() {
     <S.Container>
       <Back to="/" />
       <W.IntroText className="date">{preInfo.date}<br/>{preInfo.username} 님의 {preInfo.diaryCount}번째 쓰임</W.IntroText>
-      <W.IntroText className="theme">자유주제</W.IntroText>
+      <W.IntroText className="theme">"자유주제"</W.IntroText>
       <Emotion onSelect={handleEmotionSelect} />
       <W.WriteBox
         className="title"

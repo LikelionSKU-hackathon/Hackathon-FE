@@ -8,11 +8,8 @@ import MyDiaryModal from '../components/MyDiaryModal';
 import { getUserData, getAIQuestionData } from '../api/userAPI';
 
 function HomePage() {
-    const savedToken = sessionStorage.getItem('user');
-    console.log("토큰 내용", savedToken);
-
     const [userData, setUserData] = useState({
-        memberId: 0,  // memberId 초기값 추가
+        memberId: 0,
         username: '',
         ageGroup: '',
         profileImage: '',
@@ -23,19 +20,18 @@ function HomePage() {
         category: 'category',
         content: 'content'
     });
-    const handleChangeButtonClick = () => {
-        window.location.reload();
-    };
-    
     const [modalSwitch, setModalSwitch] = useState(false);
     const [currentModal, setCurrentModal] = useState(null);
+    const [diaryId, setDiaryId] = useState(null); // diaryId 상태 추가
     const location = useLocation();
-    const navigate = useNavigate();  // navigate 함수 추가
+    const navigate = useNavigate();
 
     useEffect(() => {
-        // Modal 상태 설정
         const query = new URLSearchParams(location.search);
         const modalType = query.get('modal');
+        const diaryIdFromQuery = query.get('diaryId'); // URL에서 diaryId를 가져옴
+        setDiaryId(diaryIdFromQuery); // 상태 업데이트
+        console.log("home diaryId: ", diaryId);
         if (modalType === 'MyDiary') {
             setModalSwitch(true);
             setCurrentModal('MyDiary');
@@ -51,7 +47,7 @@ function HomePage() {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const token = sessionStorage.getItem('token'); // 토큰을 세션 스토리지에서 가져옴
+                const token = sessionStorage.getItem('token');
                 if (token) {
                     const response = await getUserData(token);
                     setUserData(response.result);
@@ -71,7 +67,6 @@ function HomePage() {
                     if (response) {
                         setQuestionData(response.result);
                     }
-                    
                 } else {
                     console.error('No token found in sessionStorage.');
                 }
@@ -84,36 +79,43 @@ function HomePage() {
         fetchAIQuestionData();
     }, []);
 
-    useEffect(() => {
-        console.log("User Data:", userData);
-        console.log("User Category", userData.keywordList);
-    }, [userData]); // userData가 변경될 때마다 실행
-
     const handleStoryBoxClick = () => {
         setModalSwitch(true);
         setCurrentModal('OtherDiary');
     };
 
+    const handleWriteDiaryClick = () => {
+        const encodedTitle = encodeURIComponent(questionData.content);
+        navigate(`/WriteDiary?memberId=${userData.memberId}&title=${encodedTitle}`);
+    };
+
     const handleWriteFreeDiaryClick = () => {
-        if (userData.memberId) { // memberId가 있는지 확인
+        if (userData.memberId) {
             navigate(`/WriteFreeDiary?memberId=${userData.memberId}`);
         } else {
             console.error('Member ID is not available');
         }
     };
 
-    console.log("AI Question Data:", questionData);
+    const handleChangeButtonClick = () => {
+        window.location.reload(); // 페이지 새로고침
+    };
+
     return (
         <S.Container>
             <M.ModalContainer show={modalSwitch ? 'true' : undefined}>
-                {currentModal === 'MyDiary' ? <MyDiaryModal setModalSwitch={setModalSwitch} /> : currentModal === 'OtherDiary' ? <OtherDiaryModal setModalSwitch={setModalSwitch} /> : null}
+                {currentModal === 'MyDiary' ? (
+                    <MyDiaryModal setModalSwitch={setModalSwitch} diaryId={diaryId} />
+                ) : currentModal === 'OtherDiary' ? (
+                    <OtherDiaryModal setModalSwitch={setModalSwitch} />
+                ) : null}
             </M.ModalContainer>
             <S.TextDiv>
                 <h6>쓰담쓰담<br />하루의 끝<br />나의 마음일기</h6>
                 <p>오로지 나만을 위한 일기를 써보세요</p>
             </S.TextDiv>
 
-            <S.ProfileBox>
+            <S.ProfileBox to='/login'>
                 <S.Circle>
                     {userData.profileImage && <img src={userData.profileImage} alt="Profile" />}
                 </S.Circle>
@@ -139,7 +141,7 @@ function HomePage() {
                 <S.DiaryButton className="free" onClick={handleWriteFreeDiaryClick}>
                     <p>MY STORY<br />자유주제로<br />일기쓰기</p>
                 </S.DiaryButton>
-                <S.DiaryButton className="daily" to="/WriteDiary">
+                <S.DiaryButton className="daily" onClick={handleWriteDiaryClick}>
                     <p>MY STORY<br />지정주제로<br />일기쓰기</p>
                 </S.DiaryButton>
             </div>

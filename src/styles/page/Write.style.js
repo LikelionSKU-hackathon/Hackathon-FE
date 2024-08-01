@@ -12,6 +12,7 @@ export const IntroText = styled.span`
         text-align: center;
         color: rgb(85, 85, 85);
         margin-bottom: 10px;
+        text-decoration: underline;
     }
     &.date {
         font-size: 14px;
@@ -57,6 +58,8 @@ export const WriteBox = styled.textarea`
     &.title {
         height: 17px;
         margin-bottom: 0;
+        overflow-x: auto;
+        white-space: nowrap;
     }
     
     &.detail {

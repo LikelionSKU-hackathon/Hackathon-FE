@@ -103,7 +103,7 @@ export const HistoryBox = styled(NavLink)`
   }
 
   > h5 {
-    font-size: 16px;
+    font-size: 17px;
     font-weight: 700;
     line-height: 20px;
     letter-spacing: -0.025em;
@@ -150,6 +150,7 @@ export const StoryContainer = styled.div`
   padding : 10px;
   align-items : center;
   justify-content: center;
+  margin: 8px;
 
   >h3 {
     text-align: left;
@@ -220,6 +221,8 @@ export const DiaryButton = styled(NavLink)`
   text-align: left;
   color: rgb(0, 0, 0);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  border: 1px solid #D0DAE8;
+  position : relative;
 
   &.free {
     background: rgb(178, 134, 255);
@@ -230,6 +233,9 @@ export const DiaryButton = styled(NavLink)`
   }
 
   > p {
+    position: absolute;
+    bottom : 10px;
+    left : 10px;
     font-weight: 400;
     font-size: 14px;
     margin: 0;
@@ -287,6 +293,7 @@ export const MoreButton = styled(NavLink)`
 `;
 
 export const Title = styled.h6 `
+  margin-top : 20px;
   font-size: 24px;
   font-weight: 700;
   line-height: 23px;
@@ -299,6 +306,7 @@ export const Title = styled.h6 `
 `;
 
 export const SubTitle = styled.text`
+  margin-top : 10px;
   font-size: 12px;
   font-weight: 300;
   line-height: 15px;
@@ -308,3 +316,12 @@ export const SubTitle = styled.text`
   padding : 15px;
   transform: translateX(-15%);
 `;
+
+export const StoryBoxContainer = styled.div`
+  width: 88%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  height: auto;
+`
