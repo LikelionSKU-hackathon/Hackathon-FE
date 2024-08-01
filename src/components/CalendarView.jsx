@@ -12,12 +12,14 @@ import soso from '../assets/myPage/icon_soso.svg';
 import upset from '../assets/myPage/icon_upset.svg';
 
 // 날짜와 이미지를 포함한 데이터
-let datesWithImages;
-const emogi = {"화나요":ang,"슬퍼요" : sad, "그저그래요":soso, "행복해요":happy, "뿌듯해요":good, "속상해요":upset};
+let dirary;
+const emogi = {"화나요":ang,"슬퍼요" : sad, "그저그래요":soso, "행복해요":happy,"기뻐요":happy, "뿌듯해요":good, "속상해요":upset};
 export default function CalendarView(Props) {
   const [value, setValue] = useState(new Date());
   const renderTileContent = ({ date, view }) => {
-    const dateInfo = datesWithImages.find(d => d.date.toDateString() === date.toDateString());
+    const dateInfo = dirary.find(d => d.date.toDateString() === date.toDateString());
+    if(dateInfo)
+      console.log(dateInfo.image);
     return (
       <S.DateContainer>
         {dateInfo && <S.DateImage src={emogi[dateInfo.image]} alt="date image" />}
@@ -38,7 +40,7 @@ export default function CalendarView(Props) {
 
   const onClickDay = (date) => {
     //Props.onClick(true);
-    const data = datesWithImages.find(d => d.date.toDateString() === date.toDateString());
+    const data = dirary.find(d => d.date.toDateString() === date.toDateString());
     if (data) {
       Props.onClick(data);
     } else {
@@ -48,7 +50,7 @@ export default function CalendarView(Props) {
     
   };
 
-  datesWithImages = Props.date;
+  dirary = Props.date;
   return (
     <>
       <Calendar
