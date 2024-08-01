@@ -61,7 +61,9 @@ export default function LoginPageEmail() {
                 }
             })
             .catch(error => {
-                console.error('Error:', error);
+                console.error('Error:', error.response.data);
+                if(error.response.data.code == "auth4001")
+                    setIsErr(true);
             });
 
     };
