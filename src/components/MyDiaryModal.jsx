@@ -94,7 +94,7 @@ export default function MyDiaryModal({ setModalSwitch, diaryId }) {
                     <M.ModalBody>{diaryData.content}</M.ModalBody>
                 </M.ModalBodyContain>
                 <M.ModalExtra>
-                    <h3>AI 쓰감 선생님의 한 마디</h3>
+                    <h3>AI 쓰담 선생님의 한 마디</h3>
                     <p>{diaryData.aiComments || 'No comments available'}</p>
                 </M.ModalExtra>
             </M.ModalContent>

@@ -226,6 +226,7 @@ export const ModalHeader = styled.div`
   align-items: flex-start;
 
   > h6 {
+    left : 10px;
     margin : 5px;
     font-size: 24px;
     font-weight: 700;
@@ -233,6 +234,7 @@ export const ModalHeader = styled.div`
     
   }
   >p {
+    left : 10px;
     font-size: 12px;
     font-weight: 300;
     line-height: 14.32px;
