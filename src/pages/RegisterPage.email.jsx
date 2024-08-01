@@ -16,7 +16,7 @@ export default function RegisterPageEmail() {
     const [age, setAge] = useState("");
     const fileInputRef = useRef(null);
     const isFormValid = userId !== '' && pwd !== '' && name !== '' && age !== "";
-
+    const formData = new FormData();
     const navigate = useNavigate();
     const location = useLocation();
     // 받은 주소
@@ -49,34 +49,46 @@ export default function RegisterPageEmail() {
     const login = sessionStorage.getItem('login');
     useEffect(() => {
         // login 확인
-        console.log("isLogin : " +login);
+        console.log("isLogin : " + login);
         if (login) {
             alert("이미 로그인 됨.");
             navigate('/', { replace: true, state: { redirectedFrom: window.location.pathname } });
         }
     }, []);
+    async function addFormdata() {
+        // 이미지 설정
+        formData.append('username', name);
+        formData.append('email', userId);
+        formData.append('password', pwd);
+        formData.append('age_group', age);
+        formData.append('role', 'ROLE_USER');
+        // 이미지 설정
+        if (profileImage == icon_profile) {
+            console.log("기본이미지");
+            try {
+                const response = await fetch(icon_profile);
+                const blob = await response.blob();
+                const file = new File([blob], "profile.png", { type: blob.type });
+                formData.append('profileImage', file);
+                console.log("기본이미지 끝");
+            } catch (error) {
+                console.error('Error converting image to Blob:', error);
+            }
+        } else {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[fileInput.files.length - 1];
+            formData.append('profileImage', file);
+        }
+    }
     // register 테스트
     const tryRegister = async () => {
         if (emailCheck) {
             if (nameCheck) {
                 // 가입 요청
                 console.log("시작이어용");
-                const formData = new FormData();
-                formData.append('username', name);
-                formData.append('email', userId);
-                formData.append('password', pwd);
-                formData.append('age_group', age);
-                formData.append('role', 'ROLE_USER');
-                // 이미지 설정
-                if (profileImage == icon_profile) { 
-                    formData.append('profileImage', icon_profile);
-                }
-                else {
-                    const fileInput = document.getElementById('fileInput');
-                    const file = fileInput.files[fileInput.files.length - 1];
-                    formData.append('profileImage', file);
-                }
-
+                console.log("대기");
+                await addFormdata();
+                console.log("대기 끝");
                 axios.post('https://sub.skuhackathon.shop/members/signup'
                     , formData,
                     {
