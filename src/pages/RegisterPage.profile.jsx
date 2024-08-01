@@ -65,7 +65,8 @@ export default function RegisterPageProfile() {
     // 로그인 여부 확인
     useEffect(() => {
         // login 확인
-        if (false) {
+        const login = sessionStorage.getItem('login');
+        if (login) {
             alert("이미 로그인 됨.");
             navigate('/', { replace: true, state: { redirectedFrom: window.location.pathname } });
         }
