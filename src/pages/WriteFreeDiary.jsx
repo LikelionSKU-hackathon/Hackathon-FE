@@ -20,7 +20,6 @@ export default function WriteFreePage() {
   const [token, setToken] = useState('');
   const location = useLocation();
   const memberId = new URLSearchParams(location.search).get('memberId');
-  console.log('memberId: ', memberId)
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -72,9 +71,9 @@ export default function WriteFreePage() {
         }
       });
       const { id } = response.data;
-      console.log('Created diary ID:', id);
-      navigate('/?modal=MyDiary', { state: { id } });
-      console.log('Response:', response.data);
+      console.log('FreeDiary Created diary ID:', id);
+      navigate(`/?modal=MyDiary&diaryId=${id}`);
+      console.log('자유주제 일기 쓰기 Response:', response.data);
     } catch (error) {
       if (error.response) {
         console.error('서버 응답 오류:', error.response.data);

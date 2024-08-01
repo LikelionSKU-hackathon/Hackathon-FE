@@ -31,7 +31,7 @@ export default function StoryBox({ diary, onClick }) {
                     <img src={diary.member.profileImage || profile} alt="Profile" />
                     <S.TextDiv>
                         <h6>{diary.member.username}</h6>
-                        <p>{diary.member.ageGroup} / #{diary.member.keywordList.map(keyword => keyword.category).join(' ')}</p>
+                        <p>{diary.member.ageGroup} / {diary.member.keywordList.map(keyword => `# ${keyword.category}`).join(' ')}</p>
                     </S.TextDiv>
                 </S.ProfileBox>
                 <S.CircleButton><img src={diary.moodImage} alt="Mood" /></S.CircleButton>

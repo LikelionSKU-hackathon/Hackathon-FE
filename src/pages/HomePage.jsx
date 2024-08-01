@@ -33,9 +33,10 @@ function HomePage() {
     useEffect(() => {
         const query = new URLSearchParams(location.search);
         const modalType = query.get('modal');
-        const diaryIdFromQuery = query.get('diaryId'); // URL에서 diaryId를 가져옴
-        setDiaryId(diaryIdFromQuery); // 상태 업데이트
-        console.log("home diaryId: ", diaryId);
+        const diaryIdFromQuery = query.get('diaryId');
+        console.log("Fetched diaryId from URL:", diaryIdFromQuery);
+        setDiaryId(diaryIdFromQuery);
+        console.log("home diaryId: ", diaryIdFromQuery); // 수정된 부분
         if (modalType === 'MyDiary') {
             setModalSwitch(true);
             setCurrentModal('MyDiary');
@@ -111,11 +112,7 @@ function HomePage() {
     };
 
     const handleWriteFreeDiaryClick = () => {
-        if (userData.memberId) {
-            navigate(`/WriteFreeDiary?memberId=${userData.memberId}`);
-        } else {
-            console.error('Member ID is not available');
-        }
+        navigate(`/WriteFreeDiary?memberId=${userData.memberId}`);
     };
 
     const handleChangeButtonClick = () => {
@@ -145,7 +142,7 @@ function HomePage() {
                     <p>
                         {userData.ageGroup} / 
                         #{userData.keywordList.length > 0 
-                            ? userData.keywordList.map(keyword => keyword.category).join('# ') 
+                            ? userData.keywordList.map(keyword => `#${keyword.category}`).join(' ') 
                             : '키워드'}
                     </p>
                 </S.ProfileText>
