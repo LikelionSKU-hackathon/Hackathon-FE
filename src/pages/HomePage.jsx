@@ -95,6 +95,11 @@ function HomePage() {
         fetchAIQuestionData();
     }, []);
 
+    useEffect(() => {
+        console.log("User Data:", userData);
+        console.log("User Category", userData.keywordList);
+    }, [userData]);
+
     const handleStoryBoxClick = () => {
         setModalSwitch(true);
         setCurrentModal('OtherDiary');
@@ -133,7 +138,7 @@ function HomePage() {
 
             <S.ProfileBox to='/login'>
                 <S.Circle>
-                    {userData.profileImage && <img src={userData.profileImage} alt="Profile" />}
+                    {userData.profileImage && <img src={userData.profileImage} />}
                 </S.Circle>
                 <S.ProfileText>
                     <h6>{userData.username || '로그인 해주세요'}</h6>
@@ -171,8 +176,8 @@ function HomePage() {
                     쓰담쓰담<br />
                     오늘의 스토리텔러는?
                 </h3>
-                <StoryBox onClick={handleStoryBoxClick}></StoryBox>
-                <StoryBox onClick={handleStoryBoxClick}></StoryBox>
+                {/* <StoryBox onClick={handleStoryBoxClick}></StoryBox>
+                <StoryBox onClick={handleStoryBoxClick}></StoryBox> */}
                 <S.MoreButton to="/diary">
                     <h6>더 많은 일기 보기 &gt;</h6>
                 </S.MoreButton>

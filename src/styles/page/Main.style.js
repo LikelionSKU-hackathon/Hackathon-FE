@@ -293,16 +293,15 @@ export const MoreButton = styled(NavLink)`
 `;
 
 export const Title = styled.h6 `
-  margin-top : 20px;
   font-size: 24px;
   font-weight: 700;
   line-height: 23px;
   letter-spacing: -0.025em;
   text-align: left;
   color: #555555;
-  padding : 10px;
-  margin : 0;
-  transform: translateX(-15%);
+  transform: translateX(-10%);
+  padding-bottom : 0px;
+  margin-bottom : 0px;
 `;
 
 export const SubTitle = styled.text`
@@ -313,8 +312,8 @@ export const SubTitle = styled.text`
   letter-spacing: -0.025em;
   text-align: left;
   color: #555555;
-  padding : 15px;
-  transform: translateX(-15%);
+  transform: translateX(-10%);
+  padding-bottom : 15px;
 `;
 
 export const StoryBoxContainer = styled.div`

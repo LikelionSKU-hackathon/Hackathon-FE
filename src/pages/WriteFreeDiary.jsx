@@ -59,7 +59,7 @@ export default function WriteFreePage() {
   
     try {
       const response = await axios.post('/diary/diaries', {
-        title: '자유주제 ' + title,
+        title: title,
         content: content,
         memberId: memberId, 
         moodId: moodId, 
