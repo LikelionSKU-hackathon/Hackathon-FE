@@ -165,7 +165,7 @@ export const StoryContainer = styled.div`
   }
 `;
 
-export const ProfileBox = styled.div`
+export const ProfileBox = styled(NavLink)`
   width: 330px;
   height: 50px;
   margin: 7px;
