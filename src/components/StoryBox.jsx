@@ -33,31 +33,31 @@ export default function StoryBox({ diary, onClick }) {
     };
     const userId = getUserId();
 
-    const fetchLikeStatus = async () => {
-        try {
-            if (!token || !userId) throw new Error('토큰이나 사용자 ID가 없습니다.');
+    // const fetchLikeStatus = async () => {
+    //     try {
+    //         if (!token || !userId) throw new Error('토큰이나 사용자 ID가 없습니다.');
 
-            // 좋아요 상태를 확인하는 POST 요청
-            const response = await axios.post(`/diary/${diary.diaryId}/likes`, {
-                diaryId: diary.diaryId,
-                memberId: userId
-            }, {
-                headers: { Authorization: `Bearer ${token}` }
-            });
+    //         // 좋아요 상태를 확인하는 POST 요청
+    //         const response = await axios.post(`/diary/${diary.diaryId}/likes`, {
+    //             diaryId: diary.diaryId,
+    //             memberId: userId
+    //         }, {
+    //             headers: { Authorization: `Bearer ${token}` }
+    //         });
 
-            const userLike = response.data;
-            if (userLike) {
-                setLiked(true);
-                setLikeId(userLike.id);
-                setLikeCount(prevCount => prevCount + 1); // 예시로 좋아요 수를 증가
-            } else {
-                setLiked(false);
-                setLikeId(null);
-            }
-        } catch (error) {
-            console.error('좋아요 상태를 가져오는 데 실패했습니다:', error.response?.data || error.message);
-        }
-    };
+    //         const userLike = response.data;
+    //         if (userLike) {
+    //             setLiked(true);
+    //             setLikeId(userLike.id);
+    //             setLikeCount(prevCount => prevCount + 1); // 예시로 좋아요 수를 증가
+    //         } else {
+    //             setLiked(false);
+    //             setLikeId(null);
+    //         }
+    //     } catch (error) {
+    //         console.error('좋아요 상태를 가져오는 데 실패했습니다:', error.response?.data || error.message);
+    //     }
+    // };
 
     // useEffect(() => {
     //     fetchLikeStatus();
@@ -93,21 +93,23 @@ export default function StoryBox({ diary, onClick }) {
     //     }
     // };
 
+    console.log('diary: ', diary);
+
     return (
         <S.StoryBox onClick={onClick}>
-            <h5>#{diary.diaryId}</h5>
+            <h5>#{diary.category}</h5>
             <h5 className="title">{diary.title}</h5>
             <p>{diary.content}</p>
             <S.StoryDiv>
                 <S.ProfileBox>
-                    <img src={diary.member.profileImage || profile} alt="Profile" />
+                    <img src={diary.member.profileImage} />
                     <S.TextDiv>
                         <h6>{diary.member.username}</h6>
                         <p>{diary.member.ageGroup} / {diary.member.keywordList.map(keyword => `# ${keyword.category}`).join(' ')}</p>
                     </S.TextDiv>
                 </S.ProfileBox>
                 <S.CircleButton><img src={diary.moodImage} alt="Mood" /></S.CircleButton>
-                <S.CircleButton className='liked' onClick={handleLike}>
+                <S.CircleButton className='liked'>{/* onClick={handleLike}*/}
                     {liked ? <S.SHeartFilled /> : <S.SHeartOutLined />}
                 </S.CircleButton>
             </S.StoryDiv>

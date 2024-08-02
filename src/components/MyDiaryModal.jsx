@@ -13,7 +13,6 @@ const emogi = [ang, sad, soso, happy, good, upset];
 
 export default function MyDiaryModal({ setModalSwitch, diaryId }) {
     const [diaryData, setDiaryData] = useState(null);
-    //const diaryId = 13; // 테스트를 위해 diaryId를 10으로 설정
     const [token, setToken] = useState('');
     const navigate = useNavigate(); // useNavigate 훅 추가
 
@@ -66,7 +65,7 @@ export default function MyDiaryModal({ setModalSwitch, diaryId }) {
 
     const handleClose = () => {
         setModalSwitch(false); // 모달 상태 업데이트
-        navigate('?'); // URL에서 쿼리 파라미터 제거
+        navigate('/'); // URL에서 쿼리 파라미터 제거
     };
 
     if (!diaryData) {
@@ -95,7 +94,7 @@ export default function MyDiaryModal({ setModalSwitch, diaryId }) {
                 </M.ModalBodyContain>
                 <M.ModalExtra>
                     <h3>AI 쓰담 선생님의 한 마디</h3>
-                    <p>{diaryData.aiComments || 'No comments available'}</p>
+                    <p>{diaryData.aiComments || 'AI쓰담 선생님이 댓글을 적고 있어요!'}</p>
                 </M.ModalExtra>
             </M.ModalContent>
             <M.MoreButton to="/diary">더 많은 이야기 보러가기</M.MoreButton>

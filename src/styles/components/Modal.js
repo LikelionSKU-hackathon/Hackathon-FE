@@ -93,7 +93,8 @@ export const ModalTitle = styled.h3`
 `;
 export const ModalBodyContain = styled.div`
   width: 290px;
-  height: 110px;
+  min-height: 110px;
+  height: auto;
   display: block;
   position: relative;
 `

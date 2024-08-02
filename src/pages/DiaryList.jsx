@@ -21,7 +21,7 @@ export default function DiaryList() {
             const data = await getDiaryList();
             if (data && data.isSuccess) {
                 setDiaryList(data.result.diaryList);
-                console.log('list[0]: ',data.result[0]);
+                console.log('list[0]: ',data.result.diaryList[0]);
             } else {
                 console.error('Error fetching diary list:', data.message);
             }

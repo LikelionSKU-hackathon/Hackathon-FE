@@ -24,6 +24,7 @@ export default function WriteDiary() {
   const queryParams = new URLSearchParams(location.search);
   const title = queryParams.get('title');
   const memberId = queryParams.get('memberId');
+  const category = queryParams.get('category');
   const decodedTitle = decodeURIComponent(title);
   console.log(decodedTitle);
 
@@ -54,6 +55,7 @@ export default function WriteDiary() {
 
   const handleDoneClick = async () => {
     console.log('Posting data:', {
+      category: category,
       title: title,
       content: content,
       memberId: memberId, 
@@ -64,6 +66,7 @@ export default function WriteDiary() {
   
     try {
       const response = await axios.post('/diary/diaries', {
+        category: category,
         title: title,
         content: content,
         memberId: parseInt(memberId), 

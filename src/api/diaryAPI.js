@@ -28,7 +28,8 @@ export const getDiaryList = async () => {
 
 export const getPopularDiary = async () => {
     try {
-        const response = await axios.get('doary/popular');
+        const response = await axios.get('diary/popular');
+        console.log('getPopularDiary: ', response);
         return response.data;
     } catch (error) {
         console.error('좋아요 많은 다이어리 가져오기 error: ', error);

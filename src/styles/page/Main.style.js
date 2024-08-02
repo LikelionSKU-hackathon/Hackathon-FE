@@ -104,7 +104,7 @@ export const HistoryBox = styled(NavLink)`
 
   > h5 {
     font-size: 17px;
-    font-weight: 700;
+    font-weight: 400;
     line-height: 20px;
     letter-spacing: -0.025em;
     text-align: right;
@@ -154,20 +154,20 @@ export const StoryContainer = styled.div`
 
   >h3 {
     text-align: left;
-    padding : 10px 15px;
+    padding : 0;
     margin : 0;
     color : rgb(255,255,255);
     font-size: 18px;
     font-weight: 700;
     line-height: 21.48px;
     letter-spacing: -0.025em;
-    width : 100%
+    width : 86%
   }
-`;
+`
 
 export const ProfileBox = styled(NavLink)`
   width: 330px;
-  height: 50px;
+  height: 60px;
   margin: 7px;
   background: rgba(0, 0, 0, 0.5);
   border-radius: 100px;
@@ -235,18 +235,21 @@ export const DiaryButton = styled(NavLink)`
   > p {
     position: absolute;
     bottom : 10px;
-    left : 10px;g
-    font-weight: 400;
+    left : 10px;
     font-size: 14px;
     margin: 0;
     color: black;
+    font-weight: 400;
+    > span {
+      font-weight: 500;
+    }
   }
 `;
 
 export const Circle = styled.div`
   background: rgb(217, 217, 217);
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   margin: 6px;
   padding: 0;
@@ -264,7 +267,7 @@ export const FreeButton = styled.button`
 `;
 
 export const MoreButton = styled(NavLink)`
-  width: 288px;
+  width: 86%;
   height: 25px;
   padding: 10px;
   border-radius: 10px;
@@ -287,8 +290,8 @@ export const MoreButton = styled(NavLink)`
   }
 
   &:hover {
-    background-color: #c0c8d8; /* Add hover effect if needed */
-    color: #333333; /* Change text color on hover */
+    background-color: #c0c8d8;
+    color: #333333;
   }
 `;
 
@@ -317,7 +320,7 @@ export const SubTitle = styled.text`
 `;
 
 export const StoryBoxContainer = styled.div`
-  width: 88%;
+  width: 86%;
   max-width: 320px;
   display: flex;
   flex-direction: column;

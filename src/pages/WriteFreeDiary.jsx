@@ -48,6 +48,7 @@ export default function WriteFreePage() {
 
   const handleDoneClick = async () => {
     console.log('Posting data:', {
+      category: '자유주제',
       title: title,
       content: content,
       memberId: memberId, 
@@ -58,6 +59,7 @@ export default function WriteFreePage() {
   
     try {
       const response = await axios.post('/diary/diaries', {
+        category: '자유주제',
         title: title,
         content: content,
         memberId: memberId, 

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import * as S from "../styles/page/Main.style";
 import * as M from "../styles/components/Modal";
-import StoryBox from "../components/StoryBox";
 import { useLocation, useNavigate } from "react-router-dom";
 import OtherDiaryModal from '../components/OtherDiaryModal';
 import MyDiaryModal from '../components/MyDiaryModal';
@@ -21,9 +20,7 @@ function HomePage() {
         category: 'category',
         content: 'content'
     });
-    const [popularDiary, setPopularDiary] = useState({
-
-    });
+    const [popularDiary, setPopularDiary] = useState([]);
     const [modalSwitch, setModalSwitch] = useState(false);
     const [currentModal, setCurrentModal] = useState(null);
     const [diaryId, setDiaryId] = useState(null); // diaryId 상태 추가
@@ -34,9 +31,7 @@ function HomePage() {
         const query = new URLSearchParams(location.search);
         const modalType = query.get('modal');
         const diaryIdFromQuery = query.get('diaryId');
-        console.log("Fetched diaryId from URL:", diaryIdFromQuery);
         setDiaryId(diaryIdFromQuery);
-        console.log("home diaryId: ", diaryIdFromQuery); // 수정된 부분
         if (modalType === 'MyDiary') {
             setModalSwitch(true);
             setCurrentModal('MyDiary');
@@ -94,21 +89,17 @@ function HomePage() {
 
         fetchUserData();
         fetchAIQuestionData();
+        fetchPopularDiary();
     }, []);
-
-    useEffect(() => {
-        console.log("User Data:", userData);
-        console.log("User Category", userData.keywordList);
-    }, [userData]);
 
     const handleStoryBoxClick = () => {
         setModalSwitch(true);
-        setCurrentModal('OtherDiary');
+        navigate('/diary')
     };
 
     const handleWriteDiaryClick = () => {
         const encodedTitle = encodeURIComponent(questionData.content);
-        navigate(`/WriteDiary?memberId=${userData.memberId}&title=${encodedTitle}`);
+        navigate(`/WriteDiary?category=${questionData.category}&memberId=${userData.memberId}&title=${encodedTitle}`);
     };
 
     const handleWriteFreeDiaryClick = () => {
@@ -135,14 +126,14 @@ function HomePage() {
 
             <S.ProfileBox to='/login'>
                 <S.Circle>
-                    {userData.profileImage && <img src={userData.profileImage} />}
+                    <img src={userData.profileImage} />
                 </S.Circle>
                 <S.ProfileText>
                     <h6>{userData.username || '로그인 해주세요'}</h6>
                     <p>
                         {userData.ageGroup} / 
-                        #{userData.keywordList.length > 0 
-                            ? userData.keywordList.map(keyword => `#${keyword.category}`).join(' ') 
+                        {userData.keywordList.length > 0 
+                            ? userData.keywordList.map(keyword => ` #${keyword.category}`).join(' ') 
                             : '키워드'}
                     </p>
                 </S.ProfileText>
@@ -157,10 +148,10 @@ function HomePage() {
 
             <div style={{ gap: '14px' }}>
                 <S.DiaryButton className="free" onClick={handleWriteFreeDiaryClick}>
-                    <p>MY STORY<br />자유주제로<br />일기쓰기</p>
+                    <p><span>MY STORY</span><br /> 자유주제로<br />일기쓰기</p>
                 </S.DiaryButton>
                 <S.DiaryButton className="daily" onClick={handleWriteDiaryClick}>
-                    <p>MY STORY<br />지정주제로<br />일기쓰기</p>
+                    <p><span>MY STORY</span><br /> 지정주제로<br />일기쓰기</p>
                 </S.DiaryButton>
             </div>
 
@@ -173,8 +164,9 @@ function HomePage() {
                     쓰담쓰담<br />
                     오늘의 스토리텔러는?
                 </h3>
-                {/* <StoryBox onClick={handleStoryBoxClick}></StoryBox>
-                <StoryBox onClick={handleStoryBoxClick}></StoryBox> */}
+                {/* {popularDiary.slice(0, 2).map((diary) => (
+                    <StoryBox key={diary.id} diary={diary} onClick={handleStoryBoxClick} />
+                ))} */}
                 <S.MoreButton to="/diary">
                     <h6>더 많은 일기 보기 &gt;</h6>
                 </S.MoreButton>
