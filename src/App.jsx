@@ -11,6 +11,9 @@ import RegisterPageWord from './pages/RegisterPage.word';
 import RegisterPageProfile from './pages/RegisterPage.profile';
 import RegisterPageFinal from './pages/RegisterPage.final';
 import WriteFreeDiary from './pages/WriteFreeDiary';
+import OAuth2Naver from './pages/OAuth2Naver';
+import OAuth2Google from './pages/OAuth2Google';
+import OAuth2Kakao from './pages/OAuth2Kakao';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -23,6 +26,18 @@ const router = createBrowserRouter([
   {
     path: '/login/email',
     element: <LoginPageEmail />,
+  },
+  {
+    path: '/login/oauth2/code/naver',
+    element: <OAuth2Naver />,
+  },
+  {
+    path: '/login/oauth2/code/google',
+    element: <OAuth2Google />,
+  },
+  {
+    path: '/login/oauth2/code/kakao',
+    element: <OAuth2Kakao />,
   },
   {
     path: '/register',

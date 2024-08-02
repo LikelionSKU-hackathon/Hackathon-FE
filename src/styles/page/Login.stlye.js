@@ -48,11 +48,13 @@ export const InputText = styled.p`
     font-size: clamp(14px, 2vw, 56px);
     /*font-size: 14px;*/
     font-family: Pretendard, sans-serif;
+    display: ${({ disabled }) => (disabled ? 'none' : 'block')};
     color : #98989E;
 `;
 export const InputContainer = styled.div` 
     width: 100%;
     height: 40px;
+    display: ${({ disabled }) => (disabled ? 'none' : 'block')};
     position: relative;
     font-weight: 400;
     font-size: 18px;
