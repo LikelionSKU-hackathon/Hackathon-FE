@@ -14,6 +14,7 @@ export default function RegisterPageEmail() {
     const [pwd, setPwd] = useState('');
     const [name, setName] = useState('');
     const [age, setAge] = useState("");
+    const [hideEmail, setHideEmail] = useState(false);
     const fileInputRef = useRef(null);
     const isFormValid = userId !== '' && pwd !== '' && name !== '' && age !== "";
     const formData = new FormData();
@@ -49,10 +50,17 @@ export default function RegisterPageEmail() {
     const login = sessionStorage.getItem('login');
     useEffect(() => {
         // login 확인
-        console.log("isLogin : " + login);
         if (login) {
             alert("이미 로그인 됨.");
             navigate('/', { replace: true, state: { redirectedFrom: window.location.pathname } });
+        }
+        else {
+            console.log("data 1: " +  "social" in message);
+            if ( "social" in message) {
+                console.log("is IN");
+                //setUserId(message.email);
+                setHideEmail(true);
+            }
         }
     }, []);
     async function addFormdata() {
@@ -207,8 +215,12 @@ export default function RegisterPageEmail() {
                         onClick={handleImageChange} />
                 </S.ProfileContainer>
 
-                <L.InputText>이메일</L.InputText>
-                <L.InputContainer>
+                <L.InputText
+                    disabled={hideEmail}>
+                    이메일
+                </L.InputText>
+                <L.InputContainer
+                    disabled={hideEmail}>
                     <L.InputLine
                         type="text"
                         value={userId}

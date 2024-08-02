@@ -4,11 +4,37 @@ import naver from "../assets/Login/logo_naver.png";
 import kakao from "../assets/Login/logo_kakao.png";
 import google from "../assets/Login/logo_google.png";
 import { useNavigate } from 'react-router-dom';
-
+import axios from 'axios';
 export default function RegisterPage() {
     const navigate = useNavigate();
-    const handleClick = (addr) => {
-        navigate('/register/email', { state: addr });
+    let address = "";
+    const handleClick = async (addr) => {
+        try {
+            address = addr;
+            let response = null;
+            if (addr == "naver") {
+                const url = 'https://sub.skuhackathon.shop/api/v1/oauth2/authorization/naver';
+                window.location.href = url;
+            }
+            else if (addr == "kakao") {
+                const url = 'https://sub.skuhackathon.shop/api/v1/oauth2/authorization/kakao';
+                window.location.href = url;
+            }
+            else if (addr == "google") {
+                const url = 'https://sub.skuhackathon.shop/api/v1/oauth2/authorization/google';
+                window.location.href = url;
+            }
+            // console.log("res : "+response);
+            // const redirectUrl = response.data;
+            // console.log("data : "+response);
+            // if (redirectUrl) {
+            //     //window.location.href = redirectUrl; // 리디렉션 수행
+            // }
+        }
+        catch (e) {
+            console.log(e);
+        }
+        //navigate('/register/email', { state: {social : addr} });
     };
     // 로그인 여부 확인
     const login = sessionStorage.getItem('login');
