@@ -15,6 +15,7 @@ export default function RegisterPageEmail() {
     const [name, setName] = useState('');
     const [age, setAge] = useState("");
     const [hideEmail, setHideEmail] = useState(false);
+    const [onSocial, setonSocial] = useState(false);
     const fileInputRef = useRef(null);
     const isFormValid = userId !== '' && pwd !== '' && name !== '' && age !== "";
     const formData = new FormData();
@@ -58,8 +59,16 @@ export default function RegisterPageEmail() {
             console.log("data 1: " +  "social" in message);
             if ( "social" in message) {
                 console.log("is IN");
-                //setUserId(message.email);
+                console.log("data 0: " + message.social.provider);
+                console.log("data 1: " + message.social.email);
+                console.log("data 2: " + message.social.profilePicture);
+                setUserId(message.social.email);
                 setHideEmail(true);
+                setEmailCheck(true);
+                setProfileImage(message.social.profilePicture);
+                const fileView = document.getElementById('fileView');
+                fileView.style.backgroundImage = `url(${message.social.profilePicture})`;
+                setonSocial(true);
             }
         }
     }, []);
@@ -71,8 +80,8 @@ export default function RegisterPageEmail() {
         formData.append('age_group', age);
         formData.append('role', 'ROLE_USER');
         // 이미지 설정
-        if (profileImage == icon_profile) {
-            console.log("기본이미지");
+        if (profileImage == icon_profile || onSocial) {
+            console.log("기본이미지 혹은 소셜이미지");
             try {
                 const response = await fetch(icon_profile);
                 const blob = await response.blob();
@@ -162,6 +171,8 @@ export default function RegisterPageEmail() {
                     // 중복이 없다면(false)
                     if (!response.result)
                         setEmailCheck(true);
+                    else
+                        alert('이미 존재하는 이메일입니다.');
                 }
             })
             .catch(error => {
