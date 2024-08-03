@@ -25,6 +25,7 @@ export default function WriteDiary() {
   const title = queryParams.get('title');
   const memberId = queryParams.get('memberId');
   const category = queryParams.get('category');
+  console.log('category : ', category);
   const decodedTitle = decodeURIComponent(title);
   console.log(decodedTitle);
 
@@ -54,26 +55,20 @@ export default function WriteDiary() {
   };
 
   const handleDoneClick = async () => {
-    console.log('Posting data:', {
+    const postData = {
       category: category,
       title: title,
       content: content,
-      memberId: memberId, 
-      moodId: moodId, 
+      memberId: memberId,
+      moodId: moodId,
       questionId: 0,
-      public: activeButton === 'public'
-    });
+      public: activeButton === 'public',
+    };
+    
+    console.log('AI Posting Data: ', postData);
   
     try {
-      const response = await axios.post('/diary/diaries', {
-        category: category,
-        title: title,
-        content: content,
-        memberId: parseInt(memberId), 
-        moodId: moodId, 
-        questionId: 1,
-        public: activeButton === 'public',
-      }, {
+      const response = await axios.post('/diary/diaries', postData, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',

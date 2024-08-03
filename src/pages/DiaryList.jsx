@@ -9,13 +9,15 @@ import { getDiaryList } from "../api/diaryAPI";
 export default function DiaryList() {
     const [modalSwitch, setModalSwitch] = useState(false);
     const [currentModal, setCurrentModal] = useState(null);
+    const [currentDiaryId, setCurrentDiaryId] = useState(null); // 현재 다이어리 ID를 저장할 상태 추가
     const [diaryList, setDiaryList] = useState([]);
 
     const handleStoryBoxClick = (diaryId) => {
         setModalSwitch(true);
         setCurrentModal('OtherDiary');
+        setCurrentDiaryId(diaryId); // 클릭된 다이어리 ID 설정
     };
-    
+
     useEffect(() => {
         const fetchDiaryList =  async () => {
             const data = await getDiaryList();
@@ -29,14 +31,10 @@ export default function DiaryList() {
         fetchDiaryList();
     }, []);
 
-    console.log(diaryList[0]);
-
-    
-
     return (
         <S.Container>
             <M.ModalContainer show={modalSwitch}>
-                {currentModal === 'OtherDiary' && <OtherDiaryModal setModalSwitch={setModalSwitch} />}
+                {currentModal === 'OtherDiary' && <OtherDiaryModal setModalSwitch={setModalSwitch} diaryId={currentDiaryId} />} {/* diaryId 전달 */}
             </M.ModalContainer>
             <Back to="/" />
             <S.Title>더 많은 이야기 구경하기</S.Title>

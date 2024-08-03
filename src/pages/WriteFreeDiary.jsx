@@ -21,6 +21,7 @@ export default function WriteFreePage() {
   const location = useLocation();
   const memberId = new URLSearchParams(location.search).get('memberId');
   const navigate = useNavigate();
+  const category = "자유주제";
 
   useEffect(() => {
     const fetchPreInfo = async () => {
@@ -47,26 +48,20 @@ export default function WriteFreePage() {
   };
 
   const handleDoneClick = async () => {
-    console.log('Posting data:', {
-      category: '자유주제',
+    const postData = {
+      category: category,
       title: title,
       content: content,
-      memberId: memberId, 
-      moodId: moodId, 
+      memberId: memberId,
+      moodId: moodId,
       questionId: 0,
-      public: activeButton === 'public'
-    });
+      public: activeButton === 'public',
+    };
+  
+    console.log('Posting data:', postData);
   
     try {
-      const response = await axios.post('/diary/diaries', {
-        category: '자유주제',
-        title: title,
-        content: content,
-        memberId: memberId, 
-        moodId: moodId, 
-        questionId: 0,
-        public: activeButton === 'public',
-      }, {
+      const response = await axios.post('/diary/diaries', postData, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json'

@@ -1,15 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as M from "../styles/components/Modal";
-import ang from '../assets/myPage/icon_ang.svg';
-import good from '../assets/myPage/icon_good.svg';
-import happy from '../assets/myPage/icon_happy.svg';
-import sad from '../assets/myPage/icon_sad.svg';
-import soso from '../assets/myPage/icon_soso.svg';
-import upset from '../assets/myPage/icon_upset.svg';
 import { getWriteDiary } from '../api/diaryAPI';
 import { useNavigate } from 'react-router-dom';
-
-const emogi = [ang, sad, soso, happy, good, upset];
 
 export default function MyDiaryModal({ setModalSwitch, diaryId }) {
     const [diaryData, setDiaryData] = useState(null);
@@ -82,13 +74,13 @@ export default function MyDiaryModal({ setModalSwitch, diaryId }) {
                 </p>
             </M.ModalHeader>
             <M.ModalContent>
-                <M.ModalImage src={diaryData.moodImage || emogi[0]} alt="emoji" />
+                <M.ModalImage src={diaryData.moodImage} />
                 <M.CloseButton onClick={handleClose} />
                 <span>
                     {getFormattedDate()}
                 </span>
 
-                <M.ModalTitle>#{diaryData.title}</M.ModalTitle>
+                <M.ModalTitle>{diaryData.title}</M.ModalTitle>
                 <M.ModalBodyContain>
                     <M.ModalBody>{diaryData.content}</M.ModalBody>
                 </M.ModalBodyContain>

@@ -42,7 +42,7 @@ export const StoryBox = styled(NavLink)`
     letter-spacing: -0.3px;
     overflow: hidden; /* 넘치는 부분 숨김 */
     display: -webkit-box;
-    -webkit-line-clamp: 3; /* 표시할 줄의 수 */
+    -webkit-line-clamp: 2; /* 표시할 줄의 수 */
     -webkit-box-orient: vertical; /* 박스 방향 수직 */
     text-overflow: ellipsis; /* 넘칠 때 ...으로 표시 */
     
@@ -101,6 +101,11 @@ export const TextDiv = styled.div`
     font-weight: 400;
     line-height: 10px;
     letter-spacing: -0.025em;
+    overflow: hidden; /* 넘치는 부분 숨김 */
+    display: -webkit-box;
+    -webkit-line-clamp: 1; /* 표시할 줄의 수 */
+    -webkit-box-orient: vertical; /* 박스 방향 수직 */
+    text-overflow: ellipsis; /* 넘칠 때 ...으로 표시 */
   }
 `;
 

@@ -7,9 +7,10 @@ export const getWriteDiary = async (diaryId, token) => {
                 'Authorization': `Bearer ${token}`,
             }
         });
+        console.log("other diary modal diary data : ", response.data);
         return response.data;
     } catch (error) {
-        console.error('내가 쓴 일기 가져오기 error:', error);
+        console.error('일기 가져오기 error:', error);
         return null;
     }
 };
