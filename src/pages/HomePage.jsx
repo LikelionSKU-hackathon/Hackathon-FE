@@ -7,6 +7,7 @@ import MyDiaryModal from '../components/MyDiaryModal';
 import { getUserData, getAIQuestionData } from '../api/userAPI';
 import { getPopularDiary } from '../api/diaryAPI';
 import StoryBox from '../components/StoryBox';
+import Loading from '../components/Loading';
 
 function HomePage() {
     const [userData, setUserData] = useState({
@@ -27,6 +28,7 @@ function HomePage() {
     const [diaryId, setDiaryId] = useState(null); // diaryId 상태 추가
     const location = useLocation();
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const query = new URLSearchParams(location.search);
@@ -46,6 +48,7 @@ function HomePage() {
     }, [location.search]);
 
     useEffect(() => {
+        sessionStorage.setItem('hasLoaded', 'false');
         const fetchUserData = async () => {
             try {
                 const token = sessionStorage.getItem('token');
@@ -85,7 +88,7 @@ function HomePage() {
                     
             } catch (error) {
                 console.error('오늘의 일기 불러오기 error: ', error);
-            }
+            } 
         };
 
         fetchUserData();
@@ -107,9 +110,13 @@ function HomePage() {
         navigate(`/WriteFreeDiary?memberId=${userData.memberId}`);
     };
 
-    const handleChangeButtonClick = () => {
-        window.location.reload(); // 페이지 새로고침
+    const handleChangeButtonClick = async() => {
+        const token = sessionStorage.getItem('token');
+        const response = await getAIQuestionData(token);
+        setQuestionData(response.result);
     };
+
+    <Loading />
 
     return (
         <S.Container>
@@ -149,10 +156,10 @@ function HomePage() {
 
             <div style={{ gap: '14px' }}>
                 <S.DiaryButton className="free" onClick={handleWriteFreeDiaryClick}>
-                    <p><span>MY STORY</span><br /> 자유주제로<br />일기쓰기</p>
+                    <p><span>My Story</span><br /> 자유주제로<br />일기쓰기</p>
                 </S.DiaryButton>
                 <S.DiaryButton className="daily" onClick={handleWriteDiaryClick}>
-                    <p><span>MY STORY</span><br /> 지정주제로<br />일기쓰기</p>
+                    <p><span>My Story</span><br /> 지정주제로<br />일기쓰기</p>
                 </S.DiaryButton>
             </div>
 

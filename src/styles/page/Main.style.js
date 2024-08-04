@@ -123,7 +123,7 @@ export const TextDiv = styled.div`
   padding : 15px;
   > h6 {
     font-weight: 600;
-    font-size: 33px;
+    font-size: 35px;
     text-align: left;
     margin-top: 100px;
     margin-bottom: 0;
@@ -133,7 +133,7 @@ export const TextDiv = styled.div`
 
   > p {
     font-weight: 400;
-    font-size: 18px;
+    font-size: 20px;
     margin-top: 0;
     color: rgba(111, 112, 117, 1);
   }
@@ -141,7 +141,7 @@ export const TextDiv = styled.div`
 
 export const StoryContainer = styled.div`
   width: 310px;
-  height: 340px;
+  height: 360px;
   border-radius: 10px;
   opacity: 0px;
   background: rgba(127, 127, 127, 0.9);
@@ -151,6 +151,7 @@ export const StoryContainer = styled.div`
   align-items : center;
   justify-content: center;
   margin: 8px;
+  box-shadow: 0px 4px 4px 0px #00000040 inset;
 
   >h3 {
     text-align: left;
@@ -223,6 +224,7 @@ export const DiaryButton = styled(NavLink)`
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   border: 1px solid #D0DAE8;
   position : relative;
+  line-height: 1.3;
 
   &.free {
     background: rgb(178, 134, 255);

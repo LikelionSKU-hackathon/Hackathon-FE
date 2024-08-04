@@ -85,7 +85,7 @@ export const TextDiv = styled.div`
   margin-right : 5px;
 
   >h6 {
-    margin : 5px 0px;
+    margin : 3px 0px;
     padding : 0;
     font-size: 11px;
     font-weight: 700;
@@ -95,7 +95,7 @@ export const TextDiv = styled.div`
 
   >p {
     padding : 0;
-    margin: 0;
+    margin: 3px 0px;
     font-size: 8px;
     font-weight: 400;
     line-height: 10px;

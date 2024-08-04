@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import * as M from "../styles/components/Modal";
 import { getWriteDiary } from '../api/diaryAPI';
 import { useNavigate } from 'react-router-dom';
+import Loading from './Loading';
 
 export default function MyDiaryModal({ setModalSwitch, diaryId }) {
     const [diaryData, setDiaryData] = useState(null);
@@ -61,7 +62,7 @@ export default function MyDiaryModal({ setModalSwitch, diaryId }) {
     };
 
     if (!diaryData) {
-        return <div>Loading...</div>;
+        return <Loading />
     }
 
     return (
