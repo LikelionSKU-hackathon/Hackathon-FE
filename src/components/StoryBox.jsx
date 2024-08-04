@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import * as S from "../styles/components/StoryBox";
 import axios from "../api/axios";
-
+import { getLikeStatus } from "../api/diaryAPI";
 
 export default function StoryBox({ diary, onClick }) {
     const [liked, setLiked] = useState(false);
-    const [likeCount, setLikeCount] = useState(0);
     const [likeId, setLikeId] = useState(null);
 
     const token = sessionStorage.getItem('token');
@@ -25,35 +24,18 @@ export default function StoryBox({ diary, onClick }) {
     };
     const userId = getUserId();
 
-    const fetchLikeStatus = async () => {
-        try {
-            if (!token || !userId) throw new Error('토큰이나 사용자 ID가 없습니다.');
-
-            // 좋아요 상태를 확인하는 POST 요청
-            const response = await axios.post(`/diary/${diary.diaryId}/likes`, {
-                diaryId: diary.diaryId,
-                memberId: userId
-            }, {
-                headers: { Authorization: `Bearer ${token}` }
-            });
-
-            const userLike = response.data;
-            if (userLike) {
-                setLiked(true);
-                setLikeId(userLike.id);
-                setLikeCount(prevCount => prevCount + 1); // 예시로 좋아요 수를 증가
-            } else {
-                setLiked(false);
-                setLikeId(null);
-            }
-        } catch (error) {
-            console.error('좋아요 상태를 가져오는 데 실패했습니다:', error.response?.data || error.message);
-        }
-    };
-
     useEffect(() => {
+        const fetchLikeStatus = async () => {
+            try {
+                if (!token || !userId) throw new Error('토큰이나 사용자 ID가 없습니다.');
+                const likedStatus = await getLikeStatus(diary.diaryId, token);
+                setLiked(likedStatus);
+            } catch (error) {
+                console.error('좋아요 상태를 가져오는 데 실패했습니다:', error.response?.data || error.message);
+            }
+        };
         fetchLikeStatus();
-    }, [diary.diaryId, userId, token]);
+    }, [diary.diaryId, token, userId]);
 
     const handleLike = async (event) => {
         event.stopPropagation();
@@ -67,7 +49,6 @@ export default function StoryBox({ diary, onClick }) {
             if (liked) {
                 // 좋아요 취소
                 await axios.delete(`/diary/${diary.diaryId}/likes/${likeId}`, config);
-                setLikeCount(prevCount => prevCount - 1);
                 setLiked(false);
                 setLikeId(null);
             } else {
@@ -76,7 +57,6 @@ export default function StoryBox({ diary, onClick }) {
                     diaryId: diary.diaryId,
                     memberId: userId
                 }, config);
-                setLikeCount(prevCount => prevCount + 1);
                 setLiked(true);
                 setLikeId(response.data.id);
             }
@@ -84,8 +64,6 @@ export default function StoryBox({ diary, onClick }) {
             console.error(liked ? '좋아요 취소 실패:' : '좋아요 실패:', error.response?.data || error.message);
         }
     };
-
-    console.log('diary: ', diary);
 
     return (
         <S.StoryBox onClick={onClick}>
@@ -101,7 +79,7 @@ export default function StoryBox({ diary, onClick }) {
                     </S.TextDiv>
                 </S.ProfileBox>
                 <S.CircleButton><img src={diary.moodImage} alt="Mood" /></S.CircleButton>
-                <S.CircleButton className='liked'>{/* onClick={handleLike}*/}
+                <S.CircleButton className='liked' onClick={handleLike}>
                     {liked ? <S.SHeartFilled /> : <S.SHeartOutLined />}
                 </S.CircleButton>
             </S.StoryDiv>

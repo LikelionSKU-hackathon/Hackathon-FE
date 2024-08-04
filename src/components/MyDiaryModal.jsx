@@ -86,7 +86,12 @@ export default function MyDiaryModal({ setModalSwitch, diaryId }) {
                 </M.ModalBodyContain>
                 <M.ModalExtra>
                     <h3>AI 쓰담 선생님의 한 마디</h3>
-                    <p>{diaryData.aiComments || 'AI쓰담 선생님이 댓글을 적고 있어요!'}</p>
+                    <p>{diaryData.aiComments || (
+                        <>
+                        AI쓰담 선생님이<br />
+                        일기에 대한 답변을 쓰고 있어요 :)
+                        </>
+                    )}</p>
                 </M.ModalExtra>
             </M.ModalContent>
             <M.MoreButton to="/diary">더 많은 이야기 보러가기</M.MoreButton>

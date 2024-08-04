@@ -8,7 +8,7 @@ export const StoryBox = styled(NavLink)`
   border-radius: 5px;
   border: 2px solid rgba(208, 218, 232, 1);
   background: rgba(255, 255, 255, 1);
-  padding : 10px;
+  padding : 5px;
   margin : 5px 0;
   align-item : center;
   justify-content: center;
@@ -42,10 +42,9 @@ export const StoryBox = styled(NavLink)`
     letter-spacing: -0.3px;
     overflow: hidden; /* 넘치는 부분 숨김 */
     display: -webkit-box;
-    -webkit-line-clamp: 2; /* 표시할 줄의 수 */
+    -webkit-line-clamp: 3; /* 표시할 줄의 수 */
     -webkit-box-orient: vertical; /* 박스 방향 수직 */
     text-overflow: ellipsis; /* 넘칠 때 ...으로 표시 */
-    
   }
 `;
 
@@ -60,7 +59,7 @@ export const StoryDiv = styled.div`
 
 export const ProfileBox = styled.div`
   margintop : 0;
-  width: 195px;
+  width: 70%;
   height: 28px;
   margin : 3px 0 3px -3px;
   border-radius: 30px;

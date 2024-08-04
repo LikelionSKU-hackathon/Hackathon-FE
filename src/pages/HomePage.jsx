@@ -6,6 +6,7 @@ import OtherDiaryModal from '../components/OtherDiaryModal';
 import MyDiaryModal from '../components/MyDiaryModal';
 import { getUserData, getAIQuestionData } from '../api/userAPI';
 import { getPopularDiary } from '../api/diaryAPI';
+import StoryBox from '../components/StoryBox';
 
 function HomePage() {
     const [userData, setUserData] = useState({
@@ -79,7 +80,7 @@ function HomePage() {
             try{
                 const response = await getPopularDiary();
                 if (response) {
-                    setPopularDiary(response);
+                    setPopularDiary(response.result.diaryList);
                 }
                     
             } catch (error) {
@@ -164,9 +165,13 @@ function HomePage() {
                     쓰담쓰담<br />
                     오늘의 스토리텔러는?
                 </h3>
-                {/* {popularDiary.slice(0, 2).map((diary) => (
-                    <StoryBox key={diary.id} diary={diary} onClick={handleStoryBoxClick} />
-                ))} */}
+                {popularDiary.map(diary => (
+                    <StoryBox 
+                        key={diary.diaryId} 
+                        diary={diary} 
+                        onClick={() => handleStoryBoxClick(diary.diaryId)} 
+                    />
+                ))}
                 <S.MoreButton to="/diary">
                     <h6>더 많은 일기 보기 &gt;</h6>
                 </S.MoreButton>

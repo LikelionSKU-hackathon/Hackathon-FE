@@ -141,7 +141,7 @@ export const TextDiv = styled.div`
 
 export const StoryContainer = styled.div`
   width: 310px;
-  height: 390px;
+  height: 340px;
   border-radius: 10px;
   opacity: 0px;
   background: rgba(127, 127, 127, 0.9);
@@ -155,13 +155,13 @@ export const StoryContainer = styled.div`
   >h3 {
     text-align: left;
     padding : 0;
-    margin : 0;
+    margin : 10px 0;
     color : rgb(255,255,255);
     font-size: 18px;
     font-weight: 700;
     line-height: 21.48px;
     letter-spacing: -0.025em;
-    width : 86%
+    width : 93%
   }
 `
 
@@ -267,7 +267,7 @@ export const FreeButton = styled.button`
 `;
 
 export const MoreButton = styled(NavLink)`
-  width: 86%;
+  width: 92%;
   height: 25px;
   padding: 10px;
   border-radius: 10px;
