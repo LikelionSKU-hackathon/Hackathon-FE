@@ -45,7 +45,8 @@ export const getLikeStatus = async (diaryId, token) => {
                 Authorization: `Bearer ${token}`
             }
         });
-        return response.data;  // true 또는 false 반환
+        console.log('좋아요 데이터 : ', response.data);
+        return response.data;
     } catch (error) {
         console.error('좋아요 가져오기 에러 :', error.response?.data || error.message);
         throw error;

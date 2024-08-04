@@ -1,41 +1,38 @@
 import React, { useState, useEffect } from "react";
 import * as S from "../styles/components/StoryBox";
+import { getLikeStatus} from '../api/diaryAPI';
 import axios from "../api/axios";
-import { getLikeStatus } from "../api/diaryAPI";
 
 export default function StoryBox({ diary, onClick }) {
     const [liked, setLiked] = useState(false);
     const [likeId, setLikeId] = useState(null);
 
     const token = sessionStorage.getItem('token');
-    
-    const getUserId = () => {
-        const user = sessionStorage.getItem('user');
-        if (user) {
-            try {
-                const parsedUser = JSON.parse(user);
-                return parsedUser.userId;
-            } catch (e) {
-                console.error('User information parsing error:', e);
-                return null;
+    const userId = JSON.parse(sessionStorage.getItem('user') || '{}')?.userId;
+
+    // 좋아요 상태를 가져오는 함수
+    const fetchLikeStatus = async () => {
+        try {
+            if (!token || !userId) throw new Error('토큰이나 사용자 ID가 없습니다.');
+
+            const response = await getLikeStatus(diary.diaryId, token);
+            const userLike = response.iliked;
+
+            if (userLike) {
+                setLiked(true);
+                setLikeId(response.id);
+            } else {
+                setLiked(false);
+                setLikeId(null);
             }
+        } catch (error) {
+            console.error('좋아요 상태를 가져오는 데 실패했습니다:', error.response?.data || error.message);
         }
-        return null;
     };
-    const userId = getUserId();
 
     useEffect(() => {
-        const fetchLikeStatus = async () => {
-            try {
-                if (!token || !userId) throw new Error('토큰이나 사용자 ID가 없습니다.');
-                const likedStatus = await getLikeStatus(diary.diaryId, token);
-                setLiked(likedStatus);
-            } catch (error) {
-                console.error('좋아요 상태를 가져오는 데 실패했습니다:', error.response?.data || error.message);
-            }
-        };
         fetchLikeStatus();
-    }, [diary.diaryId, token, userId]);
+    }, [diary.diaryId, userId, token]);
 
     const handleLike = async (event) => {
         event.stopPropagation();
