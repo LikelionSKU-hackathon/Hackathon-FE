@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import BG from "../../assets/BG_Paper.png";
 import Close from "../../assets/myPage/icon_close.svg";
 import  BG_Answer from "../../assets/myPage/bg_answer.svg";
+import  BG_Loading from "../../assets/myPage/bg_loading.svg";
 import { HeartFilled } from "@ant-design/icons";
 
 // 모달 스타일 정의
@@ -114,7 +115,15 @@ export const ModalBody = styled.p`
   margin-bottom : 10px;
   padding : 0;
 `;
-
+export const ModalExtraLoading = styled.div`
+  width: 100%;
+  height: 110px;
+  /*background-color: rgba(0, 255, 0, 1);*/
+  background-image: url(${BG_Loading});
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  padding: 7px;
+`
 export const ModalExtra = styled.div`
   width: 100%;
   height: 110px;

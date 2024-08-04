@@ -15,14 +15,23 @@ import upset from '../assets/myPage/icon_upset.svg';
 let dirary;
 const emogi = {"화나요":ang,"슬퍼요" : sad, "그저그래요":soso, "행복해요":happy,"기뻐요":happy, "뿌듯해요":good, "속상해요":upset};
 export default function CalendarView(Props) {
+  dirary = Props.date;
   const [value, setValue] = useState(new Date());
+  const isSameDate = (date1, date2) => {
+    const d1 = new Date(date1);
+    const d2 = new Date(date2);
+    return (
+      d1.getFullYear() === d2.getFullYear() &&
+      d1.getMonth() === d2.getMonth() &&
+      d1.getDate() === d2.getDate()
+    );
+};
   const renderTileContent = ({ date, view }) => {
-    const dateInfo = dirary.find(d => d.date.toDateString() === date.toDateString());
-    if(dateInfo)
-      console.log(dateInfo.image);
+    //console.log(date.toDateString());
+    const dateInfo = dirary.find(d =>isSameDate(new Date(d.day), date));
     return (
       <S.DateContainer>
-        {dateInfo && <S.DateImage src={emogi[dateInfo.image]} alt="date image" />}
+        {dateInfo && <S.DateImage src={dateInfo.moodImage} alt="date image" />}
         {!dateInfo && <S.DefaultCircle />}
       </S.DateContainer>
     );
@@ -40,7 +49,7 @@ export default function CalendarView(Props) {
 
   const onClickDay = (date) => {
     //Props.onClick(true);
-    const data = dirary.find(d => d.date.toDateString() === date.toDateString());
+    const data = dirary.find(d =>isSameDate(new Date(d.day), date));
     if (data) {
       Props.onClick(data);
     } else {
@@ -49,12 +58,18 @@ export default function CalendarView(Props) {
     }
     
   };
+  const handleChange = ({ activeStartDate, view }) => {
+    if (view === 'month') {
+      Props.onChange(activeStartDate);
+    }
+};
 
-  dirary = Props.date;
+  
   return (
     <>
       <Calendar
         onChange={setValue}
+        onActiveStartDateChange={handleChange}
         value={value}
         tileContent={renderTileContent}
         onClickDay={onClickDay}
