@@ -14,24 +14,57 @@ export default function OAuth2Kakao() {
             const state = urlParams.get('state');
             console.log('state :', state);
 
-            const clientId = "이거 비웠으니까 넣어줘야함";
-            const clientSecret = "이거 비웠으니까 넣어줘야함";
-            const redirectUri = "이거 비웠으니까 넣어줘야함";
+
+            const clientId = import.meta.env.VITE_KAKAO_CLIENT_ID;
+            const clientSecret = import.meta.env.VITE_KAKAO_CLIENT_SECRET;
+            const redirectUri = import.meta.env.VITE_KAKAO_REDIRECT;
             if (code) {
                 try {
                     // 인증 코드 처리 및 토큰 요청 로직
-                    const response = await fetch(`https://kauth.kakao.com/oauth/token`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                        body: `grant_type=authorization_code&client_id=${clientId}&redirect_uri=${redirectUri}&code=${code}&client_secret=${clientSecret}`,
-                    });
-                    console.log('response:', response);
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
+                    const bodyData = {
+                        grant_type: "authorization_code",
+                        client_id: clientId,
+                        client_secret: clientSecret,
+                        redirect_uri: redirectUri,
+                        code: code
                     }
-                    const data = await response.json();
-                    const access_token = data.access_token;
-                    localStorage.setItem('social-token', access_token);
+                    const queryStringBody = Object.keys(bodyData)
+                        .map(k => encodeURIComponent(k) + "=" + encodeURI(bodyData[k]))
+                        .join("&");
+                    console.log('queryStringBody:', queryStringBody);
+                    try {
+                        const response = await fetch("https://kauth.kakao.com/oauth/token", {
+                            method: "POST",
+                            headers: {
+                                'content-type': 'application/x-www-form-urlencoded;charset=utf-8',
+                            },
+                            body: queryStringBody
+                        })
+                            .then(res => res.json())
+                            .then((data) => {
+                                console.log(data)
+                            })
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+
+                        const data = await response.json();
+                        console.log(data)
+
+                    } catch (error) {
+                        console.error('Error fetching access token:', error.message);
+                        throw error; // 에러를 호출자에게 전달
+                    }
+                    // console.log('response:', response);
+                    // const accessToken = response.data.access_token;
+                    // console.log('accessToken:', accessToken);
+                    // if (!response.ok) {
+                    //     throw new Error(`HTTP error! status: ${response.status}`);
+                    // }
+                    //const data = await response.json();
+                    //console.log('data:', data);
+                    //const access_token = data.access_token;
+                    //localStorage.setItem('social-token', access_token);
                     // console.log('tokenResponse:', tokenResponse);
                     // const token = tokenResponse.data;
                     // console.log('token:', token);

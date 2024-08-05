@@ -14,9 +14,12 @@ export default function OAuth2Naver() {
             console.log('Code:', code);
             const state = urlParams.get('state');
             console.log('state:', state);
-            const clientId = "이거 비웠으니까 넣어줘야함";
-            const clientSecret = "이거 비웠으니까 넣어줘야함";
-            const redirectUri = "이거 비웠으니까 넣어줘야함";
+            const clientId = import.meta.env.VITE_NAVER_CLIENT_ID;
+            const clientSecret = import.meta.env.VITE_NAVER_CLIENT_SECRET;
+            const redirectUri = import.meta.env.VITE_NAVER_REDIRECT;
+            console.log('clientId:', clientId);
+            console.log('clientSecret:', clientSecret);
+            console.log('redirectUri:', redirectUri);
             try{
             if (code) {
                 const response = await fetch(`https://nid.naver.com/oauth2.0/token`, {
