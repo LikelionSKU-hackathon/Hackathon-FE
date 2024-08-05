@@ -9,7 +9,7 @@ export default function Loading() {
     const [background, setBackground] = useState('');
     const [word, setWord] = useState('');
     const [isVisible, setIsVisible] = useState(true);
-
+    const hasLoaded = sessionStorage.getItem('hasLoaded');
     useEffect(() => {
         if (hasLoaded === 'true') {
             setIsVisible(false);
