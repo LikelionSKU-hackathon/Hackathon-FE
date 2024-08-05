@@ -76,7 +76,7 @@ export default function MyDiaryModal({ setModalSwitch, diaryId }) {
             </M.ModalHeader>
             <M.ModalContent>
                 <M.ModalImage src={diaryData.moodImage} />
-                <M.CloseButton onClick={handleClose} />
+                <M.CloseButton onClick={handleClose}aria-label="Close" />
                 <span>
                     {getFormattedDate()}
                 </span>
