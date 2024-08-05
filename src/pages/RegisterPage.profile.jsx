@@ -10,7 +10,7 @@ export default function RegisterPageProfile() {
     const [pwd, setPwd] = useState('');
     const [name, setName] = useState('');
     const [age, setAge] = useState();
-    const [profileImage, setProfileImage] = useState();
+    const [profileImage, setProfileImage] = useState(undefined);
     const [selectedOptions, setSelectedOptions] = useState([]);
     const fileInputRef = useRef(null);
     const isFormValid = userId !== '' && pwd !== '' && name !== '' && age !== 0;
@@ -22,46 +22,53 @@ export default function RegisterPageProfile() {
     // 이미지 설정
     const setImage = (event) => {
         const fileView = document.getElementById('fileView');
-        if (profileImage)
+        if (profileImage) {
+            console.log("사진 변경 진입");
             fileView.style.backgroundImage = `url(${profileImage})`;
+        }
     };
-    // 가입 테스트
+    // 가입
     const tryRegister = async () => {
         const userData = JSON.parse(sessionStorage.getItem('user'));
-        console.log("data 0: " + message.selectedOptions);
+        console.log("data 0: " +userData.userId);
         // 키워드 전송
         axios.post(`https://sub.skuhackathon.shop/keyword/${userData.userId}`,
-        {
-            keywordIdList: message.selectedOptions
-        },
-        {
-            headers: {
-                'Accept': '*/*',
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => {
-            console.log("response last 0: " + response.data); 
-                    console.log("response last: " + response);
-                    navigate('/register/final',
+            {
+                keywordIdList: message.selectedOptions
+            },
+            {
+                headers: {
+                    'Accept': '*/*',
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                console.log("response last 0: " + response.data);
+                console.log("response last: " + response);
+                
+                navigate('/register/final',
+                    {
+                        state:
                         {
-                            state:
-                            {
-                                userId,
-                                pwd,
-                                name,
-                                age,
-                                profileImage,
-                                selectedOptions
-                            }
-                        });
-        })
-        .catch(error => {
-            console.error('Error fetching data:', error);
-            alert("오류 발생. 다시 시도해주세요.");
-        });
+                            userId,
+                            pwd,
+                            name,
+                            age,
+                            profileImage,
+                            selectedOptions
+                        }
+                    });
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                alert("오류 발생. 다시 시도해주세요.");
+            });
     }
     // test
+    useEffect(() => {
+        console.log("데이터 변경");
+        setImage();
+    }, [profileImage]);
     // 로그인 여부 확인
     useEffect(() => {
         // login 확인
@@ -74,37 +81,38 @@ export default function RegisterPageProfile() {
             if (message) {
                 const option = message.option;
                 const selected = message.selectedOptions;
+                console.log("selected : " + selected);
                 const op = []
                 op.push(option.find(item => item.id === selected[0]));
                 op.push(option.find(item => item.id === selected[1]));
                 op.push(option.find(item => item.id === selected[2]));
                 setoptions(op);
                 setName(message.name);
-                // TODO : 이미지 설정
-                setProfileImage(message.profileImage);
-
-                const userData = JSON.parse(sessionStorage.getItem('user'));
+                console.log("profileImage : " + sessionStorage.getItem('profileImage'));
                 
+                const userData = JSON.parse(sessionStorage.getItem('user'));
 
-                // const info = axios.get('https://sub.skuhackathon.shop/members/', {
-                //     headers: {
-                //         'Accept': '*/*',
-                //         'Authorization': `Bearer ${jwtToken}`
-                //     }
-                // });
-                // console.log("data 2: " + info);
-                // setUserId(userData.userId);
-                // setPwd(userData.pwd);
-                // setName(userData.userName);
-                // setAge(userData.ageGroup);
-                // setProfileImage(userData.profileImage);
-                // setoptions(userData.memberKeyword);
-                // setImage();
-                // console.log("데이터 확인 in /profile");
+                // 로그인
+                const jwtToken = localStorage.getItem('jwtToken');
+                const info = axios.get('https://sub.skuhackathon.shop/members/', {
+                    headers: {
+                        'Accept': '*/*',
+                        'Authorization': `Bearer ${jwtToken}`
+                    }
+                });
+                console.log("data 2: " + Object.entries(userData));
+                setUserId(userData.userId);
+                setPwd(userData.pwd);
+                setName(userData.userName);
+                setAge(userData.ageGroup);
+                setProfileImage(sessionStorage.getItem('profileImage'));
+                setoptions(op);
+                console.log("op : " + op);
+                console.log("데이터 확인 in /profile");
+
             }
         }
     }, []);
-
     setImage();
     return (
         <>
@@ -122,7 +130,7 @@ export default function RegisterPageProfile() {
                         <br />이야기가 기록 될 프로필 입니다 :)</p>
                     <hr></hr>
                     <h1>{age} 나의 주요고민</h1>
-                    {options != null && options[0] != null&& (
+                    {options != null && options[0] != null && (
                         <>
                             <FixLine
                                 emoji={options[0].emoji}

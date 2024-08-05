@@ -38,6 +38,11 @@ export default function RegisterPageFinal() {
             setName(message.name);
             setAge(message.age);
             setProfileImage(message.profileImage);
+            // 소셜 상태면 그대로 로그인 취급
+            if(localStorage.getItem('jwtToken'))
+            {
+                sessionStorage.setItem('login',true);
+            }
         }
     }, []);
     return (
@@ -50,7 +55,7 @@ export default function RegisterPageFinal() {
                 <S.PreviewContainer>
                     <S.Preview src={preview}></S.Preview>
                 </S.PreviewContainer>
-                <S.FixSubmit onClick={tryRegister}>로그인 하러 가기</S.FixSubmit>
+                <S.FixSubmit onClick={tryRegister}>{sessionStorage.getItem('login') ? '바로 시작하기' : '로그인 하러 가기'}</S.FixSubmit>
             </S.FinalPageContainer>
         </>
     );

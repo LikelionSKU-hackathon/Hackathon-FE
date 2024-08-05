@@ -24,17 +24,10 @@ export default function RegisterPage() {
                 const url = 'https://sub.skuhackathon.shop/api/v1/oauth2/authorization/google';
                 window.location.href = url;
             }
-            // console.log("res : "+response);
-            // const redirectUrl = response.data;
-            // console.log("data : "+response);
-            // if (redirectUrl) {
-            //     //window.location.href = redirectUrl; // 리디렉션 수행
-            // }
         }
         catch (e) {
             console.log(e);
         }
-        //navigate('/register/email', { state: {social : addr} });
     };
     // 로그인 여부 확인
     const login = sessionStorage.getItem('login');

@@ -97,12 +97,15 @@ export const InputSubmit = styled.button`
     justify-content: center;
     width: 100%;
     height: 43px; 
-    boarder-radius: 10px;
     background: #B5B6BD;
     color: white;
     margin : 35px 0;
     background-color: ${props => (props.disabled ? '#B5B6BD' : '#93BAF3')};
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    p{
+        text-align: center;
+        margin: 0;
+    }
 `;
 export const FixedInputSubmit = styled.button` 
     display : flex;

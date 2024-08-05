@@ -33,20 +33,17 @@ export default function RegisterPageEmail() {
         fileInput.addEventListener('change', function (event) {
             if (fileInput.files && fileInput.files[fileInput.files.length - 1]) {
                 const reader = new FileReader();
-                console.log("0");
                 reader.onload = function (event) {
-                    console.log("1");
                     const imageURL = event.target.result;
                     setProfileImage(imageURL);
                     fileView.style.backgroundImage = `url(${imageURL})`;
-                    console.log("2");
-
                 };
-                console.log("3");
                 reader.readAsDataURL(fileInput.files[fileInput.files.length - 1]);
             }
         });
     };
+
+
     // 로그인 여부 확인
     const login = sessionStorage.getItem('login');
     useEffect(() => {
@@ -56,18 +53,14 @@ export default function RegisterPageEmail() {
             navigate('/main', { replace: true, state: { redirectedFrom: window.location.pathname } });
         }
         else {
-            console.log("data 1: " +  "social" in message);
-            if ( "social" in message) {
+            console.log("data 1: " + "social" in message);
+            // 소셜 로그인시 이메일, 비밀번호 숨김
+            if ("social" in message || localStorage.getItem('jwtToken')) {
                 console.log("is IN");
-                console.log("data 0: " + message.social.provider);
-                console.log("data 1: " + message.social.email);
-                console.log("data 2: " + message.social.profilePicture);
-                setUserId(message.social.email);
+                setUserId("social");
+                setPwd("social");
                 setHideEmail(true);
                 setEmailCheck(true);
-                setProfileImage(message.social.profilePicture);
-                const fileView = document.getElementById('fileView');
-                fileView.style.backgroundImage = `url(${message.social.profilePicture})`;
                 setonSocial(true);
             }
         }
@@ -106,19 +99,28 @@ export default function RegisterPageEmail() {
                 console.log("대기");
                 await addFormdata();
                 console.log("대기 끝");
-                axios.post('https://sub.skuhackathon.shop/members/signup'
-                    , formData,
-                    {
-                        headers: {
-                            'Content-Type': 'multipart/form-data'
-                        }
-                    })
-                    .then(response => {
+                // 소셜 회원가입
+                if (onSocial) {
+                    try {
+                        // 회원가입
+                        const jwtToken = localStorage.getItem('jwtToken');
+                        const response = await axios.put('https://sub.skuhackathon.shop/members/social/signup'
+                            , formData
+                            , {
+                                headers: {
+                                    'Content-Type': 'multipart/form-data',
+                                    'accept': '*/*',
+                                    'Authorization': `Bearer ${jwtToken}`,
+                                },
+                            });
+                        console.log(response);
                         console.log("보냈어용");
                         console.log(response.data);
                         console.log(response.status);
 
-                        //이동 및 데이터 전송
+                        //이동 및 데이터 전송 profileImage
+                        sessionStorage.setItem('token', jwtToken);
+                        sessionStorage.setItem('profileImage', profileImage);
                         sessionStorage.setItem('user', JSON.stringify({
                             userId: response.data.result.memberId,
                             email: userId,
@@ -137,11 +139,9 @@ export default function RegisterPageEmail() {
                                     profileImage,
                                 }
                             });
-                    })
-
-                    .catch(error => {
+                    } catch (error) {
                         console.log("에러났어용");
-                        console.error('Error fetching data:', error.response.data);
+                        console.error('Error fetching data:', error);
                         if (error.response.data.result.email)
                             alert(error.response.data.data.result.email);
                         if (error.response.data.result.password)
@@ -151,7 +151,57 @@ export default function RegisterPageEmail() {
                         if (error.response.data.code == "member4005") {
                             alert("이미 존재하는 계정입니다.");
                         }
-                    });
+                    }
+                }
+                // 통상 이메일 회원가입
+                else {
+                    axios.post('https://sub.skuhackathon.shop/members/signup'
+                        , formData,
+                        {
+                            headers: {
+                                'Content-Type': 'multipart/form-data',
+                            }
+                        })
+                        .then(response => {
+                            console.log("보냈어용");
+                            console.log(response.data);
+                            console.log(response.status);
+
+                            //이동 및 데이터 전송
+                            sessionStorage.setItem('user', JSON.stringify({
+                                userId: response.data.result.memberId,
+                                email: userId,
+                                ageGroup: age,
+                                userName: response.data.result.username,
+                                memberKeyword: []
+                            }));
+                            navigate('/register/word',
+                                {
+                                    state:
+                                    {
+                                        userId,
+                                        pwd,
+                                        name,
+                                        age,
+                                        profileImage,
+                                    }
+                                });
+                        })
+
+                        .catch(error => {
+                            console.log("에러났어용");
+                            console.error('Error fetching data:', error.response.data);
+                            if (error.response.data.result.email)
+                                alert(error.response.data.data.result.email);
+                            if (error.response.data.result.password)
+                                alert(error.response.data.result.password);
+                            if (error.response.data.result.profileImage)
+                                alert("프로필 이미지 등록에 실패했습니다.");
+                            if (error.response.data.code == "member4005") {
+                                alert("이미 존재하는 계정입니다.");
+                            }
+                        });
+                }
             } else {
                 alert('닉네임 중복확인을 해주세요');
             }
@@ -245,16 +295,23 @@ export default function RegisterPageEmail() {
                         {emailCheck ? "확인 완료" : "중복 확인"}
                     </L.btnCheck>
                 </L.InputContainer>
+                <L.InputText
+                    disabled={hideEmail}>
+                    비밀번호
+                </L.InputText>
+                <L.InputContainer
+                    disabled={hideEmail}>
 
-                <L.InputText>비밀번호</L.InputText>
-                <L.InputLine
-                    type="password"
-                    value={pwd}
-                    onChange={(e) => setPwd(e.target.value)}
-                    placeholder="비밀번호 입력하세요"
-                />
-
-                <L.InputText>닉네임</L.InputText>
+                    <L.InputLine
+                        type="password"
+                        value={pwd}
+                        onChange={(e) => setPwd(e.target.value)}
+                        placeholder="비밀번호 입력하세요"
+                    />
+                </L.InputContainer>
+                <L.InputText>
+                    닉네임
+                </L.InputText>
                 <L.InputContainer>
                     <L.InputLine
                         type="text"
@@ -305,7 +362,7 @@ export default function RegisterPageEmail() {
                     disabled={!isFormValid}>
                     <p>입력완료</p>
                 </L.InputSubmit>
-            </S.RegisteContainer>
+            </S.RegisteContainer >
         </>
     );
 }
