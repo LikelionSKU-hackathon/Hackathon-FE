@@ -64,8 +64,12 @@ export default function StoryBox({ diary, onClick }) {
 
     return (
         <S.StoryBox onClick={onClick}>
-            <h5>#{diary.category}</h5>
-            <h5 className="title">{diary.title}</h5>
+
+            <S.TitleDiv>
+                <h5>#{diary.category}</h5>
+                <h5 className="title">{diary.title}</h5>
+            </S.TitleDiv>
+
             <p>{diary.content}</p>
             <S.StoryDiv>
                 <S.ProfileBox>

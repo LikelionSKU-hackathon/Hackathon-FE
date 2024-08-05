@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 export const btnContainer = styled.div`
     position: absolute;
-    top: 30px;
+    top: 50px;
     left: 30px;
     padding: 0;
     border: none;

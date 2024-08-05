@@ -52,7 +52,7 @@ export const CloseButton = styled.button`
 `;
 
 export const ModalImage = styled.img`
-  width: 70px;
+  width: 80px;
   height: auto;
   position: absolute;
   top: -35px;
@@ -214,7 +214,7 @@ export const Comment = styled.div`
 export const MoreButton = styled(NavLink)`
     width: 88%;
     max-width: 320px;
-    height: 20px;
+    height: 30px;
     margin: 10px;
     padding : 10px 15px;
     background: rgb(208, 218, 232);

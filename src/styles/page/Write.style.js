@@ -1,7 +1,6 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
-// `styled.text` 대신에 `styled.span`이나 `styled.p` 사용
 export const IntroText = styled.span`
     &.theme {
         font-size: 18px;
@@ -13,6 +12,8 @@ export const IntroText = styled.span`
         margin-bottom: 10px;
         text-decoration: underline;
         margin-top : 20px;
+        max-width: 280px;
+        word-break: keep-all; 
     }
     &.date {
         margin-top: 40px;
@@ -34,6 +35,26 @@ export const IntroText = styled.span`
         margin-bottom: 5px;
     }
 `;
+
+export const TitleArea = styled.div `
+    width: 270px;
+    height : 17px;
+    background: rgb(208, 218, 232);
+    align-items: center;
+    overflow: hidden;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 15.73px;
+    text-align: left;
+    margin: 10px 10px 5px 10px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+`
 
 export const WriteBox = styled.textarea`
     width: 270px;
@@ -57,10 +78,9 @@ export const WriteBox = styled.textarea`
     overflow-y: auto;
 
     &.title {
+        display : block;
         height: 17px;
         margin-bottom: 0;
-        overflow-x: auto;
-        white-space: nowrap;
     }
     
     &.detail {

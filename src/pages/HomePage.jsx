@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from 'react-router-dom';
 import * as S from "../styles/page/Main.style";
 import * as M from "../styles/components/Modal";
 import OtherDiaryModal from '../components/OtherDiaryModal';
@@ -28,6 +28,7 @@ function HomePage() {
     const [diaryId, setDiaryId] = useState(null);
     const [background, setBackground] = useState('');
     const [word, setWord] = useState('');
+    const [token, setToken] = useState('');
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -52,15 +53,17 @@ function HomePage() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const token = sessionStorage.getItem('token');
-                if (token) {
+                const getToken = sessionStorage.getItem('token');
+                setToken(getToken);
+
+                if (getToken) {
                     const fetchUserData = async () => {
-                        const response = await getUserData(token);
+                        const response = await getUserData(getToken);
                         setUserData(response.result);
                     };
 
                     const fetchAIQuestionData = async () => {
-                        const response = await getAIQuestionData(token);
+                        const response = await getAIQuestionData(getToken);
                         setQuestionData(response.result);
                     };
 
@@ -105,9 +108,9 @@ function HomePage() {
     };
 
     const handleChangeButtonClick = async () => {
-        const token = sessionStorage.getItem('token');
-        if (token) {
-            const response = await getAIQuestionData(token);
+        const getToken = sessionStorage.getItem('token');
+        if (getToken) {
+            const response = await getAIQuestionData(getToken);
             setQuestionData(response.result);
         }
     };
@@ -143,11 +146,18 @@ function HomePage() {
                 </S.ProfileText>
             </S.ProfileBox>
 
-            <S.QBox className="question">
-                <h6>TODAY<br />QUESTION</h6>
-                <h5># {questionData.category || 'AI 연동 중'}</h5>
-                <p>Q. {questionData.content || 'AI 연동 중'}</p>
-            </S.QBox>
+            {token ? (
+                <S.QBox className="question">
+                    <h6>TODAY<br />QUESTION</h6>
+                    <h5># {questionData.category || 'AI 연동 중'}</h5>
+                    <p>Q. {questionData.content || 'AI 연동 중'}</p>
+                </S.QBox>
+            ) : (
+                <S.QBox className="noLogin">
+                    <h4>쓰담쓰담이 당신을 위로 할<br/>오늘의 일기 주제를 생성하고 있어요 :)</h4>
+                </S.QBox>
+            )}
+            
             <S.ChangeButton onClick={handleChangeButtonClick}>주제 변경하기</S.ChangeButton>
 
             <div style={{ gap: '14px' }}>

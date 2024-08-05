@@ -42,42 +42,58 @@ export const QBox = styled.div`
     min-height: 90px;
     height : auto;
     background: ${props => props.bgColor || questionColors[Math.floor(Math.random() * questionColors.length)]};
+    > h6 {
+      font-size: 20px;
+      font-weight: 500;
+      line-height: 20px;
+      letter-spacing: -0.025em;
+      text-align: left;
+      margin-top: 0px;
+      margin-bottom: 10px;
+    }
+
+    > h5 {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 20px;
+      letter-spacing: -0.025em;
+      text-align: right;
+      margin-top: 5px;
+      margin-bottom: 0;
+      padding: 0;
+    }
+
+    > p {
+      font-weight: 500;
+      font-size: 16px;
+      text-align: right;
+      line-height: 20px;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  
   }
 
-  &.history {
-    height: 67px;
-    background: rgba(205, 0, 135, 1);
+  &.noLogin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: ${props => props.bgColor || questionColors[Math.floor(Math.random() * questionColors.length)]};
+    min-height: 90px;
+    height: auto;
+    white-space: pre-line;
+      > h4 {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 20px;
+      letter-spacing: -0.025em;
+      margin-top: 5px;
+      margin-bottom: 0;
+      padding: 0
   }
 
-  > h6 {
-    font-size: 20px;
-    font-weight: 500;
-    line-height: 20px;
-    letter-spacing: -0.025em;
-    text-align: left;
-    margin-top: 0px;
-    margin-bottom: 10px;
-  }
-
-  > h5 {
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 20px;
-    letter-spacing: -0.025em;
-    text-align: right;
-    margin-top: 5px;
-    margin-bottom: 0;
-    padding: 0;
-  }
-
-  > p {
-    font-weight: 500;
-    font-size: 16px;
-    text-align: right;
-    line-height: 20px;
-    margin-top: 0;
-    margin-bottom: 0;
-  }
+  
 `;
 
 export const HistoryBox = styled(NavLink)`
@@ -304,9 +320,12 @@ export const Title = styled.h6 `
   letter-spacing: -0.025em;
   text-align: left;
   color: #555555;
-  transform: translateX(-10%);
+  transform: translateX(-20%);
+  padding-left : 0;
+  margin-left : 0;
   padding-bottom : 0px;
   margin-bottom : 0px;
+  margin-top : 100px;
 `;
 
 export const SubTitle = styled.text`
@@ -317,7 +336,7 @@ export const SubTitle = styled.text`
   letter-spacing: -0.025em;
   text-align: left;
   color: #555555;
-  transform: translateX(-10%);
+  transform: translateX(-20%);
   padding-bottom : 15px;
 `;
 
