@@ -14,14 +14,15 @@ import WriteFreeDiary from './pages/WriteFreeDiary';
 import OAuth2Naver from './pages/OAuth2Naver';
 import OAuth2Google from './pages/OAuth2Google';
 import OAuth2Kakao from './pages/OAuth2Kakao';
-import Test from './pages/Test';
+import SocialLogin from './pages/SocialLogin';
+import OAuthRedirectHandler from './pages/OAuthRedirectHandler';
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: '/dashboard',
     element: <HomePage />,
   },
   {
-    path: '/login',
+    path: '/login1',
     element: <LoginPage />,
   },
   {
@@ -77,9 +78,15 @@ const router = createBrowserRouter([
     element: <WriteFreeDiary />,
   },
   {
-    path: '/test',
-    element: <Test />,
+    path: '/oauth2/redirect',
+    element: <OAuthRedirectHandler />,
   },
+  {
+    path: '/login',
+    element: <SocialLogin />,
+  },
+ 
+
 ]);
 
 function App() {

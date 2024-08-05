@@ -18,7 +18,7 @@ export const StoryBox = styled(NavLink)`
   >h5 {
     font-size: 11px;
     font-weight: 600;
-    line-height: 23px;
+    line-height: 10px;
     text-align: left;
     letter-spacing: -0.025em;
     padding-right : 5px;
