@@ -9,7 +9,7 @@ export default function OAuth2Naver() {
     useEffect(() => {
         const handleOAuth2Callback = async () => {
             const urlParams = new URLSearchParams(window.location.search);
-            console.log('urlParams:', urlParams);
+            console.log('urlParams:', urlParams.toString());
             const code = urlParams.get('code');
             console.log('Code:', code);
             const state = urlParams.get('state');
@@ -20,26 +20,37 @@ export default function OAuth2Naver() {
             console.log('clientId:', clientId);
             console.log('clientSecret:', clientSecret);
             console.log('redirectUri:', redirectUri);
-            try{
-            if (code) {
-                const response = await fetch(`https://nid.naver.com/oauth2.0/token`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: new URLSearchParams({
-                        grant_type: 'authorization_code',
-                        client_id: clientId,
-                        client_secret: clientSecret,
-                        code: code,
-                        redirect_uri: redirectUri,
-                    }),
+            try {
+                const response = await fetch('http://localhost:8080/api/v1/auth/login/oauth2/success', {
+                    method: 'GET',
+                    credentials: 'include'
                 });
                 console.log('response:', response);
+                console.log('response:', Object.entries(response));
+                if (!response.ok) {
+                    throw new Error('OAuth2 로그인 요청 실패');
+                }
 
-            }}
-            catch(e){
-                console.error(e);
+                const data = await response.json();
+
+                const accessToken = data.accessToken;
+                const authorization = data.authorization;
+                const username = data.username;
+                const redirectUrl = data.redirectUrl;
+
+                localStorage.setItem('accessToken', accessToken);
+                localStorage.setItem('authorization', authorization);
+                localStorage.setItem('username', username);
+
+                console.log('OAuth2 로그인 성공:', username);
+                console.log('JWT 토큰:', accessToken);
+
+                if (redirectUrl) {
+                    window.location.href = redirectUrl;
+                }
+
+            } catch (error) {
+                console.error('OAuth2 로그인 처리 중 오류 발생:', error);
             }
         };
 
@@ -49,7 +60,7 @@ export default function OAuth2Naver() {
     }, [navigate]);
 
     return (
-        <Loading/>
+        <Loading />
     );
 };
 

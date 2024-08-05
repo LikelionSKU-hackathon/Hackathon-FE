@@ -1,7 +1,9 @@
 import styled, { keyframes } from 'styled-components';
 
 export const LoadingContainer = styled.div`
-    display: flex;
+    display: ${props => (props.show ? 'display' : 'none')};
+    position: fixed;    
+    z-index: 2000;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -25,5 +27,6 @@ export const Word = styled.img`
     position: absolute;
     top: 40px;
     right: 30px;
+    opacity: 0;
     animation: ${fadeIn} 2s ease-in-out 1s forwards;
 `;

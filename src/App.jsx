@@ -19,7 +19,7 @@ import Test from './pages/Test';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Loading />
+    element: <HomePage />
   },
   {
     path: '/main',
