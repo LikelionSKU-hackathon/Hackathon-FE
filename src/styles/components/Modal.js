@@ -47,7 +47,7 @@ export const CloseButton = styled.button`
   border: none;
   top: 5%;
   right: 5%;
-  background-image: url(${Close});
+  background-image: url(${Close}) !important;
   background-size: contain;
   background-repeat: no-repeat;
   z-index: 100;
@@ -322,7 +322,7 @@ export const CommetInput = styled.input`
     transform: translateY(-50%) translateY(5px);
     border: none;
     cursor: pointer;
-    background-image: url(${icon_Arrow});
+    background-image: url(${icon_Arrow}) !important;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
