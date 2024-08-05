@@ -14,6 +14,8 @@ export default function Loading() {
 
     useEffect(() => {
         const hours = new Date().getHours();
+        if(sessionStorage.getItem('hideLoading'))
+            setShow(false);
         if (hours >= 18 || hours < 6) {
             setBackground(BG_Night);
             setWord(Word_Night);
@@ -23,6 +25,7 @@ export default function Loading() {
         }
 
         const timer = setTimeout(() => {
+            sessionStorage.setItem('hideLoading', true);
             setShow(false);
             //navigate('/main'); // 페이지 이동
         }, 2000); // 2초 후에 이동
