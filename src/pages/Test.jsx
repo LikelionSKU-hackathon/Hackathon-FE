@@ -5,13 +5,15 @@ function Test() {
     handleOAuth2Success();
   }, []);
 
-  const handleLogin = (provider) => {
-    window.location.href = `http://localhost:8080/api/v1/oauth2/authorization/${provider}`;
+  const handleLogin = async (provider) => {
+    //window.location.href = `https://sub.skuhackathon.shop/api/v1/oauth2/authorization/${provider}`;
+    const response = await fetch(`https://sub.skuhackathon.shop/api/v1/auth/login/oauth2/success`);
+    console.log("response : "+response);
   };
 
   const handleOAuth2Success = async () => {
     try {
-      const response = await fetch('http://localhost:8080/api/v1/auth/login/oauth2/success', {
+      const response = await fetch('https://sub.skuhackathon.shop/api/v1/auth/login/oauth2/success', {
         method: 'GET',
         credentials: 'include'
       });

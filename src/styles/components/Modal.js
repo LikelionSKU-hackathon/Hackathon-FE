@@ -4,6 +4,7 @@ import BG from "../../assets/BG_Paper.png";
 import Close from "../../assets/myPage/icon_close.svg";
 import  BG_Answer from "../../assets/myPage/bg_answer.svg";
 import  BG_Loading from "../../assets/myPage/bg_loading.svg";
+import  icon_Arrow from "../../assets/ETC/arrowUp.svg";
 import { HeartFilled } from "@ant-design/icons";
 
 // 모달 스타일 정의
@@ -38,7 +39,7 @@ export const ModalContent = styled.div`
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 `;
 
-export const CloseButton = styled.button`
+export const CloseButton = styled.div`
   width: 16px;
   height: 16px;
   position: absolute;
@@ -118,7 +119,7 @@ export const ModalExtraLoading = styled.div`
   width: 100%;
   height: 110px;
   /*background-color: rgba(0, 255, 0, 1);*/
-  background-image: url(${BG_Loading});
+  background-image : url(${BG_Loading});
   background-size: 100% 100%;
   background-repeat: no-repeat;
   padding: 7px;
@@ -127,7 +128,7 @@ export const ModalExtra = styled.div`
   width: 100%;
   height: 110px;
   /*background-color: rgba(0, 255, 0, 1);*/
-  background-image: url(${BG_Answer});
+  background-image : url(${BG_Answer});
   background-size: 100% 100%;
   background-repeat: no-repeat;
   padding: 7px;
@@ -321,7 +322,7 @@ export const CommetInput = styled.input`
     transform: translateY(-50%) translateY(5px);
     border: none;
     cursor: pointer;
-    background-image: url(src/assets/ETC/arrowUp.svg);
+    background-image : url(${icon_Arrow});
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
