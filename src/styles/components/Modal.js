@@ -50,7 +50,7 @@ export const CloseButton = styled.button`
   background-image: url(${Close});
   background-size: contain;
   background-repeat: no-repeat;
-  z-index: 10000;
+  z-index: 100;
 `;
 
 export const ModalImage = styled.img`
@@ -119,7 +119,7 @@ export const ModalExtraLoading = styled.div`
   width: 100%;
   height: 110px;
   /*background-color: rgba(0, 255, 0, 1);*/
-  background-image: url(${BG_Loading});
+  background-image : url(${BG_Loading});
   background-size: 100% 100%;
   background-repeat: no-repeat;
   padding: 7px;
@@ -128,7 +128,7 @@ export const ModalExtra = styled.div`
   width: 100%;
   height: 110px;
   /*background-color: rgba(0, 255, 0, 1);*/
-  background-image: url(${BG_Answer});
+  background-image : url(${BG_Answer});
   background-size: 100% 100%;
   background-repeat: no-repeat;
   padding: 7px;
@@ -322,12 +322,12 @@ export const CommetInput = styled.input`
     transform: translateY(-50%) translateY(5px);
     border: none;
     cursor: pointer;
-    background-image: url(${icon_Arrow});
+    background-image : url(${icon_Arrow});
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     padding: 0;
-    z-index : 10000;
+    z-index : 100;
   `;
 
   export const InputContainer = styled.div`
