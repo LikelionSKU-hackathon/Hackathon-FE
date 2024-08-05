@@ -10,9 +10,9 @@ export default function OAuth2Google() {
             const urlParams = new URLSearchParams(window.location.search);
             const code = urlParams.get('code');
             console.log('Authorization Code:', code);
-            const clientId = "이거 비웠으니까 넣어줘야함";
-            const clientSecret = "이거 비웠으니까 넣어줘야함";
-            const redirectUri = "이거 비웠으니까 넣어줘야함";
+            const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+            const clientSecret = import.meta.env.VITE_GOOGLE_CLIENT_SECRET;
+            const redirectUri = import.meta.env.VITE_GOOGLE_REDIRECT;
             if (code) {
                 //액세스 토큰 요청
                 const tokenResponse = await fetch('https://oauth2.googleapis.com/token', {
