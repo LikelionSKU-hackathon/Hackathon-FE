@@ -12,6 +12,7 @@ export default function WriteFreePage() {
   const [content, setContent] = useState('');
   const [activeButton, setActiveButton] = useState('public');
   const [moodId, setMoodId] = useState(null);
+  const [moodLabel, setMoodLabel] = useState('');
   const [preInfo, setPreInfo] = useState({
     date: '',
     username: '',
@@ -43,9 +44,10 @@ export default function WriteFreePage() {
     setActiveButton(button);
   };
 
-  const handleEmotionSelect = (moodId) => {
+  const handleEmotionSelect = (moodId, moodLabel) => {
     setMoodId(moodId);
-  };
+    setMoodLabel(moodLabel); // 선택된 레이블 상태로 설정
+  };;
 
   const handleDoneClick = async () => {
     const postData = {
@@ -89,6 +91,7 @@ export default function WriteFreePage() {
       <W.IntroText className="date">{preInfo.date}<br/>{preInfo.username} 님의 {preInfo.diaryCount}번째 쓰임</W.IntroText>
       <W.IntroText className="theme">"자유주제"</W.IntroText>
       <Emotion onSelect={handleEmotionSelect} />
+      {moodLabel && <W.EmotionLabel>{moodLabel}</W.EmotionLabel>} {/* 선택된 레이블 표시 */}
       <W.WriteBox
         className="title"
         placeholder="제목을 입력해주세요"

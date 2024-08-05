@@ -9,7 +9,7 @@ export const StoryBox = styled(NavLink)`
   border: 2px solid rgba(208, 218, 232, 1);
   background: rgba(255, 255, 255, 1);
   padding : 5px;
-  margin : 5px 0;
+  margin : 10px 0;
   align-item : center;
   justify-content: center;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -18,12 +18,13 @@ export const StoryBox = styled(NavLink)`
   >h5 {
     font-size: 11px;
     font-weight: 600;
-    line-height: 23px;
     text-align: left;
     letter-spacing: -0.025em;
     padding-right : 5px;
     display: inline;
-    margin : 0;
+    white-space: nowrap; /* 텍스트를 한 줄로 유지 */
+      overflow: hidden; /* 넘치는 텍스트를 숨김 */
+      text-overflow: ellipsis; 
 
     &.title {
       font-weight : 400;
@@ -49,12 +50,13 @@ export const StoryBox = styled(NavLink)`
 `;
 
 export const StoryDiv = styled.div`
-  width : 290px;
+  width : 100%;
   height: 40px;
   margin : 3px;
   padding : 0;
   flex-direction : row;
   display : flex;
+  justify-content: space-between;
 `;
 
 export const ProfileBox = styled.div`
@@ -115,8 +117,9 @@ export const CircleButton = styled.button`
   border-radius: 50%;
   object-fit: cover;
   padding : 0;
-  align-items: center;
-  justify-content: center;
+  display: flex; /* Flexbox를 사용하여 중앙 정렬 */
+  align-items: center; /* 수직 중앙 정렬 */
+  justify-content: center; /* 수평 중앙 정렬 */
   background-color : transparent;
 
   img {

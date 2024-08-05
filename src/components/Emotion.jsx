@@ -9,15 +9,17 @@ import emotion6 from "../assets/Emotion/6.svg";
 
 const Emotion = ({ onSelect }) => {
     const [selectedImage, setSelectedImage] = useState(null);
+    const [selectedLabel, setSelectedLabel] = useState('');
     const [isSelecting, setIsSelecting] = useState(false);
     const images = [emotion1, emotion2, emotion3, emotion4, emotion5, emotion6];
     const moodIds = [1, 2, 3, 4, 5, 6]; 
     const labels = ["화나요", "슬퍼요", "그저그래요", "행복해요", "기뻐요", "속상해요"];
 
-    const handleImageClick = (image, moodId) => {
+    const handleImageClick = (image, moodId, label) => {
         setSelectedImage(image);
+        setSelectedLabel(label);
         setIsSelecting(false);
-        onSelect(moodId); 
+        onSelect(moodId, label); 
     };
 
     const handleButtonClick = () => {
@@ -37,7 +39,7 @@ const Emotion = ({ onSelect }) => {
                         <div key={index} style={{ textAlign: 'center' }}>
                             <S.EmotionOption
                                 src={image}
-                                onClick={() => handleImageClick(image, moodIds[index])}
+                                onClick={() => handleImageClick(image, moodIds[index], labels[index])}
                                 className={selectedImage === image ? 'selected' : ''}
                             />
                             <S.EmotionOptionLabel>{labels[index]}</S.EmotionOptionLabel>

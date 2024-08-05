@@ -3,9 +3,8 @@ import styled from "styled-components";
 
 // `styled.text` 대신에 `styled.span`이나 `styled.p` 사용
 export const IntroText = styled.span`
-    margin-top: 20px;
     &.theme {
-        font-size: 16px;
+        font-size: 18px;
         font-weight: 700;
         line-height: 19.09px;
         letter-spacing: -0.025em;
@@ -13,8 +12,10 @@ export const IntroText = styled.span`
         color: rgb(85, 85, 85);
         margin-bottom: 10px;
         text-decoration: underline;
+        margin-top : 20px;
     }
     &.date {
+        margin-top: 40px;
         font-size: 14px;
         font-weight: 500;
         line-height: 16.71px;
@@ -44,7 +45,7 @@ export const WriteBox = styled.textarea`
     font-weight: 500;
     line-height: 15.73px;
     text-align: left;
-    margin: 10px;
+    margin: 15px;
     padding: 10px 15px;
     border: none;
     border-radius: 10px;
@@ -66,6 +67,10 @@ export const WriteBox = styled.textarea`
         height: 180px;
         padding: 10px 15px;
     }
+    
+    &::placeholder {
+        font-family: Pretendard
+    }
 `;
 
 export const Emotion = styled.button`
@@ -78,10 +83,19 @@ export const Emotion = styled.button`
     position: relative;
 `;
 
+export const EmotionLabel = styled.p`
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 14.52px;
+    text-align: center;
+    margin : 5px;
+    padding : 0;
+`
+
 export const Done = styled(NavLink)`
     width: 280px;
-    height: 20px;
-    margin: 10px;
+    height: 25px;
+    margin: 15px;
     padding: 10px;
     background: rgb(208, 218, 232);
     border: 1px solid rgba(187, 215, 255, 1);

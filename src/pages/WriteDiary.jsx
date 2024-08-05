@@ -10,7 +10,8 @@ import Back from "../components/Back";
 export default function WriteDiary() {
   const [content, setContent] = useState('');
   const [activeButton, setActiveButton] = useState('public');
-  const [moodId, setMoodId] = useState(null); // moodId 상태 추가
+  const [moodId, setMoodId] = useState(null);
+  const [moodLabel, setMoodLabel] = useState('');
   const [preInfo, setPreInfo] = useState({
     date: '',
     username: '',
@@ -50,8 +51,9 @@ export default function WriteDiary() {
     setActiveButton(button);
   };
 
-  const handleEmotionSelect = (moodId) => {
-    setMoodId(moodId); // 선택된 moodId를 상태로 설정
+  const handleEmotionSelect = (moodId, moodLabel) => {
+    setMoodId(moodId);
+    setMoodLabel(moodLabel); // 선택된 레이블 상태로 설정
   };
 
   const handleDoneClick = async () => {
@@ -93,10 +95,11 @@ export default function WriteDiary() {
 
   return (
     <S.Container>
-      <Back to="/main" />
+      <Back to="/main" style={{ marginTop: '10px' }} />
       <W.IntroText className="date">{preInfo.date}<br/>{preInfo.username} 님의 {preInfo.diaryCount}번째 쓰임</W.IntroText>
       <W.IntroText className="theme">"{title}"</W.IntroText>
       <Emotion onSelect={handleEmotionSelect} />
+      {moodLabel && <W.EmotionLabel>{moodLabel}</W.EmotionLabel>} {/* 선택된 레이블 표시 */}
       <W.WriteBox
         className="title"
         placeholder="제목을 입력해주세요"

@@ -31,10 +31,10 @@ export const ModalContent = styled.div`
   margin: 5% auto;
   padding: 45px 15px 10px 15px;
   border: 1px solid #888;
-  width: 88%;
+  width: 85%;
   max-width: 320px;
   height: auto;
-  border-radius: 10px;
+  border-radius: 15px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 `;
 
@@ -49,7 +49,7 @@ export const CloseButton = styled.button`
   background-image: url(${Close});
   background-size: contain;
   background-repeat: no-repeat;
-  z-index: 1000;
+  z-index: 10000;
 `;
 
 export const ModalImage = styled.img`
@@ -65,9 +65,8 @@ export const ModalDate = styled.h3`
   font-family: Pretendard;
   font-weight: 400;
   color : #555;
-  margin-right: 5px;
+  margin: 0 5px 4px 0;
   padding : 0;
-  margin-bottom: 4px;
 `;
 export const ModalDateBold = styled.h3`
   display: inline-block;
@@ -76,7 +75,7 @@ export const ModalDateBold = styled.h3`
   font-weight: 700;
   color : #555;
   padding : 0;
-  margin-bottom: 4px;
+  margin: 0 0px 4px 5px;
 `;
 export const ModalTitle = styled.h3`
   font-size: 15px;
@@ -154,11 +153,12 @@ export const Line = styled.div`
   width : 100%;
   height : 1px;
   background: #555555;
-  margin: 4px 0 ;
+  margin: 10px 0 ;
 `
 
 export const CommentContain = styled.div`
   width : 90%;
+  height : auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -177,7 +177,7 @@ export const CommentContain = styled.div`
 export const CommentDiv = styled.div`
   position: relative;
   width : 100%;
-  height: 70px;
+  height: auto;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -255,14 +255,15 @@ export const ModalHeader = styled.div`
 
 export const ModalLike = styled.div`
   width : 100%;
-  height : 30px;
+  height : 40px;
   display: flex;
   justify-content: center;
   align-items: flex-end;
   flex-direction: column;
+  margin : 10px;
   > div {
-    width: 27px;
-    height: 27px;
+    width: 40px;
+    height: 40px;
     border: 1px solid #E3E8EF;
     box-shadow: 0px 4px 4px 0px #00000026;
     background: #93BAF3;
@@ -275,19 +276,19 @@ export const ModalLike = styled.div`
     margin : 0;
 
     > h6 {
-      font-size: 5px;
+      font-size: 9px;
       font-weight: 600;
       line-height: 7px;
       letter-spacing: -0.025em;
       text-align: center;
       color: #FFF;
-      margin: 0;
+      margin: 2px 0;
     }
   }
 `;
 
 export const SHeartFilled = styled(HeartFilled)`
-  font-size: 10px;
+  font-size: 15px;
   color : #DD0000;  
 `;
 
@@ -306,6 +307,9 @@ export const CommetInput = styled.input`
     text-align: left;
     border : none;
     color : #FFFFFF;
+    &::placeholder {
+        color: #FFFFFF;
+    }
   `;
   
   export const ArrowButton = styled.div`
@@ -322,7 +326,7 @@ export const CommetInput = styled.input`
     background-position: center;
     background-repeat: no-repeat;
     padding: 0;
-    z-index : 1000;
+    z-index : 10000;
   `;
 
   export const InputContainer = styled.div`

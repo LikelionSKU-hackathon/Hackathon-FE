@@ -141,7 +141,7 @@ export const TextDiv = styled.div`
 
 export const StoryContainer = styled.div`
   width: 310px;
-  height: 360px;
+  height: 380px;
   border-radius: 10px;
   opacity: 0px;
   background: rgba(127, 127, 127, 0.9);
@@ -150,7 +150,7 @@ export const StoryContainer = styled.div`
   padding : 10px;
   align-items : center;
   justify-content: center;
-  margin: 8px;
+  margin: 10px;
   box-shadow: 0px 4px 4px 0px #00000040 inset;
 
   >h3 {
