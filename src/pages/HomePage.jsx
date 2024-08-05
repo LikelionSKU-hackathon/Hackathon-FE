@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from "react-router-dom";
 import * as S from "../styles/page/Main.style";
 import * as M from "../styles/components/Modal";
-import { useLocation, useNavigate } from "react-router-dom";
 import OtherDiaryModal from '../components/OtherDiaryModal';
 import MyDiaryModal from '../components/MyDiaryModal';
 import { getUserData, getAIQuestionData } from '../api/userAPI';
 import { getPopularDiary } from '../api/diaryAPI';
 import StoryBox from '../components/StoryBox';
-import Loading from '../components/Loading';
 
 function HomePage() {
     const [userData, setUserData] = useState({
@@ -25,10 +24,12 @@ function HomePage() {
     const [popularDiary, setPopularDiary] = useState([]);
     const [modalSwitch, setModalSwitch] = useState(false);
     const [currentModal, setCurrentModal] = useState(null);
-    const [diaryId, setDiaryId] = useState(null); // diaryId 상태 추가
+    const [diaryId, setDiaryId] = useState(null);
+    const [background, setBackground] = useState('');
+    const [word, setWord] = useState('');
+
     const location = useLocation();
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const query = new URLSearchParams(location.search);
@@ -48,57 +49,49 @@ function HomePage() {
     }, [location.search]);
 
     useEffect(() => {
-        sessionStorage.setItem('hasLoaded', 'false');
-        const fetchUserData = async () => {
+        const fetchData = async () => {
             try {
                 const token = sessionStorage.getItem('token');
                 if (token) {
-                    const response = await getUserData(token);
-                    setUserData(response.result);
-                } else {
-                    console.error('No token found in sessionStorage.');
-                }
-            } catch (error) {
-                console.error('Error fetching user data:', error);
-            }
-        };
+                    const fetchUserData = async () => {
+                        const response = await getUserData(token);
+                        setUserData(response.result);
+                    };
 
-        const fetchAIQuestionData = async () => {
-            try {
-                const token = sessionStorage.getItem('token');
-                if (token) {
-                    const response = await getAIQuestionData(token);
-                    if (response) {
+                    const fetchAIQuestionData = async () => {
+                        const response = await getAIQuestionData(token);
                         setQuestionData(response.result);
-                    }
-                } else {
-                    console.error('No token found in sessionStorage.');
+                    };
+
+                    // Fetch all necessary data
+                    await Promise.all([fetchUserData(), fetchAIQuestionData()]);
                 }
             } catch (error) {
-                console.error('AI question data 불러오기 error:', error);
+                console.error('Error fetching data:', error);
             }
         };
 
+        fetchData();
+    }, []);
+
+    useEffect(() => {
         const fetchPopularDiary = async () => {
-            try{
+            try {
                 const response = await getPopularDiary();
                 if (response) {
                     setPopularDiary(response.result.diaryList);
                 }
-                    
             } catch (error) {
                 console.error('오늘의 일기 불러오기 error: ', error);
-            } 
+            }
         };
 
-        fetchUserData();
-        fetchAIQuestionData();
         fetchPopularDiary();
     }, []);
 
     const handleStoryBoxClick = () => {
         setModalSwitch(true);
-        navigate('/diary')
+        navigate('/diary');
     };
 
     const handleWriteDiaryClick = () => {
@@ -110,13 +103,13 @@ function HomePage() {
         navigate(`/WriteFreeDiary?memberId=${userData.memberId}`);
     };
 
-    const handleChangeButtonClick = async() => {
+    const handleChangeButtonClick = async () => {
         const token = sessionStorage.getItem('token');
-        const response = await getAIQuestionData(token);
-        setQuestionData(response.result);
+        if (token) {
+            const response = await getAIQuestionData(token);
+            setQuestionData(response.result);
+        }
     };
-
-    <Loading />
 
     return (
         <S.Container>

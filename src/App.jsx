@@ -14,9 +14,14 @@ import WriteFreeDiary from './pages/WriteFreeDiary';
 import OAuth2Naver from './pages/OAuth2Naver';
 import OAuth2Google from './pages/OAuth2Google';
 import OAuth2Kakao from './pages/OAuth2Kakao';
+import Loading from './components/Loading';
 const router = createBrowserRouter([
   {
     path: '/',
+    element: <Loading />
+  },
+  {
+    path: '/main',
     element: <HomePage />,
   },
   {

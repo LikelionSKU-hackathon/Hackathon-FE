@@ -68,7 +68,7 @@ export default function RegisterPageProfile() {
         const login = sessionStorage.getItem('login');
         if (login) {
             alert("이미 로그인 됨.");
-            navigate('/', { replace: true, state: { redirectedFrom: window.location.pathname } });
+            navigate('/main', { replace: true, state: { redirectedFrom: window.location.pathname } });
         }
         else {
             if (message) {

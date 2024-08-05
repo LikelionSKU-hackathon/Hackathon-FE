@@ -18,7 +18,7 @@ export const ModalContainer = styled.div`
   background-color: rgba(37, 37, 37, 0.9);
   justify-content: center;
   align-items: center;
-  z-index: 100;
+  z-index: 10;
   flex-direction : column;
 `;
 

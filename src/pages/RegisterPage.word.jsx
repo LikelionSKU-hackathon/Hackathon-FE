@@ -44,7 +44,7 @@ export default function RegisterPageWord() {
         //console.log("user : " + savedToken);
         if (login) {
             alert("이미 설정 됨.");
-            navigate('/', { replace: true, state: { redirectedFrom: window.location.pathname } });
+            navigate('/main', { replace: true, state: { redirectedFrom: window.location.pathname } });
         }
         else {
             const token = sessionStorage.getItem('token')

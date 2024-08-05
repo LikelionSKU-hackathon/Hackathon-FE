@@ -58,7 +58,7 @@ export default function MyDiaryModal({ setModalSwitch, diaryId }) {
 
     const handleClose = () => {
         setModalSwitch(false); // 모달 상태 업데이트
-        navigate('/'); // URL에서 쿼리 파라미터 제거
+        navigate('/main'); // URL에서 쿼리 파라미터 제거
     };
 
     if (!diaryData) {

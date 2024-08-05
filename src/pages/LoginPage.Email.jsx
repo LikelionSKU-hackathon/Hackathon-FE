@@ -18,7 +18,7 @@ export default function LoginPageEmail() {
     const navigate = useNavigate();
     const location = useLocation();
     // 이전 페이지
-    const from = location.state?.redirectedFrom || '/';
+    const from = location.state?.redirectedFrom || '/main';
 
     // login 요청
     const tryLogin = async () => {
@@ -77,7 +77,7 @@ export default function LoginPageEmail() {
         // login 확인
         if (login) {
             alert("이미 로그인 됨.");
-            navigate('/', { replace: true, state: { redirectedFrom: window.location.pathname } });
+            navigate('/main', { replace: true, state: { redirectedFrom: window.location.pathname } });
         }
     }, []);
     return (

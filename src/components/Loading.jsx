@@ -1,21 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import * as S from "../styles/components/Loading";
-import BG_Night from "../assets/Loading/bg_night.svg";
-import BG_Morning from "../assets/Loading/bg_morning.svg";
-import Word_Night from "../assets/Loading/word_night.svg";
-import Word_Morning from "../assets/Loading/word_morning.svg";
+import * as S from '../styles/components/Loading'; // Styled-components 파일 경로
+import BG_Night from '../assets/Loading/bg_night.svg';
+import BG_Morning from '../assets/Loading/bg_morning.svg';
+import Word_Night from '../assets/Loading/word_night.svg';
+import Word_Morning from '../assets/Loading/word_morning.svg';
+import { useNavigate } from 'react-router-dom';
 
 export default function Loading() {
     const [background, setBackground] = useState('');
     const [word, setWord] = useState('');
-    const [isVisible, setIsVisible] = useState(true);
+    const navigate = useNavigate(); // useNavigate 훅 사용
 
     useEffect(() => {
-        if (hasLoaded === 'true') {
-            setIsVisible(false);
-            return;
-        }
-
         const hours = new Date().getHours();
         if (hours >= 18 || hours < 6) {
             setBackground(BG_Night);
@@ -25,19 +21,12 @@ export default function Loading() {
             setWord(Word_Morning);
         }
 
-        // 타이머를 사용하여 2초 후에 로딩 화면을 숨김
         const timer = setTimeout(() => {
-            setIsVisible(false);
-            sessionStorage.setItem('hasLoaded', 'true');
-        }, 2000);
+            navigate('/main'); // 페이지 이동
+        }, 2000); // 2초 후에 이동
 
-        // 클린업 함수
-        return () => clearTimeout(timer);
-    }, []);
-
-    if (!isVisible) {
-        return null;
-    }
+        return () => clearTimeout(timer); // Cleanup function
+    }, [navigate]);
 
     return (
         <S.LoadingContainer background={background}>
