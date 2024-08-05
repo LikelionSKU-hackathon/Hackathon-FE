@@ -14,8 +14,6 @@ import WriteFreeDiary from './pages/WriteFreeDiary';
 import OAuth2Naver from './pages/OAuth2Naver';
 import OAuth2Google from './pages/OAuth2Google';
 import OAuth2Kakao from './pages/OAuth2Kakao';
-import React, { useState, useEffect } from 'react';
-import Loading from './components/Loading';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -80,22 +78,8 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    setIsLoading(true);
-    // 3초 후에 로딩 상태를 해제
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 3000);
-
-    // 타이머 정리
-    return () => clearTimeout(timer);
-  }, []);
   return (
-    <>
-    {isLoading ? <Loading /> : <RouterProvider router={router} />}
-    </>
+    <RouterProvider router={router} />
   )
 }
 
