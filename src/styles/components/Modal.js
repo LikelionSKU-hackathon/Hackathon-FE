@@ -39,7 +39,7 @@ export const ModalContent = styled.div`
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 `;
 
-export const CloseButton = styled.button`
+export const CloseButton = styled.div`
   width: 16px;
   height: 16px;
   position: absolute;
