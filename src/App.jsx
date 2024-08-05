@@ -16,6 +16,7 @@ import OAuth2Google from './pages/OAuth2Google';
 import OAuth2Kakao from './pages/OAuth2Kakao';
 import Loading from './components/Loading';
 import Test from './pages/Test';
+import OAuthPage from './pages/OAuthPage';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
   {
     path: '/login/email',
     element: <LoginPageEmail />,
+  },
+  {
+    path: '/login/oauth2/code/:provider',
+    element: <OAuthPage />,
   },
   {
     path: '/login/oauth2/code/naver',
