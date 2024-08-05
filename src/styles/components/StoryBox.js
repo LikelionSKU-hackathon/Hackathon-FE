@@ -8,35 +8,16 @@ export const StoryBox = styled(NavLink)`
   border-radius: 5px;
   border: 2px solid rgba(208, 218, 232, 1);
   background: rgba(255, 255, 255, 1);
-  padding : 5px;
-  margin : 10px 0;
+  padding : 0 5px;
+  margin : 10px;
   align-item : center;
   justify-content: center;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   color : #555555;
 
-  >h5 {
-    font-size: 11px;
-    font-weight: 600;
-    text-align: left;
-    letter-spacing: -0.025em;
-    padding-right : 5px;
-    display: inline;
-    white-space: nowrap; /* 텍스트를 한 줄로 유지 */
-      overflow: hidden; /* 넘치는 텍스트를 숨김 */
-      text-overflow: ellipsis; 
-
-    &.title {
-      font-weight : 400;
-    }
-    
-    &.list {
-      padding : 10px;    
-    }
-  }
-
   >p {
-    margin: 0;
+    padding : 3px;
+    margin: 3px;
     font-size: 9px;
     font-weight: 400;
     line-height: 14px;
@@ -46,6 +27,32 @@ export const StoryBox = styled(NavLink)`
     -webkit-line-clamp: 3; /* 표시할 줄의 수 */
     -webkit-box-orient: vertical; /* 박스 방향 수직 */
     text-overflow: ellipsis; /* 넘칠 때 ...으로 표시 */
+  }
+`;
+
+export const TitleDiv = styled.div`
+  width: 100%;
+  height : 12px;
+  padding: 5px;
+  display: flex; /* Flexbox 사용하여 자식 요소들을 가로로 배치 */
+  align-items: center; /* 수직 중앙 정렬 */
+  margin : 0;
+  
+  > h5 {
+    font-size: 11px;
+    font-weight: 600;
+    text-align: left;
+    letter-spacing: -0.025em;
+    padding-right: 5px;
+    white-space: nowrap;
+    max-width: 100%;
+    margin : 10px 0 0 0;
+    
+    &.title {
+      font-weight: 400;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
   }
 `;
 

@@ -100,12 +100,7 @@ export default function WriteDiary() {
       <W.IntroText className="theme">"{title}"</W.IntroText>
       <Emotion onSelect={handleEmotionSelect} />
       {moodLabel && <W.EmotionLabel>{moodLabel}</W.EmotionLabel>} {/* 선택된 레이블 표시 */}
-      <W.WriteBox
-        className="title"
-        placeholder="제목을 입력해주세요"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
+      <W.TitleArea> {title} </W.TitleArea>
       <W.WriteBox
         style={{ height: '180px' }}
         placeholder="내용 입력하기"
