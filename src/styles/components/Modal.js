@@ -39,7 +39,7 @@ export const ModalContent = styled.div`
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 `;
 
-export const CloseButton = styled.div`
+export const CloseButton = styled.button`
   width: 16px;
   height: 16px;
   position: absolute;
@@ -50,7 +50,7 @@ export const CloseButton = styled.div`
   background-image: url(${Close});
   background-size: contain;
   background-repeat: no-repeat;
-  z-index: 10000;
+  z-index: 100;
 `;
 
 export const ModalImage = styled.img`
