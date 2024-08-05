@@ -25,14 +25,14 @@ export default function Loading() {
             setWord(Word_Morning);
         }
 
-        // 타이머를 사용하여 2초 후에 로딩 화면을 숨김
-        const timer = setTimeout(() => {
-            setIsVisible(false);
-            sessionStorage.setItem('hasLoaded', 'true');
-        }, 2000);
+        // // 타이머를 사용하여 2초 후에 로딩 화면을 숨김
+        // const timer = setTimeout(() => {
+        //     setIsVisible(false);
+        //     sessionStorage.setItem('hasLoaded', 'true');
+        // }, 2000);
 
-        // 클린업 함수
-        return () => clearTimeout(timer);
+        // // 클린업 함수
+        // return () => clearTimeout(timer);
     }, []);
 
     if (!isVisible) {
