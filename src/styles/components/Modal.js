@@ -49,7 +49,7 @@ export const CloseButton = styled.button`
   background-image: url(${Close});
   background-size: contain;
   background-repeat: no-repeat;
-  z-index: 1;
+  z-index: 1000;
 `;
 
 export const ModalImage = styled.img`
@@ -322,7 +322,7 @@ export const CommetInput = styled.input`
     background-position: center;
     background-repeat: no-repeat;
     padding: 0;
-    z-index : 1;
+    z-index : 1000;
   `;
 
   export const InputContainer = styled.div`

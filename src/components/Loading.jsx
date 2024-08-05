@@ -11,8 +11,6 @@ export default function Loading() {
     const [isVisible, setIsVisible] = useState(true);
 
     useEffect(() => {
-        const hasLoaded = sessionStorage.getItem('hasLoaded');
-
         if (hasLoaded === 'true') {
             setIsVisible(false);
             return;
