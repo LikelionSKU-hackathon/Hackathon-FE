@@ -4,6 +4,7 @@ import BG from "../../assets/BG_Paper.png";
 import Close from "../../assets/myPage/icon_close.svg";
 import  BG_Answer from "../../assets/myPage/bg_answer.svg";
 import  BG_Loading from "../../assets/myPage/bg_loading.svg";
+import  icon_Arrow from "/src/assets/ETC/arrowUp.svg";
 import { HeartFilled } from "@ant-design/icons";
 
 // 모달 스타일 정의
@@ -321,7 +322,7 @@ export const CommetInput = styled.input`
     transform: translateY(-50%) translateY(5px);
     border: none;
     cursor: pointer;
-    background-image: url(src/assets/ETC/arrowUp.svg);
+    background-image: url(${icon_Arrow});
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
