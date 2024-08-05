@@ -69,7 +69,7 @@ export default function WriteFreePage() {
       });
       const { id } = response.data;
       console.log('FreeDiary Created diary ID:', id);
-      navigate(`/?modal=MyDiary&diaryId=${id}`);
+      navigate(`/main?modal=MyDiary&diaryId=${id}`);
       console.log('자유주제 일기 쓰기 Response:', response.data);
     } catch (error) {
       if (error.response) {
@@ -85,7 +85,7 @@ export default function WriteFreePage() {
   
   return (
     <S.Container>
-      <Back to="/" />
+      <Back to="/main" />
       <W.IntroText className="date">{preInfo.date}<br/>{preInfo.username} 님의 {preInfo.diaryCount}번째 쓰임</W.IntroText>
       <W.IntroText className="theme">"자유주제"</W.IntroText>
       <Emotion onSelect={handleEmotionSelect} />

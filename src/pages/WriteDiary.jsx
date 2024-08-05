@@ -78,7 +78,7 @@ export default function WriteDiary() {
       console.log(response.data);
       const { id } = response.data;
       console.log('Created diary ID:', id);
-      navigate(`/?modal=MyDiary&diaryId=${id}`);
+      navigate(`/main?modal=MyDiary&diaryId=${id}`);
     } catch (error) {
       if (error.response) {
         console.error('서버 응답 오류:', error.response.data);
@@ -93,7 +93,7 @@ export default function WriteDiary() {
 
   return (
     <S.Container>
-      <Back to="/" />
+      <Back to="/main" />
       <W.IntroText className="date">{preInfo.date}<br/>{preInfo.username} 님의 {preInfo.diaryCount}번째 쓰임</W.IntroText>
       <W.IntroText className="theme">"{title}"</W.IntroText>
       <Emotion onSelect={handleEmotionSelect} />

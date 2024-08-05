@@ -6,15 +6,15 @@ import { Link } from 'react-router-dom';
 export default function LoginModule() {
     return (
         <S.ModuleContainer>
-            <S.LoginLine className="naver" to = "/">
+            <S.LoginLine className="naver" to = "/main">
                 <img src={naver} ></img>
                 <p> 네이버 계정으로 로그인</p>
             </S.LoginLine>
-            <S.LoginLine className="kakao"  to = "/">
+            <S.LoginLine className="kakao"  to = "/main">
                 <img src={kakao} ></img>
                 <p>카카오 계정으로 로그인</p>
             </S.LoginLine>
-            <S.LoginLine className="google"  to = "/">
+            <S.LoginLine className="google"  to = "/main">
                 <img src={google} ></img>
                 <p>Google 계정으로 로그인</p>
             </S.LoginLine>

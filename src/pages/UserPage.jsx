@@ -112,7 +112,7 @@ export default function UserPage() {
     return (
         <>
             <S.UserPageContainer>
-                <Back to="/"></Back>
+                <Back to="/main"></Back>
                 <M.ModalContainer show={modalSwitch ? "true" : undefined}>
                     <M.ModalContent>
                         <M.ModalImage src={clickedData && clickedData.moodImage}></M.ModalImage>
