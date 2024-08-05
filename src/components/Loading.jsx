@@ -8,11 +8,14 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Loading() {
     const [background, setBackground] = useState('');
+    const [show, setShow] = useState(true);
     const [word, setWord] = useState('');
     const navigate = useNavigate(); // useNavigate 훅 사용
 
     useEffect(() => {
         const hours = new Date().getHours();
+        if(sessionStorage.getItem('hideLoading'))
+            setShow(false);
         if (hours >= 18 || hours < 6) {
             setBackground(BG_Night);
             setWord(Word_Night);
@@ -22,14 +25,16 @@ export default function Loading() {
         }
 
         const timer = setTimeout(() => {
-            navigate('/main'); // 페이지 이동
+            sessionStorage.setItem('hideLoading', true);
+            setShow(false);
+            //navigate('/main'); // 페이지 이동
         }, 2000); // 2초 후에 이동
 
         return () => clearTimeout(timer); // Cleanup function
     }, [navigate]);
 
     return (
-        <S.LoadingContainer background={background}>
+        <S.LoadingContainer background={background} show = {show}>
             <S.Word src={word} />
         </S.LoadingContainer>
     );

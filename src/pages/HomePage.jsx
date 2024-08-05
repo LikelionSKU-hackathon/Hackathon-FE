@@ -7,6 +7,7 @@ import MyDiaryModal from '../components/MyDiaryModal';
 import { getUserData, getAIQuestionData } from '../api/userAPI';
 import { getPopularDiary } from '../api/diaryAPI';
 import StoryBox from '../components/StoryBox';
+import Loading from '../components/Loading';
 
 function HomePage() {
     const [userData, setUserData] = useState({
@@ -112,6 +113,8 @@ function HomePage() {
     };
 
     return (
+        <>
+        <Loading></Loading>
         <S.Container>
             <M.ModalContainer show={modalSwitch ? 'true' : undefined}>
                 {currentModal === 'MyDiary' ? (
@@ -177,6 +180,7 @@ function HomePage() {
                 </S.MoreButton>
             </S.StoryContainer>
         </S.Container>
+        </>
     );
 }
 
