@@ -14,6 +14,7 @@ import WriteFreeDiary from './pages/WriteFreeDiary';
 import OAuth2Naver from './pages/OAuth2Naver';
 import OAuth2Google from './pages/OAuth2Google';
 import OAuth2Kakao from './pages/OAuth2Kakao';
+import Test from './pages/Test';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -74,6 +75,10 @@ const router = createBrowserRouter([
   {
     path: '/writeFreeDiary',
     element: <WriteFreeDiary />,
+  },
+  {
+    path: '/test',
+    element: <Test />,
   },
 ]);
 
