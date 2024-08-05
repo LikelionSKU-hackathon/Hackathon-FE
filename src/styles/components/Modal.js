@@ -4,7 +4,7 @@ import BG from "../../assets/BG_Paper.png";
 import Close from "../../assets/myPage/icon_close.svg";
 import  BG_Answer from "../../assets/myPage/bg_answer.svg";
 import  BG_Loading from "../../assets/myPage/bg_loading.svg";
-import  icon_Arrow from "/src/assets/ETC/arrowUp.svg";
+import  icon_Arrow from "../../assets/ETC/arrowUp.svg";
 import { HeartFilled } from "@ant-design/icons";
 
 // 모달 스타일 정의
