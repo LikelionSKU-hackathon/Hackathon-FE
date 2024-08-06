@@ -27,7 +27,7 @@ export default function Loading() {
         const timer = setTimeout(() => {
             sessionStorage.setItem('hideLoading', true);
             setShow(false);
-        }, 3000); // 2초 후에 이동
+        }, 5000); // 5초 후에 이동
 
         return () => clearTimeout(timer); // Cleanup function
     }, [navigate]);
