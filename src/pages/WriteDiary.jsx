@@ -95,7 +95,7 @@ export default function WriteDiary() {
 
   return (
     <S.Container>
-      <Back to="/main" style={{ marginTop: '10px' }} />
+      <Back to="/" style={{ marginTop: '10px' }} />
       <W.IntroText className="date">{preInfo.date}<br/>{preInfo.username} 님의 {preInfo.diaryCount}번째 쓰임</W.IntroText>
       <W.IntroText className="theme">"{title}"</W.IntroText>
       <Emotion onSelect={handleEmotionSelect} />
