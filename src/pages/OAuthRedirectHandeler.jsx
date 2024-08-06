@@ -7,21 +7,22 @@ export default function OAuthRedirectHandler() {
   useEffect(() => {
     const extractToken = () => {
       const params = new URLSearchParams(window.location.search);
+      console.log('params : ', params.toString());
       const token = params.get('token');
       if (token) {
         localStorage.setItem('jwtToken', token);
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
         // 원하는 페이지로 리디렉션
-        navigate('/register/email',
-          {
-            state: {
-              social: {
-                provider: 'social',
-                token : token
-              }
-            }
-          }
-        );
+        // navigate('/register/email',
+        //   {
+        //     state: {
+        //       social: {
+        //         provider: 'social',
+        //         token : token
+        //       }
+        //     }
+        //   }
+        // );
       } else {
         console.error('No token found in URL');
       }

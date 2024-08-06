@@ -53,17 +53,17 @@ export default function OAuth2Google() {
                 // 저장후 이동
                 if (email && profilePicture) {
                     localStorage.setItem('social-token', tokenData.token);
-                    navigate('/register/email',
-                        {
-                            state: {
-                                social: {
-                                    provider: 'google',
-                                    email,
-                                    profilePicture
-                                }
-                            }
-                        }
-                    );
+                    // navigate('/register/email',
+                    //     {
+                    //         state: {
+                    //             social: {
+                    //                 provider: 'google',
+                    //                 email,
+                    //                 profilePicture
+                    //             }
+                    //         }
+                    //     }
+                    // );
                 }
             } else {
                 console.error('Authorization code not found');
