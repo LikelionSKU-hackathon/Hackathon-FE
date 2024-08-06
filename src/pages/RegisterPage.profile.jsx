@@ -98,8 +98,8 @@ export default function RegisterPageProfile() {
                 setName(userData.userName);
                 setAge(userData.ageGroup);
                 setProfileImage(sessionStorage.getItem('profileImage'));
-                if(sessionStorage.getItem('profileImage'))
-                    console.log("profileImage" + sessionStorage.getItem('profileImage'));
+                if(!sessionStorage.getItem('profileImage'))
+                    console.log("profileImage is null");
                 setoptions(op);
 
             }

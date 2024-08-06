@@ -51,7 +51,7 @@ export default function OAuthRedirectHandler() {
           try {
             tryLogin(token);
             sessionStorage.setItem('login', true);
-            navigate('/main');
+            //navigate('/');
           }
           catch {
             alert("오류 발생, 다시 시도해주세요.");
