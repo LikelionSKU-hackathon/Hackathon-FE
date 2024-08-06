@@ -38,6 +38,14 @@ const router = createBrowserRouter([
     element: <OAuthRedirectHandler />,
   },
   {
+    path: '/oauth2/redirect',
+    element: <Test />,
+  },
+  {
+    path: '/oauth2/success',
+    element: <Test />,
+  },
+  {
     path: '/login/oauth2/code/naver',
     element: <OAuth2Naver />,
   },
