@@ -95,6 +95,7 @@ export const Profile2 = styled.div`
     background-size: 100% 100%;
     background-repeat: no-repeat;
     background-image: url();
+    color : #555555;
 `;
 export const RadioGroupContainer = styled.div`
     display: flex;
@@ -218,12 +219,14 @@ export const ProfileBox = styled.div`
         background: #555555;
         border: none;
         margin: 0;
+        color : #555555;
     }
 
     h1 {
         font-size: 16px;
         font-weight: 600;
         font-family: Pretendard, sans-serif;
+        color : #555555;
     }
 
     >p {
@@ -232,10 +235,12 @@ export const ProfileBox = styled.div`
         font-family: Pretendard, sans-serif;
         text-align: center;
         margin: 8px 0 17px 0;
+        color : #555555;
     }
 
     .name {
         font-weight: 500;
+        color : #555555;
     }
 `;
 export const FinalPageContainer = styled.div`
@@ -253,6 +258,7 @@ export const FinalPageContainer = styled.div`
         background-repeat: no-repeat;
         background-size: 100% 100%;
         background-image: url('../assets/Login/icon_Party.png');
+        color : #555555;
     }
     h1{
         margin: 15px 0;
@@ -260,6 +266,7 @@ export const FinalPageContainer = styled.div`
         font-weight: 600;
         font-family: Pretendard, sans-serif;
         text-align: center;
+        color : #555555;
     }
     p{
         margin: 0px 0 10px 0;
@@ -268,6 +275,7 @@ export const FinalPageContainer = styled.div`
         font-weight: 400;
         font-family: Pretendard, sans-serif;
         text-align: center;
+        color : #555555;
     }
 }
 `;
