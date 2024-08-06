@@ -12,18 +12,20 @@ export default function OAuthRedirectHandler() {
           'Authorization': `Bearer ${jwtToken}`  // JWT 토큰 설정
         }
       });
-      console.log(userData.data.result);
+      //console.log(userData.data.result);
       const userResult = userData.data.result;
       sessionStorage.setItem('token', jwtToken);
       sessionStorage.setItem('login', true);
       sessionStorage.setItem('user', JSON.stringify({
-        userId: result.memberId,
-        email: result.email,
+        userId: userResult.memberId,
+        email: userResult.email,
         ageGroup: userResult.ageGroup,
         userName: userResult.userName,
         profileImage: userResult.profileImage,
         memberKeyword: userResult.memberKeyword
       }));
+      sessionStorage.setItem('login', true);
+      navigate('/');
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -55,8 +57,6 @@ export default function OAuthRedirectHandler() {
         } else if (isSuccess) {
           try {
             tryLogin(token);
-            sessionStorage.setItem('login', true);
-            //navigate('/');
           }
           catch {
             alert("오류 발생, 다시 시도해주세요.");
