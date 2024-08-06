@@ -154,7 +154,7 @@ export const SpicyButton = styled.button`
   width : 100%;
   height : 30px;
   padding : 10px;
-  madgin : 5px;
+  margin : 5px 5px 10px 5px;
   border: 1px solid #FFBBBB;
   border-radius : 10px;
   background: #FFD4D5;
@@ -171,7 +171,7 @@ export const OriginButton = styled.button`
   width : 100%;
   height : 30px;
   padding : 10px;
-  margin : 5px;
+  margin : 5px 5px 10px 5px;
   background: #D0DAE8;
   border: 1px solid #BBD7FF
   border-radius : 10px;
