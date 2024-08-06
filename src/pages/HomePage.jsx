@@ -26,8 +26,6 @@ function HomePage() {
     const [modalSwitch, setModalSwitch] = useState(false);
     const [currentModal, setCurrentModal] = useState(null);
     const [diaryId, setDiaryId] = useState(null);
-    const [background, setBackground] = useState('');
-    const [word, setWord] = useState('');
     const [token, setToken] = useState('');
 
     const location = useLocation();

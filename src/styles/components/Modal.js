@@ -35,6 +35,7 @@ export const ModalContent = styled.div`
   height: auto;
   border-radius: 15px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  margin-bottom : 10px;
 `;
 
 export const CloseButton = styled.button`
@@ -64,7 +65,7 @@ export const ModalDate = styled.h3`
   font-family: Pretendard;
   font-weight: 400;
   color : #555;
-  margin: 0 5px 4px 0;
+  margin: 0 3px 4px 0;
   padding : 0;
 `;
 export const ModalDateBold = styled.h3`
@@ -74,7 +75,7 @@ export const ModalDateBold = styled.h3`
   font-weight: 700;
   color : #555;
   padding : 0;
-  margin: 0 0px 4px 5px;
+  margin: 0 0px 4px 0px;
 `;
 export const ModalTitle = styled.h3`
   font-size: 15px;
@@ -130,6 +131,7 @@ export const ModalExtra = styled.div`
   background-size: 100% 100%;
   background-repeat: no-repeat;
   padding: 7px;
+  margin : 10px 0;
 
   h3{
     color: white;
@@ -147,6 +149,38 @@ export const ModalExtra = styled.div`
     padding : 0px 0px 0px 10px;
   };
 `;
+
+export const SpicyButton = styled.button`
+  width : 100%;
+  height : 30px;
+  padding : 10px;
+  madgin : 5px;
+  border: 1px solid #FFBBBB;
+  border-radius : 10px;
+  background: #FFD4D5;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 12.1px;
+  letter-spacing: -0.025em;
+  text-align: center;
+  box-shadow: 0px 4px 4px 0px #00000026;
+`
+
+export const OriginButton = styled.button`
+  width : 100%;
+  height : 30px;
+  padding : 10px;
+  margin : 5px;
+  background: #D0DAE8;
+  border: 1px solid #BBD7FF
+  border-radius : 10px;
+  box-shadow: 0px 4px 4px 0px #00000026;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 12.1px;
+  letter-spacing: -0.025em;
+  text-align: center;
+`
 
 export const Line = styled.div`
   width : 100%;
@@ -226,6 +260,9 @@ export const MoreButton = styled(NavLink)`
     color: rgb(85, 85, 85);
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
     text-align : center;
+    display : flex;
+    align-items: center;
+    justify-content: center;
 `;
 
 export const ModalHeader = styled.div`

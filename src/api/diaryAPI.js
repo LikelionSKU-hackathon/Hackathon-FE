@@ -85,3 +85,33 @@ export const sendComment = async (diaryId, content, memberId, token) => {
         throw error;
     }
 };
+
+export const generateSpicyComment = async (diaryId, token) => {
+    try {
+        const response = await axios.get(`/ai/spicyComment/${diaryId}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            }
+        });
+        console.log('매운맛 댓글 작성 : ', response.data);
+        return response.data;
+    } catch (error) {
+        console.error('스파이시 코멘트 생성 에러:', error);
+        return null;
+    }
+};
+
+export const getSpicyComments = async (diaryId, token) => {
+    try {
+        const response = await axios.get(`/ai/spicyComment/view/${diaryId}`, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            }
+        });
+        console.log('매운맛 댓글 데이터 : ', response.data);
+        return response.data.result.spicyAiCommentList;
+    } catch (error) {
+        console.error('스파이시 코멘트 가져오기 에러:', error);
+        return null;
+    }
+};
