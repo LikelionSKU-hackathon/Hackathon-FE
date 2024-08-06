@@ -36,6 +36,7 @@ export default function RegisterPageEmail() {
                 reader.onload = function (event) {
                     const imageURL = event.target.result;
                     setProfileImage(imageURL);
+                    
                     fileView.style.backgroundImage = `url(${imageURL})`;
                 };
                 reader.readAsDataURL(fileInput.files[fileInput.files.length - 1]);
@@ -64,7 +65,7 @@ export default function RegisterPageEmail() {
         }
     }, []);
     async function addFormdata() {
-        // 이미지 설정
+        // 데이터 설정
         formData.append('username', name);
         formData.append('email', userId);
         formData.append('password', pwd);
@@ -161,6 +162,7 @@ export default function RegisterPageEmail() {
                                 userName: response.data.result.username,
                                 memberKeyword: []
                             }));
+                            sessionStorage.setItem('profileImage', profileImage);
                             navigate('/register/word',
                                 {
                                     replace: true,

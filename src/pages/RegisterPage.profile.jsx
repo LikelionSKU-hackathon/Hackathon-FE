@@ -59,10 +59,7 @@ export default function RegisterPageProfile() {
                 alert("오류 발생. 다시 시도해주세요.");
             });
     }
-    // test
-    useEffect(() => {
-        setImage();
-    }, [profileImage]);
+
     // 로그인 여부 확인
     useEffect(() => {
         // login 확인
@@ -101,11 +98,14 @@ export default function RegisterPageProfile() {
                 if(!sessionStorage.getItem('profileImage'))
                     console.log("profileImage is null");
                 setoptions(op);
-
+                setImage();
             }
         }
     }, []);
-    setImage();
+    // test
+    useEffect(() => {
+        setImage();
+    }, [profileImage]);
     return (
         <>
             <Back to="/register/word"></Back>
