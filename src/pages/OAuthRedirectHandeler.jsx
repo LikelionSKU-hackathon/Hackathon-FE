@@ -11,6 +11,7 @@ export default function OAuthRedirectHandler() {
         'Authorization': `Bearer ${jwtToken}`  // JWT 토큰 설정
       }
     });
+    console.log(userData);
     const userResult = userData.data.result;
     sessionStorage.setItem('token', jwtToken);
     sessionStorage.setItem('login', true);
