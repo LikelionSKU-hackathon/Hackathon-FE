@@ -71,7 +71,6 @@ export default function LoginPageEmail() {
     useEffect(() => {
         // login 확인
         if (login) {
-            alert("이미 로그인 됨.");
             navigate('/main', { replace: true, state: { redirectedFrom: window.location.pathname } });
         }
     }, []);
