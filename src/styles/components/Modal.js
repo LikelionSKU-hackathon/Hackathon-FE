@@ -164,6 +164,7 @@ export const SpicyButton = styled.button`
   letter-spacing: -0.025em;
   text-align: center;
   box-shadow: 0px 4px 4px 0px #00000026;
+  color : #555555;
 `
 
 export const OriginButton = styled.button`
@@ -180,6 +181,7 @@ export const OriginButton = styled.button`
   line-height: 12.1px;
   letter-spacing: -0.025em;
   text-align: center;
+  color : #555555;
 `
 
 export const Line = styled.div`
@@ -269,7 +271,7 @@ export const ModalHeader = styled.div`
   letter-spacing: -0.025em;
   text-align: left;
   color : #FFFFFF;
-  transform: translateX(-20%);
+  transform: translateX(-30%);
   justify-content: flex-start;
   align-items: flex-start;
 
