@@ -176,7 +176,6 @@ export default function RegisterPageEmail() {
                                     }
                                 });
                         })
-
                         .catch(error => {
                             console.error('Error fetching data:', error.response.data);
                             if (error.response.data.result.email)

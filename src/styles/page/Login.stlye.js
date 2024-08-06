@@ -104,7 +104,7 @@ export const InputSubmit = styled.button`
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     p{
         text-align: center;
-        margin: 0;
+        margin: 0px;
     }
 `;
 export const FixedInputSubmit = styled.button` 
