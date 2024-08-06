@@ -7,7 +7,11 @@ export default function OAuthRedirectHandler() {
   useEffect(() => {
     const extractToken = () => {
       const params = new URLSearchParams(window.location.search);
-      console.log('params : ', params.toString());
+      const pathname = window.location.pathname;
+      const isRedirect = pathname.startsWith('/oauth2/redirect');
+      const isSuccess = pathname.startsWith('/oauth2/success');
+      console.log('isRedirect : ',isRedirect);
+      console.log('isSuccess : ', isSuccess);
       const token = params.get('token');
       if (token) {
         localStorage.setItem('jwtToken', token);
