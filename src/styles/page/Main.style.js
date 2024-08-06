@@ -275,6 +275,8 @@ export const Circle = styled.div`
     height: 100%;
     border-radius: 50%;
     object-fit: fill;
+    bacground-size: cover;
+    background-position: center;
   }
 `;
 
