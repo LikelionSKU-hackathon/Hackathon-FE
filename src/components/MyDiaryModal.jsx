@@ -113,7 +113,7 @@ export default function MyDiaryModal({ setModalSwitch, diaryId }) {
                 </M.ModalExtra>
                 {isSpicy ? (
                     <M.OriginButton onClick={handleSpicyClick}>
-                        원래 조언으로 돌아가기
+                        원래 답변으로 돌아가기
                     </M.OriginButton>
                 ) : (
                     <M.SpicyButton onClick={handleSpicyClick}>

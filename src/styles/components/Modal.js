@@ -271,7 +271,7 @@ export const ModalHeader = styled.div`
   letter-spacing: -0.025em;
   text-align: left;
   color : #FFFFFF;
-  transform: translateX(-30%);
+  transform: translateX(-10%);
   justify-content: flex-start;
   align-items: flex-start;
 
