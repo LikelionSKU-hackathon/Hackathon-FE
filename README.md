@@ -1,8 +1,6 @@
-# React + Vite
+# 쓰담 쓰담 - 오늘 하루 쓰다 팀
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+임시 아이디 : kkan@naver.com
+임시 비밀번호 : qwer1234!
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![쓰담쓰담 web icon](https://github.com/user-attachments/assets/9a00f9b3-328b-4a5b-9ebc-2a2a63aad8db)
