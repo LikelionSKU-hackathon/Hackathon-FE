@@ -8,7 +8,7 @@ export const StoryBox = styled(NavLink)`
   border-radius: 5px;
   border: 2px solid rgba(208, 218, 232, 1);
   background: rgba(255, 255, 255, 1);
-  padding : 0 5px;
+  padding : 10px 5px;
   margin : 10px;
   align-item : center;
   justify-content: center;
