@@ -57,6 +57,7 @@ function HomePage() {
                 if (getToken) {
                     const fetchUserData = async () => {
                         const response = await getUserData(getToken);
+                        console.log('response: 1', response.result);
                         setUserData(response.result);
                     };
 
