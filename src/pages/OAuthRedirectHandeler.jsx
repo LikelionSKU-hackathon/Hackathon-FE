@@ -5,24 +5,28 @@ import axios from 'axios';
 export default function OAuthRedirectHandler() {
   const navigate = useNavigate();
   const tryLogin = async (jwtToken) => {
-    const userData = await axios.get('https://sub.skuhackathon.shop/members/', {
-      headers: {
-        'Accept': '*/*',
-        'Authorization': `Bearer ${jwtToken}`  // JWT 토큰 설정
-      }
-    });
-    console.log(userData);
-    const userResult = userData.data.result;
-    sessionStorage.setItem('token', jwtToken);
-    sessionStorage.setItem('login', true);
-    sessionStorage.setItem('user', JSON.stringify({
-      userId: result.memberId,
-      email: result.email,
-      ageGroup: userResult.ageGroup,
-      userName: userResult.userName,
-      profileImage: userResult.profileImage,
-      memberKeyword: userResult.memberKeyword
-    }));
+    try {
+      const userData = await axios.get('https://sub.skuhackathon.shop/members/', {
+        headers: {
+          'Accept': '*/*',
+          'Authorization': `Bearer ${jwtToken}`  // JWT 토큰 설정
+        }
+      });
+      console.log(userData);
+      const userResult = userData.data.result;
+      sessionStorage.setItem('token', jwtToken);
+      sessionStorage.setItem('login', true);
+      sessionStorage.setItem('user', JSON.stringify({
+        userId: result.memberId,
+        email: result.email,
+        ageGroup: userResult.ageGroup,
+        userName: userResult.userName,
+        profileImage: userResult.profileImage,
+        memberKeyword: userResult.memberKeyword
+      }));
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
   }
   useEffect(() => {
     const extractToken = () => {
