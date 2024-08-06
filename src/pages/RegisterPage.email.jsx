@@ -225,6 +225,7 @@ export default function RegisterPageEmail() {
             .catch(error => {
                 console.error('Error fetching data:', error);
                 setEmailCheck(false);
+                alert('이미 존재하는 이메일입니다.');
             });
 
     };
@@ -241,6 +242,7 @@ export default function RegisterPageEmail() {
                 .catch(error => {
                     console.error('Error fetching data:', error);
                     setNameCheck(false);
+                    alert('이미 존재하는 닉네임입니다.');
                 });
         }
         else {
