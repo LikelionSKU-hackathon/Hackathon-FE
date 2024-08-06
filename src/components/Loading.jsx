@@ -28,7 +28,7 @@ export default function Loading() {
             sessionStorage.setItem('hideLoading', true);
             setShow(false);
             //navigate('/main'); // 페이지 이동
-        }, 2000); // 2초 후에 이동
+        }, 3000); // 2초 후에 이동
 
         return () => clearTimeout(timer); // Cleanup function
     }, [navigate]);
