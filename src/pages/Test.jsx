@@ -1,58 +1,30 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
-function Test() {
-  useEffect(() => {
-    handleOAuth2Success();
-  }, []);
-
-  const handleLogin = async (provider) => {
-    //window.location.href = `https://sub.skuhackathon.shop/api/v1/oauth2/authorization/${provider}`;
-    const response = await fetch(`https://sub.skuhackathon.shop/api/v1/auth/login/oauth2/success`);
-    console.log("response : "+response);
+export default function Test () {
+  const handleNaverLogin = () => {
+    window.location.href = 'https://sub.skuhackathon.shop/api/v1/oauth2/authorization/naver';
   };
 
-  const handleOAuth2Success = async () => {
-    try {
-      const response = await fetch('https://sub.skuhackathon.shop/api/v1/auth/login/oauth2/success', {
-        method: 'GET',
-        credentials: 'include'
-      });
+  const handleKakaoLogin = () => {
+    window.location.href = 'https://sub.skuhackathon.shop/api/v1/oauth2/authorization/kakao';
+  };
 
-      if (!response.ok) {
-        throw new Error('OAuth2 로그인 요청 실패');
-      }
-
-      const data = await response.json();
-
-      const accessToken = data.accessToken;
-      const authorization = data.authorization;
-      const username = data.username;
-      const redirectUrl = data.redirectUrl;
-
-      localStorage.setItem('accessToken', accessToken);
-      localStorage.setItem('authorization', authorization);
-      localStorage.setItem('username', username);
-
-      console.log('OAuth2 로그인 성공:', username);
-      console.log('JWT 토큰:', accessToken);
-
-      if (redirectUrl) {
-        window.location.href = redirectUrl;
-      }
-
-    } catch (error) {
-      console.error('OAuth2 로그인 처리 중 오류 발생:', error);
-    }
+  const handleGoogleLogin = () => {
+    window.location.href = 'https://sub.skuhackathon.shop/api/v1/oauth2/authorization/google';
   };
 
   return (
-    <div className="App">
-      <h1>OAuth2 Login Example</h1>
-      <button onClick={() => handleLogin('google')}>Login with Google</button>
-      <button onClick={() => handleLogin('kakao')}>Login with Kakao</button>
-      <button onClick={() => handleLogin('naver')}>Login with Naver</button>
+    <div>
+      <button onClick={handleNaverLogin} style={{ backgroundColor: '#03C75A', color: '#fff' }}>
+        네이버로 로그인
+      </button>
+      <button onClick={handleKakaoLogin} style={{ backgroundColor: '#FEE500', color: '#000' }}>
+        카카오로 로그인
+      </button>
+      <button onClick={handleGoogleLogin} style={{ backgroundColor: '#4285F4', color: '#fff' }}>
+        구글로 로그인
+      </button>
     </div>
   );
-}
+};
 
-export default Test;

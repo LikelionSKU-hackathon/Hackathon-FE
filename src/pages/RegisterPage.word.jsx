@@ -50,13 +50,11 @@ export default function RegisterPageWord() {
             const token = sessionStorage.getItem('token')
             console.log("data 1: " + token);
             setUserId(userData.userId);
+            console.log("userId : " + userData.userId);
             setName(userData.userName);
             setAge(userData.age);
-            console.log("profileImage: " + message.profileImage);
-            if(userData.profileImage)
-                setProfileImage(userData.profileImage);
-            else
-                setProfileImage(message.profileImage);
+            console.log("profileImage: " + sessionStorage.getItem('profileImage'));
+            setProfileImage(sessionStorage.getItem('profileImage'));
             // 선택지 불러오기
             axios.get(`https://sub.skuhackathon.shop/keyword/${userData.userId}`)
                 .then(response => {
@@ -79,6 +77,7 @@ export default function RegisterPageWord() {
         if (selectedOptions.length == 3) {
             console.log("전송시작");
             // 키워드 전송
+            sessionStorage.setItem('profileImage',profileImage);
             navigate('/register/profile',
                 {
                     state:
@@ -87,7 +86,7 @@ export default function RegisterPageWord() {
                         pwd,
                         name,
                         age,
-                        profileImage,
+                        profileImage : profileImage,
                         selectedOptions,
                         option
                     }
