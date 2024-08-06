@@ -97,9 +97,26 @@ export default function RegisterPageEmail() {
                 if (onSocial) {
                     try {
                         // 회원가입
+                        const data = new FormData();
+                        data.append('username', name);
+                        data.append('age_group', age);
+                        if (profileImage == icon_profile || onSocial) {
+                            try {
+                                const response = await fetch(icon_profile);
+                                const blob = await response.blob();
+                                const file = new File([blob], "profile.png", { type: blob.type });
+                                data.append('profileImage', file);
+                            } catch (error) {
+                                alert('Error converting image to Blob:', error);
+                            }
+                        } else {
+                            const fileInput = document.getElementById('fileInput');
+                            const file = fileInput.files[fileInput.files.length - 1];
+                            data.append('profileImage', file);
+                        }
                         const jwtToken = localStorage.getItem('jwtToken');
                         const response = await axios.put('https://sub.skuhackathon.shop/members/social/signup'
-                            , formData
+                            , data
                             , {
                                 headers: {
                                     'Content-Type': 'multipart/form-data',
@@ -120,7 +137,7 @@ export default function RegisterPageEmail() {
                             profileImage: profileImage
                         }));
                         navigate('/register/word',
-                            { 
+                            {
                                 replace: true,
                                 state:
                                 {
