@@ -273,8 +273,10 @@ export const Circle = styled.div`
   padding: 0;
   background-size : cover;
   background-position : center;
+  background-repeat : no-repeat;
   > img {
     height: 100%;
+    width : 100%;
     border-radius: 50%;
     background-size: cover;
     background-position: center;
