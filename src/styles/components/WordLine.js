@@ -44,7 +44,7 @@ export const WordTag = styled.p`
     font-size: 13px;
     font-weight: 500;
     font-family: 'Pretendard', sans-serif;
-    
+    color : #555555;
     white-space: nowrap;
     text-align : left;
     overflow: visible;
@@ -53,6 +53,7 @@ export const WordTag = styled.p`
     margin-left : 5px;
 `
 export const WordTitle = styled.p`
+    color : #555555;
     font-size: 13px;
     font-weight: 400;
     font-family: 'Pretendard', sans-serif;
