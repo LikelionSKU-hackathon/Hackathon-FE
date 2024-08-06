@@ -271,11 +271,12 @@ export const Circle = styled.div`
   border-radius: 50%;
   margin: 6px;
   padding: 0;
+  background-size : cover;
+  background-position : center;
   > img {
     height: 100%;
     border-radius: 50%;
-    object-fit: fill;
-    bacground-size: cover;
+    background-size: cover;
     background-position: center;
   }
 `;
