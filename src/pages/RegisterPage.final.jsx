@@ -28,8 +28,7 @@ export default function RegisterPageFinal() {
     useEffect(() => {
         // login 확인
         if (savedToken) {
-            alert("이미 로그인 됨.");
-            navigate('/main', { replace: true, state: { redirectedFrom: window.location.pathname } });
+            navigate('/', { replace: true, state: { redirectedFrom: window.location.pathname } });
         }
         else {
             setUserId(message.userId);

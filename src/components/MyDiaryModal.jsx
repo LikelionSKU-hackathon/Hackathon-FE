@@ -60,7 +60,7 @@ export default function MyDiaryModal({ setModalSwitch, diaryId }) {
 
     const handleClose = () => {
         setModalSwitch(false);
-        navigate('/main');
+        navigate('/');
     };
 
     const handleSpicyClick = async () => {

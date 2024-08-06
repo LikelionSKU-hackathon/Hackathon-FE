@@ -14,7 +14,7 @@ function HomePage() {
         memberId: 0,
         username: '',
         ageGroup: '',
-        profileImage: '',
+        profileImage: null,
         keywordList: [],
     });
     const [questionData, setQuestionData] = useState({
@@ -62,7 +62,6 @@ function HomePage() {
 
                     const fetchAIQuestionData = async () => {
                         const response = await getAIQuestionData(getToken);
-                        console.log('response: 2', response.result);
                         setQuestionData({
                             memberId: response.result.memberId,
                             category: response.result.category,
