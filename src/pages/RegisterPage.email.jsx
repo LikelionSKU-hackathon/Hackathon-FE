@@ -116,7 +116,8 @@ export default function RegisterPageEmail() {
                             email: userId,
                             ageGroup: age,
                             userName: response.data.result.username,
-                            memberKeyword: []
+                            memberKeyword: [],
+                            profileImage: profileImage
                         }));
                         navigate('/register/word',
                             { 
@@ -160,7 +161,8 @@ export default function RegisterPageEmail() {
                                 email: userId,
                                 ageGroup: age,
                                 userName: response.data.result.username,
-                                memberKeyword: []
+                                memberKeyword: [],
+                                profileImage: profileImage
                             }));
                             sessionStorage.setItem('profileImage', profileImage);
                             navigate('/register/word',
