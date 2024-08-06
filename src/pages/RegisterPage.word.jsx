@@ -37,30 +37,23 @@ export default function RegisterPageWord() {
     // 로그인 여부 확인
     const login = sessionStorage.getItem('login');
     const userData = JSON.parse(sessionStorage.getItem('user'));
-    console.log("data 0: " + message.profileImage);
-    console.log("data 1: " + Object.entries(message));
     useEffect(() => {
         // login 확인
-        //console.log("user : " + savedToken);
         if (login) {
             alert("이미 설정 됨.");
             navigate('/main', { replace: true, state: { redirectedFrom: window.location.pathname } });
         }
         else {
             const token = sessionStorage.getItem('token')
-            console.log("data 1: " + token);
             setUserId(userData.userId);
-            console.log("userId : " + userData.userId);
             setName(userData.userName);
             setAge(userData.age);
-            console.log("profileImage: " + sessionStorage.getItem('profileImage'));
             setProfileImage(sessionStorage.getItem('profileImage'));
             // 선택지 불러오기
             axios.get(`https://sub.skuhackathon.shop/keyword/${userData.userId}`)
                 .then(response => {
                     if (response.data.code == "COMMON200") {
                         if (!response.result) {
-                            console.log("option: " + response.data.result.keywordList[0].id);
                             setOption(response.data.result.keywordList);
                         }
                     }
@@ -73,13 +66,12 @@ export default function RegisterPageWord() {
 
     // 다음 이동
     const handleSubmitClick = (e) => {
-        console.log("options : " + selectedOptions);
         if (selectedOptions.length == 3) {
-            console.log("전송시작");
             // 키워드 전송
             sessionStorage.setItem('profileImage',profileImage);
             navigate('/register/profile',
                 {
+                    replace: true,
                     state:
                     {
                         userId,

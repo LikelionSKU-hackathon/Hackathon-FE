@@ -33,8 +33,6 @@ export default function LoginPageEmail() {
             }
         })
             .then(async response => {
-                console.log("보냈어용");
-                console.log(response.data);
                 if (response.status == 200) {
                     const result = response.data.result;
                     const jwtToken = result.accessToken;
@@ -44,8 +42,6 @@ export default function LoginPageEmail() {
                             'Authorization': `Bearer ${jwtToken}`  // JWT 토큰 설정
                         }
                     });
-                    console.log("성공");
-                    console.log(userData.data.result);
                     const userResult = userData.data.result;
                     sessionStorage.setItem('token', jwtToken);
                     sessionStorage.setItem('login',true);
@@ -61,7 +57,6 @@ export default function LoginPageEmail() {
                 }
             })
             .catch(error => {
-                console.error('Error:', error.response.data);
                 if(error.response.data.code == "auth4001")
                     setIsErr(true);
             });

@@ -23,14 +23,12 @@ export default function RegisterPageProfile() {
     const setImage = (event) => {
         const fileView = document.getElementById('fileView');
         if (profileImage) {
-            console.log("사진 변경 진입");
             fileView.style.backgroundImage = `url(${profileImage})`;
         }
     };
     // 가입
     const tryRegister = async () => {
         const userData = JSON.parse(sessionStorage.getItem('user'));
-        console.log("data 0: " +userData.userId);
         // 키워드 전송
         axios.post(`https://sub.skuhackathon.shop/keyword/${userData.userId}`,
             {
@@ -43,11 +41,9 @@ export default function RegisterPageProfile() {
                 }
             })
             .then(response => {
-                console.log("response last 0: " + response.data);
-                console.log("response last: " + response);
-                
                 navigate('/register/final',
                     {
+                        replace: true,
                         state:
                         {
                             userId,
@@ -60,13 +56,11 @@ export default function RegisterPageProfile() {
                     });
             })
             .catch(error => {
-                console.error('Error fetching data:', error);
                 alert("오류 발생. 다시 시도해주세요.");
             });
     }
     // test
     useEffect(() => {
-        console.log("데이터 변경");
         setImage();
     }, [profileImage]);
     // 로그인 여부 확인
@@ -81,14 +75,12 @@ export default function RegisterPageProfile() {
             if (message) {
                 const option = message.option;
                 const selected = message.selectedOptions;
-                console.log("selected : " + selected);
                 const op = []
                 op.push(option.find(item => item.id === selected[0]));
                 op.push(option.find(item => item.id === selected[1]));
                 op.push(option.find(item => item.id === selected[2]));
                 setoptions(op);
                 setName(message.name);
-                console.log("profileImage : " + sessionStorage.getItem('profileImage'));
                 
                 const userData = JSON.parse(sessionStorage.getItem('user'));
 
@@ -100,15 +92,13 @@ export default function RegisterPageProfile() {
                         'Authorization': `Bearer ${jwtToken}`
                     }
                 });
-                console.log("data 2: " + Object.entries(userData));
+                //console.log("data 2: " + Object.entries(userData));
                 setUserId(userData.userId);
                 setPwd(userData.pwd);
                 setName(userData.userName);
                 setAge(userData.ageGroup);
                 setProfileImage(sessionStorage.getItem('profileImage'));
                 setoptions(op);
-                console.log("op : " + op);
-                console.log("데이터 확인 in /profile");
 
             }
         }

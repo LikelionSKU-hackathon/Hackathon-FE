@@ -53,10 +53,8 @@ export default function RegisterPageEmail() {
             navigate('/main', { replace: true, state: { redirectedFrom: window.location.pathname } });
         }
         else {
-            console.log("data 1: " + "social" in message);
             // 소셜 로그인시 이메일, 비밀번호 숨김
             if ("social" in message || localStorage.getItem('jwtToken')) {
-                console.log("is IN");
                 setUserId("social");
                 setPwd("social");
                 setHideEmail(true);
@@ -74,15 +72,13 @@ export default function RegisterPageEmail() {
         formData.append('role', 'ROLE_USER');
         // 이미지 설정
         if (profileImage == icon_profile || onSocial) {
-            console.log("기본이미지 혹은 소셜이미지");
             try {
                 const response = await fetch(icon_profile);
                 const blob = await response.blob();
                 const file = new File([blob], "profile.png", { type: blob.type });
                 formData.append('profileImage', file);
-                console.log("기본이미지 끝");
             } catch (error) {
-                console.error('Error converting image to Blob:', error);
+                alert('Error converting image to Blob:', error);
             }
         } else {
             const fileInput = document.getElementById('fileInput');
@@ -94,11 +90,8 @@ export default function RegisterPageEmail() {
     const tryRegister = async () => {
         if (emailCheck) {
             if (nameCheck) {
-                // 가입 요청
-                console.log("시작이어용");
-                console.log("대기");
+                // 데이터 추가
                 await addFormdata();
-                console.log("대기 끝");
                 // 소셜 회원가입
                 if (onSocial) {
                     try {
@@ -113,10 +106,6 @@ export default function RegisterPageEmail() {
                                     'Authorization': `Bearer ${jwtToken}`,
                                 },
                             });
-                        console.log(response);
-                        console.log("보냈어용");
-                        console.log(response.data);
-                        console.log(response.status);
 
                         //이동 및 데이터 전송 profileImage
                         sessionStorage.setItem('token', jwtToken);
@@ -129,7 +118,8 @@ export default function RegisterPageEmail() {
                             memberKeyword: []
                         }));
                         navigate('/register/word',
-                            {
+                            { 
+                                replace: true,
                                 state:
                                 {
                                     userId,
@@ -140,7 +130,6 @@ export default function RegisterPageEmail() {
                                 }
                             });
                     } catch (error) {
-                        console.log("에러났어용");
                         console.error('Error fetching data:', error);
                         if (error.response.data.result.email)
                             alert(error.response.data.data.result.email);
@@ -163,9 +152,6 @@ export default function RegisterPageEmail() {
                             }
                         })
                         .then(response => {
-                            console.log("보냈어용");
-                            console.log(response.data);
-                            console.log(response.status);
 
                             //이동 및 데이터 전송
                             sessionStorage.setItem('user', JSON.stringify({
@@ -177,6 +163,7 @@ export default function RegisterPageEmail() {
                             }));
                             navigate('/register/word',
                                 {
+                                    replace: true,
                                     state:
                                     {
                                         userId,
@@ -189,7 +176,6 @@ export default function RegisterPageEmail() {
                         })
 
                         .catch(error => {
-                            console.log("에러났어용");
                             console.error('Error fetching data:', error.response.data);
                             if (error.response.data.result.email)
                                 alert(error.response.data.data.result.email);
@@ -213,8 +199,6 @@ export default function RegisterPageEmail() {
     // 중복확인 - email
     const [emailCheck, setEmailCheck] = useState(false);
     const checkEmail = () => {
-        console.log('check email');
-        console.log(`userId: ${userId}, pwd: ${pwd}, name: ${name}, age: ${age}`);
         axios.get(`https://sub.skuhackathon.shop/members/checkEmail/${userId}`)
             .then(response => {
                 if (response.data.code == "COMMON200") {

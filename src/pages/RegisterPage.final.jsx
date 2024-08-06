@@ -16,12 +16,12 @@ export default function RegisterPageFinal() {
     const location = useLocation();
     const navigate = useNavigate();
     const message = location.state || {};
-    //console.log({message});
     document.body.style.overflow = 'hidden';
     const tryRegister = (e) => {
         e.preventDefault();
-        console.log(`userId: ${userId}, pwd: ${pwd}, name: ${name}, age: ${age}`);
-        navigate('/login/email');
+        navigate('/login/email'
+            , { replace: true, }
+        );
     }
     // 로그인 여부 확인
     const savedToken = JSON.parse(sessionStorage.getItem('login'));
@@ -31,17 +31,15 @@ export default function RegisterPageFinal() {
             alert("이미 로그인 됨.");
             navigate('/main', { replace: true, state: { redirectedFrom: window.location.pathname } });
         }
-        else{
-            console.log("data 1: " + Object.entries(message));
+        else {
             setUserId(message.userId);
             setPwd(message.pwd);
             setName(message.name);
             setAge(message.age);
             setProfileImage(message.profileImage);
             // 소셜 상태면 그대로 로그인 취급
-            if(localStorage.getItem('jwtToken'))
-            {
-                sessionStorage.setItem('login',true);
+            if (localStorage.getItem('jwtToken')) {
+                sessionStorage.setItem('login', true);
             }
         }
     }, []);
