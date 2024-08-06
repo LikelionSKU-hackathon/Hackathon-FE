@@ -154,12 +154,16 @@ export const SpicyButton = styled.button`
   width : 100%;
   height : 30px;
   padding : 10px;
-  madgin : 5px;
+  margin : 5px 5px 10px 5px;
   border: 1px solid #FFBBBB;
   border-radius : 10px;
   background: #FFD4D5;
   font-size: 10px;
   font-weight: 600;
+  dispaly : flex;
+  align-items: center;
+  justify-content: center;
+  text-align : center;
   line-height: 12.1px;
   letter-spacing: -0.025em;
   text-align: center;
@@ -171,7 +175,7 @@ export const OriginButton = styled.button`
   width : 100%;
   height : 30px;
   padding : 10px;
-  margin : 5px;
+  margin : 5px 5px 10px 5px;
   background: #D0DAE8;
   border: 1px solid #BBD7FF
   border-radius : 10px;
@@ -182,6 +186,10 @@ export const OriginButton = styled.button`
   letter-spacing: -0.025em;
   text-align: center;
   color : #555555;
+  dispaly : flex;
+  align-items: center;
+  justify-content: center;
+  text-align : center;
 `
 
 export const Line = styled.div`
