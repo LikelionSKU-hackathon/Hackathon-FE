@@ -60,7 +60,7 @@ export default function RegisterPage() {
                     <p>Google 계정으로 회원가입</p>
                 </S.LoginLine>
                 <div>
-                    <S.LoginLegacy to="/register/email">이메일로 회원가입</S.LoginLegacy>
+                    <S.LoginLegacy to="/register/email" onClick={localStorage.removeItem('jwtToken')}>이메일로 회원가입</S.LoginLegacy>
                 </div >
             </S.ModuleContainer >
         </S.LoginContainer>
