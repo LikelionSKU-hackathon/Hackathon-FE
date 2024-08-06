@@ -87,7 +87,7 @@ export default function WriteFreePage() {
   
   return (
     <S.Container>
-      <Back to="/main" />
+      <Back to="/" />
       <W.IntroText className="date">{preInfo.date}<br/>{preInfo.username} 님의 {preInfo.diaryCount}번째 쓰임</W.IntroText>
       <W.IntroText className="theme">"자유주제"</W.IntroText>
       <Emotion onSelect={handleEmotionSelect} />
